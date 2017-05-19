@@ -1,0 +1,573 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="keywords" content="端到端应用性能管理,Application Insight,OneAPM Ai">
+<meta name="description" content="OneAPM Application Insight是一个真实可见的应用性能监控系统，从用户体验到网络服务，直至应用代码, 帮助您完成端到端的应用性能管理，OneAPM Ai通过 Apdex、报警、错误率让您了解应用性能对用户使用体验的影响，从而挖掘应用可优化的范围">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<!-- Use title if it's in the page YAML frontmatter -->
+<title>Application Insight 文档</title>
+
+  <script type="text/javascript">
+    // if (window.location.hostname === 'www.oneapm.com') {
+    //   var pathnameSegs = window.location.pathname.split("/docs/ci");
+    //   var realPathname = pathnameSegs[pathnameSegs.length - 1];
+    //   window.location.href = 'http://101.200.76.159:4567' + realPathname;
+    // } else if (window.location.hostname !== 'docs-ci.oneapm.com') {
+    //   window.location.href = 'http://101.200.76.159:4567' + window.location.pathname;
+    // }
+  </script>
+
+<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+
+<!-- growingio -->
+<script type='text/javascript'>
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', 'a78f5e02538f4b2b88cd4fee708bc11b']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+  </script>
+
+
+<link href="/stylesheets/site.css" rel="stylesheet" />
+<script src="/javascripts/jquery-2.2.1.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/all.js"></script>
+<style media="screen">
+  .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight {
+  color: #faf6e4;
+  background-color: #122b3b;
+}
+.highlight .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #6c8b9f;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #b2fd6d;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .err {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .gr {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .k, .highlight .kd, .highlight .kv {
+  color: #f6dd62;
+  font-weight: bold;
+}
+.highlight .o, .highlight .ow {
+  color: #4df4ff;
+}
+.highlight .p, .highlight .pi {
+  color: #4df4ff;
+}
+.highlight .gd {
+  color: #cc0000;
+}
+.highlight .gi {
+  color: #b2fd6d;
+}
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .kc {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .nt {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ld {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ss {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+.highlight .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .nb {
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #BBBBBB;
+}
+.highlight .nf {
+  color: #a8e1fe;
+}
+.highlight .py {
+  color: #a8e1fe;
+}
+.highlight .na {
+  color: #a8e1fe;
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+</style>
+
+  </head>
+
+  <body class="page-bestpractice bestpractice_sj2">
+      <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-56334895-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+<header class="main-header clearfix">
+	<div class="main-navblock col-lg-12 col-md-12 col-sm-12 col-xs-12"><div>
+		<a href="../index.html" class="logo-container">
+			<div class="oneapm-logo"></div>
+		</a>
+	</div>
+	<a href="#" class="burger-wrapper">
+		<div class="burger"></div>
+	</a>
+	<div class="nav-container">
+		<ul class="nav-list">
+			<li>
+				<a href="/quick-start/">快速入门</a>
+			</li>
+			<li>
+				<a href="/agent/">安装配置</a>
+			</li>
+			<li>
+				<a href="/book/">功能说明</a>
+			</li>
+			<li>
+				<a href="/bestpractice/">最佳实践</a>
+			</li>
+			<li>
+				<a href="/qa/">常见问题</a>
+			</li>
+			<li>
+				<a href="/contact/contact.html">联系我们</a>
+			</li>
+		</ul>
+		<ul class="login-list">
+			<li>
+				<a href="http://user.oneapm.com/pages/v2/login?from=ai-docs" class="btn outline-dark" id="loginIn">登录</a>
+			</li>
+			<li>
+				<a href="https://user.oneapm.com/pages/v2/signup?from=ai-docs" class="btn inside-yellow" id="signUp">注册</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</header>
+
+<script type="text/javascript">
+	$(function () {
+		var key=window.location.pathname;
+		var arr5=['agent','api','cloud-integration','services','services_example'];
+		var arr1=['quick-start'];
+		var arr3=['release-note','platform','dashboard','metric','alert','event'];
+		var arr4=['use-case','best-practise','bestpractice'];
+		var arr2=['qa'];
+		var arr6=['book']
+		var Arr=[arr1,arr2,arr3,arr4,arr5,arr6];
+		for(var i=0;i<6;i++) {
+			$.each(Arr[i], function (e, a) {
+				if (key.indexOf(a) !== -1) {
+					switch (i + 1) {
+						case 1:
+						key = '/quick-start/';
+						break;
+						case 5:
+						key = '/agent/';
+						break;
+						case 3:
+						key = '/platform/';
+						break;
+						case 4:
+						key = '/bestpractice/';
+						break;
+						case 2:
+						key = '/qa/';
+						break;
+						case 6:
+						key = '/book/';
+					}
+				}
+			});
+		}
+		var keyInfo="'"+key+"'";
+		var panelHead;
+		panelHead= $(".nav-container  a[href="+keyInfo+"]");
+		panelHead.addClass('show');
+	});
+</script>
+
+    <div class="page-container">
+      <div class="row">
+        <div class="col-lg-2 page-sidebar hidden-sm hidden-xs">
+           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+   <div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="headingOne">
+       <h4 class="panel-title">
+         <a href="/bestpractice/sj1.html" role="button">
+           使用 Ai 性能剖析功能分析性能问题
+         </a>
+       </h4>
+     </div>
+   </div>
+   <div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="headingTwo">
+       <h4 class="panel-title">
+         <a href="/bestpractice/sj2.html" class="collapsed">
+           使用 Ai 发现和诊断由于数据库调用产生的性能问题
+         </a>
+       </h4>
+     </div>
+   </div>
+   <div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="headingTwo">
+       <h4 class="panel-title">
+         <a href="/bestpractice/sj3.html" class="collapsed">
+          使用报警功能进行高效监控
+         </a>
+       </h4>
+     </div>
+   </div>
+</div>
+
+        </div>
+        <div class="col-lg-10 page-body">
+          <div class="body-box">
+            <h1>如何使用 Ai 发现和诊断由于数据库调用产生的性能问题</h1>
+
+<h3>引言</h3>
+
+<p>我们在不少项目中都会和客户的开发者或架构师一起尝试使用 OneAPM 一起分析和优化 Java 应用程序的性能问题，发现大部分的性能问题，往往并不是因为在某一个具体方法上缓慢的一两毫秒，更多的是因为糟糕的架构设计，不合适的框架配置，错误的数据库访问模式，乱打日志以及内存过度消耗导致的 GC 异常。下面我将重点介绍如何使用 Ai 发现和诊断由于数据库调用产生的性能问题。</p>
+
+<h3>一.常见的数据库问题大概有以下几种可能：</h3>
+
+<ul>
+<li>一次请求 SQL 大量执行：
+
+<ul>
+<li>N+1 查询问题（N+1 Query）：多次（30次或者更多）执行相同 SQL。</li>
+<li>过多的 SQL 执行（Excessive SQLs）：执行大量（大于 500）不同的 SQL 语句</li>
+</ul></li>
+<li>单一 SQL 执行缓慢：
+
+<ul>
+<li>单一 SQL 执行缓慢（Slow Single SQL）：某个单一的 SQL 语句执行时间占据了请求的响应时间的 80% 以上。</li>
+</ul></li>
+<li>数据库负载较大：
+
+<ul>
+<li>数据库繁忙（Database Heavy）：数据库执行的总体时间占据总体响应时间的 80% 以上</li>
+<li>数据库服务服务器超负荷（Overloaded Database Server）：来自各个应用的请求过多，造成了数据库服务器超负荷</li>
+</ul></li>
+<li>数据库连接池相关问题：
+
+<ul>
+<li>连接池资源用尽（Pool Exhaustion）：由于连接获取时间过长所导致（getConnection 的时间超过了  executeStatement）
+*低效的连接池访问（Inefficient Pool Access）：对连接池的访问次数过多（对 getConnection 的调用超过了 executeStatement 调用次数的 50%）</li>
+</ul></li>
+</ul>
+
+<h3>我遇到过的用户案例分析：</h3>
+
+<ol>
+<li>问题类型：一次请求 SQL 大量执行（现象）&ndash;数据库繁忙（现象）-N+1 Query （原因）</li>
+</ol>
+
+<ul>
+<li><p>问题发现：</p>
+
+<ul>
+<li>由总览分析发现，用户主要耗时集中在数据库：
+<img src="/images/sj21.png" alt="Sj21" /></li>
+<li>在现场分析用户最缓慢的几个 Web 事务，观察他们这几个 Web 事务对应的 breakdown，统计发现一次请求平均调用数据库的次数多达 1000 次占据了请求的响应时间占比到 90% 以上，其中最慢的请求调用数据库达上万次。
+<img src="/images/sj22.png" alt="Sj22" /></li>
+</ul></li>
+<li><p>问题调查和分析：这是一个给 BD 使用的内部应用，这类 Web事务都是在查询和统计当前时间段内该区域所有的外卖订单的相关信息，开发在做这个查询的时候，先查询了所有该区域内的商户对象，然后根据商户一个一个的查询出来他们当前的订单详情，是一个典型的 N+1 问题。</p></li>
+<li><p>针对这个问题可能给出的建议：
+对于N+1次查询问题本身来说，使用连接查询就可以轻易地避免这一问题。在这个商户与属性的示例中，可以使用以下连接查询：<br></p>
+
+<blockquote>
+<p>select r.<em>, p.</em> <br>
+from shanghu_names as r <br>
+inner join shanghu_properties as p on p.shanghu_id = r.shanghu_id</p>
+</blockquote></li>
+</ul>
+
+<p>结果就是整个执行过程只产生了 1 次查询执行，不再是 1000 多次了！
+2. 问题类型：一次请求 SQL 大量执行（现象）&ndash;低效的连接池访问（原因）&ndash;ORM 框架配置（解决方案）</p>
+
+<ul>
+<li>问题发现：同样是在用户现场发现几个 Web 事务有大量的数据库调用，虽然数据库调用数量比较多，但是每次请求的 1000+ 次数据库调用的总执行时间并不是很长（大概 300ms 左右），但是请求总体比较缓慢（平均响应时间在 4s，break down table 中的 database 占比在 10% 上）。
+<img src="/images/sj23.png" alt="Sj23" />
+(大量的相同 SQL 被执行)</li>
+<li>问题调查： 这次直接交流的是对应的开发部门，开发部门表示他们使用的 ORM 去调用数据库，业务与上一个案例类似。</li>
+<li>问题分析： 经过分析 trace，发现虽然每一次 sql 执行都不慢（5ms左右），但是由于每次SQL查询都要向连接池获取一个新的连接，查询后再释放，导致对于连接词访问次数过多，从而引起访问缓慢。</li>
+<li>针对这个问题可能给出的建议：
+应用的逻辑需要对某个对象列表进行迭代，但它并没有选择使用“即时加载”（Eager Loading）方式，则是使用了“延迟加载”（Lazy Loading）方式。考虑到我们总是需要获取所有对象，那么更好的方式是“即时加载”（Eager Loading）这些对象，然后考虑对他们进行缓存，前提是这些对象不会变更得十分频繁：（Hibernate 之加载策略(延迟加载与即时加载)，来进行这种类型的查询。该用户使用了“延迟加载”（Lazy Loading）方式，它会加载每个对象，并通过独立的 SQL 查询语句获取每个对象的全部属性。每个 SQL 查询都是在一个向连接池获取的JDBC连接中执行的，然后在每个查询完成之后都会返回。查看一下调用 trace 中 getConnection 的出现次数，直接反映出了这个问题。</li>
+<li><p>问题类型：连接池资源用尽（原因）</p></li>
+<li><p>问题发现： 某一时间应用整体响应时间飙升，OneAPM 发出报警。</p></li>
+<li><p>问题调查和分析：</p>
+
+<ul>
+<li>从web事务角度分析，发现所有缓慢 trace 中的 getconnection 时间的占比较高。
+<img src="/images/sj24.png" alt="Sj24" /></li>
+<li>从数据库角度分析，发现当时 update 类型操作有一个明显的突起
+<img src="/images/sj25.png" alt="Sj25" /></li>
+<li>查看当时候比较缓慢的 upadate 操作，发现都是由于 当时突然开始运行的 一个后台任务发起的。
+<img src="/images/sj26.png" alt="Sj26" /></li>
+<li>最后定位问题： 由于定时的后台任务突然发起的 upadate 操作，导致数据库连接池用尽，导致其他请求无法正常获取数据库连接导致的。</li>
+</ul></li>
+<li><p>类似的场景：</p>
+
+<ul>
+<li>某票务网站的硬件设备会定期请求后台，大约每分钟固定请求 1000 次，正常阶段 select 和 update 操作的 SQL 运行都正常，放票阶段由于大量 update 操作导致数据库锁表，导致用户无法正常打开购票页面。</li>
+<li>某运营商网站，有一个非常缓慢的报表查询类接口，由于不明原因，短时间内对这个接口有大量访问，导致数据库连接资源用尽，用户其他请求无法得到响应。</li>
+</ul></li>
+<li><p>针对这类问题可能给出的建议：</p>
+
+<ul>
+<li>将这些请求发送至独立的服务器上，避免影响其他使用者。</li>
+<li>重新设定其执行时间，只在不会影响到其他人的时间段才执行,比如凌晨。</li>
+<li>增加连接池大小，确保在正常的访问量下有足够的连接可用。</li>
+</ul></li>
+<li><p>问题类型：单一 SQL 执行缓慢</p></li>
+<li><p>问题发现：通过分析 Web 事务的 breakdown table，发现请求中最耗时的是对某一个表的 select.
+<img src="/images/sj27.png" alt="Sj27" /></p></li>
+<li><p>针对这类问题可能给出的建议：
+<img src="/images/sj28.png" alt="Sj28" />
+通过分析 SQL 查询执行计划，可以帮组 DBA 优化那些耗时较长的 SQL。</p></li>
+</ul>
+
+            <!--<hr style="margin-top: 50px;" />
+<div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
+  <p style="font-size: 16px;">
+    如果您对 AI 感兴趣，可以选择试用我们的产品，只需要点击下面的按钮免费注册即可。
+  </p>
+  <br />
+  <p>
+    <a href="https://user.oneapm.com/account/register.do?ref=https://cloud.oneapm.com&from=ci-docs" class="btn btn-info btn-lg" target="_blank">
+      立即注册 AI
+    </a>
+  </p>
+</div>
+<hr />
+<!-多说评论框 start -->
+<!--<div class="ds-thread"
+     id="ds-thread"
+     data-thread-key=""
+     data-title=""
+   data-url=""></div>
+<!-多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!--<script type="text/javascript">
+  var titleTag = document.getElementsByTagName("h1")[0];
+
+  if (titleTag) {
+    title = document.getElementsByTagName("h1")[0].innerText;
+  } else {
+    title = "";
+  }
+
+  var duoshuoTag = document.getElementById('ds-thread');
+  duoshuoTag.setAttribute('data-thread-key', title.replace(/\s/g, ''));
+  duoshuoTag.setAttribute('data-title', title);
+
+  var duoshuoQuery = {short_name:"docs-ci"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>-->
+<!-- 多说公共JS代码 end -->
+
+
+            <div class="return"></div>
+          </div>
+          <div class="footer-in">
+            
+          </div> 
+        </div>
+      </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+      $(function() {
+        $(".navbar-default .navbar-nav .guide").addClass("active");
+        (function () {
+          $('.panel-default').click(function () {
+            if(!$(this).hasClass('active')){
+              $(this).children().addClass('in');
+            }
+            else{
+              $(this).children().removeClass('in');
+            }
+          })
+          // $('.panel-default').mouseleave(function () {
+          //     if(!$(this).hasClass('active')) {
+                
+          //     }
+          //   })
+          var key=window.location.pathname;
+          var lastindex;
+          var keyInfo;
+          if(key.indexOf('quick-start') !== -1){
+            keyInfo="'"+key+"'";
+            $('ol').eq(0).children().map(function () {
+              $(this).css({
+                'cursor':'pointer',
+                'color':'#005FA8'
+              })
+            })
+            $('ol').eq(0).children().eq(0).click(function () {
+              $('.page-body').animate({ scrollTop: 300 }, 500)
+            })
+            $('ol').eq(0).children().eq(1).click(function () {
+              $('.page-body').animate({ scrollTop: 1830 }, 500)
+            })
+            $('ol').eq(0).children().eq(2).click(function () {
+              $('.page-body').animate({ scrollTop: 4202 }, 500)
+            })
+            $('ol').eq(0).children().eq(3).click(function () {
+              $('.page-body').animate({ scrollTop: 5942 }, 500)
+            })
+            $('ol').eq(0).children().eq(4).click(function () {
+              $('.page-body').animate({ scrollTop: 10066 }, 500)
+            })
+          }else if(key.indexOf('/',1) !== -1){
+            lastindex=key.indexOf('/',1);
+            keyInfo="'"+key.substring(0,lastindex+1)+"'";
+          }else {
+            lastindex=key.indexOf('.',1);
+            keyInfo="'"+key.substring(0,lastindex+1)+"html'";
+          }
+          var panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+          panelHead.siblings().addClass('in');
+          panelHead.parent().siblings('div').map(function () {
+            $(this).removeClass('active');
+          });
+          panelHead.parent().addClass('active');
+        })();
+      });
+    </script>
+  </body>
+</html>

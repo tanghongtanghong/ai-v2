@@ -1,0 +1,679 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="keywords" content="端到端应用性能管理,Application Insight,OneAPM Ai">
+<meta name="description" content="OneAPM Application Insight是一个真实可见的应用性能监控系统，从用户体验到网络服务，直至应用代码, 帮助您完成端到端的应用性能管理，OneAPM Ai通过 Apdex、报警、错误率让您了解应用性能对用户使用体验的影响，从而挖掘应用可优化的范围">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<!-- Use title if it's in the page YAML frontmatter -->
+<title>Application Insight 文档</title>
+
+  <script type="text/javascript">
+    // if (window.location.hostname === 'www.oneapm.com') {
+    //   var pathnameSegs = window.location.pathname.split("/docs/ci");
+    //   var realPathname = pathnameSegs[pathnameSegs.length - 1];
+    //   window.location.href = 'http://101.200.76.159:4567' + realPathname;
+    // } else if (window.location.hostname !== 'docs-ci.oneapm.com') {
+    //   window.location.href = 'http://101.200.76.159:4567' + window.location.pathname;
+    // }
+  </script>
+
+<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+
+<!-- growingio -->
+<script type='text/javascript'>
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', 'a78f5e02538f4b2b88cd4fee708bc11b']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+  </script>
+
+
+<link href="/stylesheets/site.css" rel="stylesheet" />
+<script src="/javascripts/jquery-2.2.1.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/all.js"></script>
+<style media="screen">
+  .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight {
+  color: #faf6e4;
+  background-color: #122b3b;
+}
+.highlight .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #6c8b9f;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #b2fd6d;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .err {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .gr {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .k, .highlight .kd, .highlight .kv {
+  color: #f6dd62;
+  font-weight: bold;
+}
+.highlight .o, .highlight .ow {
+  color: #4df4ff;
+}
+.highlight .p, .highlight .pi {
+  color: #4df4ff;
+}
+.highlight .gd {
+  color: #cc0000;
+}
+.highlight .gi {
+  color: #b2fd6d;
+}
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .kc {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .nt {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ld {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ss {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+.highlight .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .nb {
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #BBBBBB;
+}
+.highlight .nf {
+  color: #a8e1fe;
+}
+.highlight .py {
+  color: #a8e1fe;
+}
+.highlight .na {
+  color: #a8e1fe;
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+</style>
+
+  </head>
+
+  <body class="page-book book_Alert book_Alert_Alert_strategy">
+      <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-56334895-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+<header class="main-header clearfix">
+	<div class="main-navblock col-lg-12 col-md-12 col-sm-12 col-xs-12"><div>
+		<a href="../index.html" class="logo-container">
+			<div class="oneapm-logo"></div>
+		</a>
+	</div>
+	<a href="#" class="burger-wrapper">
+		<div class="burger"></div>
+	</a>
+	<div class="nav-container">
+		<ul class="nav-list">
+			<li>
+				<a href="/quick-start/">快速入门</a>
+			</li>
+			<li>
+				<a href="/agent/">安装配置</a>
+			</li>
+			<li>
+				<a href="/book/">功能说明</a>
+			</li>
+			<li>
+				<a href="/bestpractice/">最佳实践</a>
+			</li>
+			<li>
+				<a href="/qa/">常见问题</a>
+			</li>
+			<li>
+				<a href="/contact/contact.html">联系我们</a>
+			</li>
+		</ul>
+		<ul class="login-list">
+			<li>
+				<a href="http://user.oneapm.com/pages/v2/login?from=ai-docs" class="btn outline-dark" id="loginIn">登录</a>
+			</li>
+			<li>
+				<a href="https://user.oneapm.com/pages/v2/signup?from=ai-docs" class="btn inside-yellow" id="signUp">注册</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</header>
+
+<script type="text/javascript">
+	$(function () {
+		var key=window.location.pathname;
+		var arr5=['agent','api','cloud-integration','services','services_example'];
+		var arr1=['quick-start'];
+		var arr3=['release-note','platform','dashboard','metric','alert','event'];
+		var arr4=['use-case','best-practise','bestpractice'];
+		var arr2=['qa'];
+		var arr6=['book']
+		var Arr=[arr1,arr2,arr3,arr4,arr5,arr6];
+		for(var i=0;i<6;i++) {
+			$.each(Arr[i], function (e, a) {
+				if (key.indexOf(a) !== -1) {
+					switch (i + 1) {
+						case 1:
+						key = '/quick-start/';
+						break;
+						case 5:
+						key = '/agent/';
+						break;
+						case 3:
+						key = '/platform/';
+						break;
+						case 4:
+						key = '/bestpractice/';
+						break;
+						case 2:
+						key = '/qa/';
+						break;
+						case 6:
+						key = '/book/';
+					}
+				}
+			});
+		}
+		var keyInfo="'"+key+"'";
+		var panelHead;
+		panelHead= $(".nav-container  a[href="+keyInfo+"]");
+		panelHead.addClass('show');
+	});
+</script>
+
+    <div class="page-container">
+      <div class="row">
+        <div class="col-xs-3 page-sidebar hidden-sm hidden-xs">
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a href="/book/Application/app_index.html" role="button">
+          应用
+        </a>
+      </h4>
+    </div>
+<!--    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/monitor/monitor_overview.html">总览</a></li>
+          <li><a href="/book/monitor/monitor_map.html">拓扑</a></li>
+          <li><a href="/book/monitor/monitor_webTransaction.html">web 事务</a></li>
+          <li><a href="/book/monitor/monitor_dataBase.html">数据库</a></li>
+          <li><a href="/book/monitor/monitor_external.html">外部服务</a></li>
+          <li><a href="/book/monitor/monitor_bgTask.html">后台任务</a></li>
+          <li><a href="/book/monitor/monitor_jvm.html">JVM</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Web_trans_entr/entr_index.html" class="collapsed">
+          web 事务入口
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Web_trans/web_index.html" class="collapsed">
+         web 事务
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/report/report_webTransaction.html">web 事务</a></li>
+          <li><a href="/book/report/report_dataBase.html">数据库</a></li>
+          <li><a href="/book/report/report_jvm.html">JVM</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+
+ <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Trace/trace_index.html" class="collapsed">
+          调用链追踪
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Tiers/tiers_index.html" class="collapsed">
+          Tiers
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Database_calls/database_index.html" class="collapsed">
+          数据库列表
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Remote_service/remote_index.html" class="collapsed">
+          远程服务
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Setting/setting_index.html" class="collapsed">
+          设置
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Alert/alert_index.html" class="collapsed">
+          报警
+        </a>
+      </h4>
+    </div>
+   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/Alert/Alert_strategy.html">报警策略</a></li>
+          <li><a href="/book/Alert/Alert_rule.html">报警规则</a></li>
+          <li><a href="/book/Alert/Alert_action.html">报警行为</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Report/report_index.html" class="collapsed">
+            报表
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/systemSet/account.html">账号管理</a></li>
+          <li><a href="/book/systemSet/alarmPolicy.html">报警策略</a></li>
+           <li><a href="/book/systemSet/alarmPolicy02.html">报警记录</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+</div>
+
+        </div>
+        <div class="col-lg-9 page-body">
+          <div class="body-box">
+            <h1>报警策略</h1>
+
+<ul>
+<li><a href="#1">报警策略</a><br></li>
+<li><a href="#2">配置报警策略</a><br></li>
+</ul>
+
+<h2><h2 id="1">报警策略</h2></h2>
+
+<p>报警策略 为自动监控问题和问题处理提供了一种机制。你没有必要针对可能暗含问题的诸多情况，不断地查读指标和事件；但是可以主动定义一些能让你的应用平稳运行的最为相关的事件，然后创建一些措施，使得事件发生时，能够自动的进行一些操作。</p>
+
+<h2>策略结构</h2>
+
+<p>策略将策略触发器与将要采取的操作进行匹配，以响应触发过程。
+<img src="/images/as01.png" alt="As01" /></p>
+
+<h2>策略触发</h2>
+
+<p>策略触发就是导致策略触发的报警事件。 报警事件主要是指违反报警规则的事件，也就是应用的一些指标超过了报警规则中所设定的报警事件的阈值。<br><br>
+触发事件广义上定义为在应用程序中影响任何对象的事件，狭义上定义为仅影响特定对象的事件。你可以创建一个策略，触发条件为：包含应用中所有层的某事件发生，或者只涉及特定层的某事件发生。你还可以创建这样一个策略，触发条件为：影响某些节点的事件发生，或者只影响某些业务交易或某些错误的事件发生。同时，你可以专门根据不同的实体和情况调整策略。<br><br>
+例如，你可以从广义上定义一个策略，对于应用中的任何一个对象，无论什么时候，只要达到资源库的限制（例如，JVM的堆内存使用率，内存使用率或CPU使用率&gt; 80％），该策略将被触发。<br><br>
+当至少一个指定的对象中的至少一个指定触发事件发生，策略就被触发。</p>
+
+<h2>触发行为</h2>
+
+<p>为了响应策略触发器，你可以指定自动发生的一个或多个动作。<br><br>
+也许最常见的动作就是通知：发送电子邮件（我们4.0.3-E版本仅支持邮件的发送）。<br><br>
+其他类型的动作不仅仅是通知。<br><br>
+由于健康规则的定义和动作的定义是分开的，且二者都可精确定义，因此你可以基于报警事件发生的层或节点，采取不同的措施以保证违例发生在相同的阈值。</p>
+
+<h2>策略列表</h2>
+
+<p>配置好的报警策略列表查看，选择 <strong>报警 &gt; 报警策略。</strong><br>
+<strong>报警策略</strong> 列表展示了基于应用而创建的所有的策略，通过这里我们可以查看策略所包含的事件以及其可用性。同时我们可以同过 操作 里的按钮进行报警策略的修改。</p>
+
+<h2><h2 id="2">配置报警策略</h2></h2>
+
+<p>报警测略的配置方法很简单，按照动策略向导进行即可。<br>
+手动策略向导包含两个面板：<br></p>
+
+<ul>
+<li>触发策略设置：设置触发策略的事件，以及受该策略影响的对象；</li>
+<li>触发行为设置：设置策略被触发时的动作。
+在这两种面板都可以配置策略名称以及策略的启用状态。<br>
+在进行报警策略之前需要进行：<br>
+
+<ol>
+<li> 在顶部的菜单栏点击  报警；<br></li>
+<li> 点击屏幕 左侧/右侧 的 报警策略；</li>
+</ol></li>
+</ul>
+
+<h2>配置触发策略</h2>
+
+<p>触发策略设置 面板定义了使策略触发，并调用其动作的事件和对象。<br>
+由于我们的策略触发依赖于报警事件，所以我们需要在创建报警策略之前进行报警规则的创建。<br></p>
+
+<ul>
+<li>配置触发策略步骤：<br>
+1.选择  创建策略 ，进行报警策略的配置。<br>
+2.填写 策略名称。<br>
+3.进行可用性选择，可用则选中打勾。<br>
+4.选择会触发报警策略的报警事件的类型。<br>
+5.选择 报警事件 相对应的报警规则。报警规则可以在已有的报警规则中选取，也可以进行 新的报警规则  的创建。新的报警规则的创建详见配置报警规则 。</li>
+</ul>
+
+<h2>配置触发行为</h2>
+
+<p>策略动作面板将动作和触发结合。它定义了当策略触发时，启动什么策略动作。<br>
+必须在创建能够触发的策略之前，创建这些动作。详细信息见报警行为 。</p>
+
+<p><strong>配置触发行为步骤：</strong><br>
+   选择 触发行为设置 面板 ，进行报警行为——邮件 的添加。可以从已经创建的报警邮件中进行选择，也可以进行新的报警邮件行为的创建。<br>
+   新的 报警行为 设置详见报警行为 。</p>
+
+            <!--<hr style="margin-top: 50px;" />
+<div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
+  <p style="font-size: 16px;">
+    如果您对 AI 感兴趣，可以选择试用我们的产品，只需要点击下面的按钮免费注册即可。
+  </p>
+  <br />
+  <p>
+    <a href="https://user.oneapm.com/account/register.do?ref=https://cloud.oneapm.com&from=ci-docs" class="btn btn-info btn-lg" target="_blank">
+      立即注册 AI
+    </a>
+  </p>
+</div>
+<hr />
+<!-多说评论框 start -->
+<!--<div class="ds-thread"
+     id="ds-thread"
+     data-thread-key=""
+     data-title=""
+   data-url=""></div>
+<!-多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!--<script type="text/javascript">
+  var titleTag = document.getElementsByTagName("h1")[0];
+
+  if (titleTag) {
+    title = document.getElementsByTagName("h1")[0].innerText;
+  } else {
+    title = "";
+  }
+
+  var duoshuoTag = document.getElementById('ds-thread');
+  duoshuoTag.setAttribute('data-thread-key', title.replace(/\s/g, ''));
+  duoshuoTag.setAttribute('data-title', title);
+
+  var duoshuoQuery = {short_name:"docs-ci"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>-->
+<!-- 多说公共JS代码 end -->
+
+
+            <div class="return"></div>
+          </div>
+          <div class="footer-in">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+      $(function() {
+        // $(".navbar-default .navbar-nav a[href='/agent/']").parent().addClass("active");
+        (function () {
+            $('.panel-default').mouseenter(function () {
+              if(!$(this).hasClass('active')){
+                $(this).children().addClass('in');
+              }
+            });
+            $('.panel-default').mouseleave(function () {
+              if(!$(this).hasClass('active')) {
+                $(this).children().removeClass('in');
+              }
+            });
+            var key=window.location.pathname;
+            var keyInfo="'"+key+"'";
+            var panelHead;
+            if(keyInfo.indexOf('index') !== -1){
+              panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+              panelHead.siblings().addClass('in');
+              panelHead.parent().siblings('div').map(function () {
+                $(this).removeClass('active');
+              });
+              panelHead.parent().addClass('active');
+            }else if(keyInfo.indexOf('.') <0) {
+              keyInfo="'"+key+"book_index.html"+"'";
+              panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+              panelHead.siblings().addClass('in');
+              panelHead.parent().siblings('div').map(function () {
+                $(this).removeClass('active');
+              });
+              panelHead.parent().addClass('active');
+            }else {
+                panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent().parent().parent();
+                panelHead.addClass('in');
+                panelHead.parent().siblings('div').map(function () {
+                  $(this).removeClass('active');
+                });
+                panelHead.parent().addClass('active');
+              }
+          })();
+      });
+    </script>
+  </body>
+</html>

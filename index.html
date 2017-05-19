@@ -1,0 +1,565 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="keywords" content="端到端应用性能管理,Application Insight,OneAPM Ai">
+<meta name="description" content="OneAPM Application Insight是一个真实可见的应用性能监控系统，从用户体验到网络服务，直至应用代码, 帮助您完成端到端的应用性能管理，OneAPM Ai通过 Apdex、报警、错误率让您了解应用性能对用户使用体验的影响，从而挖掘应用可优化的范围">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<!-- Use title if it's in the page YAML frontmatter -->
+<title>Application Insight - 端到端应用性能管理APM – OneAPM</title>
+
+  <script type="text/javascript">
+    // if (window.location.hostname === 'www.oneapm.com') {
+    //   var pathnameSegs = window.location.pathname.split("/docs/ci");
+    //   var realPathname = pathnameSegs[pathnameSegs.length - 1];
+    //   window.location.href = 'http://101.200.76.159:4567' + realPathname;
+    // } else if (window.location.hostname !== 'docs-ci.oneapm.com') {
+    //   window.location.href = 'http://101.200.76.159:4567' + window.location.pathname;
+    // }
+  </script>
+
+<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+
+<!-- growingio -->
+<script type='text/javascript'>
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', 'a78f5e02538f4b2b88cd4fee708bc11b']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+  </script>
+
+
+<link href="/stylesheets/site.css" rel="stylesheet" />
+<script src="/javascripts/jquery-2.2.1.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/all.js"></script>
+<style media="screen">
+  .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight {
+  color: #faf6e4;
+  background-color: #122b3b;
+}
+.highlight .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #6c8b9f;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #b2fd6d;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .err {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .gr {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .k, .highlight .kd, .highlight .kv {
+  color: #f6dd62;
+  font-weight: bold;
+}
+.highlight .o, .highlight .ow {
+  color: #4df4ff;
+}
+.highlight .p, .highlight .pi {
+  color: #4df4ff;
+}
+.highlight .gd {
+  color: #cc0000;
+}
+.highlight .gi {
+  color: #b2fd6d;
+}
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .kc {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .nt {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ld {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ss {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+.highlight .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .nb {
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #BBBBBB;
+}
+.highlight .nf {
+  color: #a8e1fe;
+}
+.highlight .py {
+  color: #a8e1fe;
+}
+.highlight .na {
+  color: #a8e1fe;
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+</style>
+
+    <script src="/javascripts/sine-waves.js"></script>
+<script src="/javascripts/sine-waves-action-header.js"></script>
+  </head>
+
+  <body>
+      <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-56334895-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+<header class="main-header clearfix">
+	<div class="main-navblock col-lg-12 col-md-12 col-sm-12 col-xs-12"><div>
+		<a href="../index.html" class="logo-container">
+			<div class="oneapm-logo"></div>
+		</a>
+	</div>
+	<a href="#" class="burger-wrapper">
+		<div class="burger"></div>
+	</a>
+	<div class="nav-container">
+		<ul class="nav-list">
+			<li>
+				<a href="/quick-start/">快速入门</a>
+			</li>
+			<li>
+				<a href="/agent/">安装配置</a>
+			</li>
+			<li>
+				<a href="/book/">功能说明</a>
+			</li>
+			<li>
+				<a href="/bestpractice/">最佳实践</a>
+			</li>
+			<li>
+				<a href="/qa/">常见问题</a>
+			</li>
+			<li>
+				<a href="/contact/contact.html">联系我们</a>
+			</li>
+		</ul>
+		<ul class="login-list">
+			<li>
+				<a href="http://user.oneapm.com/pages/v2/login?from=ai-docs" class="btn outline-dark" id="loginIn">登录</a>
+			</li>
+			<li>
+				<a href="https://user.oneapm.com/pages/v2/signup?from=ai-docs" class="btn inside-yellow" id="signUp">注册</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</header>
+
+<script type="text/javascript">
+	$(function () {
+		var key=window.location.pathname;
+		var arr5=['agent','api','cloud-integration','services','services_example'];
+		var arr1=['quick-start'];
+		var arr3=['release-note','platform','dashboard','metric','alert','event'];
+		var arr4=['use-case','best-practise','bestpractice'];
+		var arr2=['qa'];
+		var arr6=['book']
+		var Arr=[arr1,arr2,arr3,arr4,arr5,arr6];
+		for(var i=0;i<6;i++) {
+			$.each(Arr[i], function (e, a) {
+				if (key.indexOf(a) !== -1) {
+					switch (i + 1) {
+						case 1:
+						key = '/quick-start/';
+						break;
+						case 5:
+						key = '/agent/';
+						break;
+						case 3:
+						key = '/platform/';
+						break;
+						case 4:
+						key = '/bestpractice/';
+						break;
+						case 2:
+						key = '/qa/';
+						break;
+						case 6:
+						key = '/book/';
+					}
+				}
+			});
+		}
+		var keyInfo="'"+key+"'";
+		var panelHead;
+		panelHead= $(".nav-container  a[href="+keyInfo+"]");
+		panelHead.addClass('show');
+	});
+</script>
+
+    <section class="section features-apm logo-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-xxs-12 col-xxs-offset-0 part">
+                <h3 class="vice-title text-center">一站式性能监控平台</h3>
+                <h2 class="title text-center">全平台，全语言</h2>
+                <div class="text-border"></div>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-xxs-12 col-xxs-offset-0 img-container">
+                <div class="col-lg-2 col-lg-offset-0 col-md-2 col-md-offset-0 col-sm-3 col-sm-offset-1 col-xs-4 col-xs-offset-0 col-xxs-6">
+                    <a href="/agent/python/Pythoninstall.html">
+                        <img class="icon-logo" src="/images/home/python.svg">
+                    </a>
+                </div>
+                <div class="col-lg-2 col-lg-offset-0 col-md-2 col-md-offset-0 col-sm-3 col-sm-offset-half col-xs-4 col-xs-offset-0 col-xxs-6">
+                    <a href="/agent/nodejs/Nodejsinstall.html">
+                        <img class="icon-logo" src="/images/home/node.svg">
+                    </a>
+                </div>
+                <div class="col-lg-2 col-lg-offset-0 col-md-2 col-md-offset-0 col-sm-3 col-sm-offset-half col-xs-4 col-xs-offset-0 col-xxs-6">
+                    <a href="/agent/java/installAgent.html">
+                        <img class="icon-logo" src="/images/home/java.svg">
+                    </a>
+                </div>
+                <div class="col-lg-2 col-lg-offset-0 col-md-2 col-md-offset-0 col-sm-3 col-sm-offset-1 col-xs-4 col-xs-offset-0 col-xxs-6">
+                    <a href="/agent/net/netinstall.html">
+                        <img class="icon-logo" src="/images/home/net.svg">
+                    </a>
+                </div>
+                <div class="col-lg-2 col-lg-offset-0 col-md-2 col-md-offset-0 col-sm-3 col-sm-offset-half col-xs-4 col-xs-offset-0 col-xxs-6">
+                    <a href="/agent/php/phpinstall.html">
+                        <img class="icon-logo" src="/images/home/php.svg">
+                    </a>
+                </div>
+                <div class="col-lg-2 col-lg-offset-0 col-md-2 col-md-offset-0 col-sm-3 col-sm-offset-half col-xs-4 col-xs-offset-0 col-xxs-6">
+                    <a href="/agent/ruby/Rubyinstall.html">
+                        <img class="icon-logo" src="/images/home/ruby.svg">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-10 col-sm-10 col-xs-10 col-lg-offset-2 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 col-xxs-12 col-xxs-offset-0 part">
+                <p>OneAPM 提供全语言和全平台的应用性能监控，无论你的团队采用了多少不同的技术方案，都可以在 OneAPM 平台上进行统一的性能管理。注册账号后，只需根据编程语言下载 Agent，按照指示安装成功之后，重启应用服务器。几分钟之后，您就可以在 OneAPM 界面上看到应用的性能数据了。</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="section features-apm" style="background-color:#f7f7f7;">
+    <div class="container">
+        <h3 class="vice-title text-center">在故障大面积影响用户前快速定位修复</h3>
+        <h2 class="title">从用户终端，到网络，直至服务端，<br class="  hidden-xxs">定位性能瓶颈</h2>
+        <div class="text-border"></div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-sm-offset-0 col-xs-6 col-xs-offset-3 col-xxs-12 col-xxs-offset-0">
+                <div class="content-wrapper"> 
+                    <span class="icon"><img src="/images/home/svg1.svg"></span>
+                    <div class="content-right"> 
+                        <h3 class="title"><span class="text">获得端到端的可视性</span></h3>
+                        <p class="intro-text">展现关键事务在整个面向服务的应用程序环境中的性能表现，提供响应时间、吞吐量、错误率等指标。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-sm-offset-0 col-xs-6 col-xs-offset-3 col-xxs-12 col-xxs-offset-0">
+                <div class="content-wrapper">
+                    <span class="icon"><img src="/images/home/svg2.svg"></span>
+                    <div class="content-right">
+                        <h3 class="title"><span class="text">实时检测程序错误和异常</span></h3>
+                        <p class="intro-text">错误信息功能可实时发现线上的错误异常，查看错误的具体情况，在第一时间发送告警通知。</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4 col-sm-offset-0  col-xs-6 col-xs-offset-3 col-xxs-12 col-xxs-offset-0">
+                <div class="content-wrapper">
+                    <span class="icon"><img src="/images/home/svg3.svg"></span>
+                    <div class="content-right">
+                        <h3 class="title"><span class="text">代码级别监控应用程序</span></h3>
+                        <p class="intro-text">无需设置，自动抓取性能消耗较大的代码和 SQL 语句，快速定位性能瓶颈。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section features-apm">
+    <div class="container">
+        <h3 class="vice-title text-center">有效管理动态复杂的企业应用环境</h3>
+        <h2 class="title">专业级应用性能分析，<br class="hidden-lg hidden-md hidden-sm hidden-xxs">为应用保驾护航</h2>
+        <div class="text-border"></div>
+        <div class="row">
+         <div class="col-lg-4 col-md-4 col-sm-4 col-sm-offset-0 col-xs-6 col-xs-offset-3 col-xxs-12 col-xxs-offset-0">
+            <div class="content-wrapper">
+                <span class="icon"><img src="/images/home/svg4.svg"></span>
+                <div class="content-right">
+                    <h3 class="title"><span class="text">数据库性能管理</span></h3>
+                    <p class="intro-text">实时查看数据库性能，轻松定位执行缓慢的 SQL / NOSQL 语句。支持 MySQL 、Oracle 、Redis 、Mongodb 、Memcached 等主流数据库。</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4 col-md-4 col-sm-4 col-sm-offset-0 col-xs-6 col-xs-offset-3 col-xxs-12 col-xxs-offset-0">
+          <div class="content-wrapper">
+            <span class="icon"><img src="/images/home/svg5.svg"></span>
+            <div class="content-right">
+                <h3 class="title"><span class="text">自动生成应用拓扑</span></h3>
+                <p class="intro-text">展示应用程序及其关联内部、外部服务系统的响应时间、吞吐量和状态，同时显示了各个服务的相互影响。如果一项服务中断，您可以立即看到其他服务遭受的影响。</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-4 col-sm-offset-0 col-xs-6 col-xs-offset-3 col-xxs-12 col-xxs-offset-0">               
+     <div class="content-wrapper">
+        <span class="icon"><img src="/images/home/svg6.svg"></span>
+        <div class="content-right">
+            <h3 class="title"><span class="text">及时精准的故障告警</span></h3>
+            <p class="intro-text">7*24 小时不间断监控，保证服务随时处于可监控状态。针对警报进行分级管理，抑制报警风暴，支持系统、邮件、短信多种报警通知方式。</p>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section cta-section text-center pricing-cta-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-7 col-xs-6 col-md-offset-1 col-sm-offset-0 col-xs-offset-3">
+                <img src="/images/home/gold-medal.png" class="hidden-xs">
+                <div class="slogan">
+                    <h2 class="title">金牌服务</h2>
+                    <p>7×24 小时服务支持，为应用保驾护航</p>
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 col-xs-12">
+                <p><a class="btn btn-large btn-sign-ye ga" href="https://user.oneapm.com/pages/v2/signup" target="_blank" data="1">立即注册</a></p>
+                <p><span class="cta-span">体验 15 天专业版</span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- <section class="section contact-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+        <div class="footer-col">
+          <p>文档</p>
+          <ul>
+            <li><a href="">快速入门</a></li>
+            <li><a href="">功能说明</a></li>
+            <li><a href="">安装指南</a></li>
+            <li><a href="">常见问题</a></li>
+            <li><a href="">API</a></li>
+            <li><a href="">联系我们</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
+        <div class="footer-col">
+          <p>语言</p>
+          <ul>
+            <li><a href="http://www.oneapm.com/ai/java.html">Java</a></li>
+            <li><a href="http://www.oneapm.com/ai/php.html">PHP</a></li>
+            <li><a href="http://www.oneapm.com/ai/dotnet.html">.net</a></li>
+            <li><a href="http://www.oneapm.com/ai/python.html">Python</a></li>
+            <li><a href="http://www.oneapm.com/ai/nodejs.html">node.js</a></li>
+            <li><a href="http://www.oneapm.com/ai/ruby.html">Ruby</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+        <figure class="figure">
+          <img src="/images/home/jishuzhichi.svg">
+          <p class="figure-title">技术支持</p>
+          <p class="figure-detail">使用 OneAPM 时，遇到任何技术上的问题，<br>都可以直接致电技术支持专线。</p>
+          <span class="phone">400-622-3101</span>
+        </figure>
+      </div>
+    </div>
+</section> -->
+
+    <div class="footer-nav-block">
+  <div class="container">
+    <div class="footer-nav">
+      <div class="footer-nav-col">
+        <ul class="footer-nav-list">
+          <li>
+            <a href="/quick-start/">文档</a>
+          </li>
+          <li>
+            <a href="/quick-start/">快速入门</a>
+          </li>
+          <li>
+            <a href="/book/">功能说明</a>
+          </li>
+          <li>
+            <a href="/agent/">安装指南</a>
+          </li>
+          <li>
+            <a href="/qa/">常见问题</a>
+          </li>
+          <li>
+           <a href="/Api/">API</a>
+         </li>
+         <li>
+          <a href="/contact/">联系我们</a>
+        </li>
+      </ul>
+    </div>
+    <div class="footer-nav-col">
+      <ul class="footer-nav-list">
+        <li>
+          <a href="/agent/">语言</a>
+        </li>
+        <li>
+          <a href="/agent/java/installAgent.html">Java</a>
+        </li>
+        <li>
+          <a href="/agent/php/phpinstall.html">PHP</a>
+        </li>
+        <li>
+          <a href="/agent/net/netinstall.html">.net</a>
+        </li>
+        <li>
+          <a href="/agent/python/Pythoninstall.html">Python</a>
+        </li>
+        <li>
+          <a href="/agent/nodejs/Nodejsinstall.html">Node.js</a>
+        </li>
+        <li><a href="/agent/ruby/Rubyinstall.html">Ruby</a></li>
+      </ul>
+    </div>
+    </div>
+    <div class="footer-support">
+      <ul class="footer-support-list">
+        <li><img src="/images/home/jishuzhichi.svg"></li>
+        <li class="support-title">技术支持</li>
+        <li class="support-mail">support@oneapm.com</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="footer-copyright-block">
+  <div class="container">
+    <div class="icp">
+      <small class="copyright">Copyright © 2008-<span id="cr-end-time"></span> 北京蓝海讯通科技股份有限公司 <a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备14028342号-2</a> 京公网安备 11010802016192 <a href="../privacy_policy.html">服务协议</a> </small>
+    </div>
+  </div>
+</div>
+
+  </body>
+</html>

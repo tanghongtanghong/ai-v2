@@ -1,0 +1,1200 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="keywords" content="端到端应用性能管理,Application Insight,OneAPM Ai">
+<meta name="description" content="OneAPM Application Insight是一个真实可见的应用性能监控系统，从用户体验到网络服务，直至应用代码, 帮助您完成端到端的应用性能管理，OneAPM Ai通过 Apdex、报警、错误率让您了解应用性能对用户使用体验的影响，从而挖掘应用可优化的范围">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<!-- Use title if it's in the page YAML frontmatter -->
+<title>Application Insight 文档</title>
+
+  <script type="text/javascript">
+    // if (window.location.hostname === 'www.oneapm.com') {
+    //   var pathnameSegs = window.location.pathname.split("/docs/ci");
+    //   var realPathname = pathnameSegs[pathnameSegs.length - 1];
+    //   window.location.href = 'http://101.200.76.159:4567' + realPathname;
+    // } else if (window.location.hostname !== 'docs-ci.oneapm.com') {
+    //   window.location.href = 'http://101.200.76.159:4567' + window.location.pathname;
+    // }
+  </script>
+
+<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+
+<!-- growingio -->
+<script type='text/javascript'>
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', 'a78f5e02538f4b2b88cd4fee708bc11b']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+  </script>
+
+
+<link href="/stylesheets/site.css" rel="stylesheet" />
+<script src="/javascripts/jquery-2.2.1.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/all.js"></script>
+<style media="screen">
+  .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight {
+  color: #faf6e4;
+  background-color: #122b3b;
+}
+.highlight .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #6c8b9f;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #b2fd6d;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .err {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .gr {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .k, .highlight .kd, .highlight .kv {
+  color: #f6dd62;
+  font-weight: bold;
+}
+.highlight .o, .highlight .ow {
+  color: #4df4ff;
+}
+.highlight .p, .highlight .pi {
+  color: #4df4ff;
+}
+.highlight .gd {
+  color: #cc0000;
+}
+.highlight .gi {
+  color: #b2fd6d;
+}
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .kc {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .nt {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ld {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ss {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+.highlight .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .nb {
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #BBBBBB;
+}
+.highlight .nf {
+  color: #a8e1fe;
+}
+.highlight .py {
+  color: #a8e1fe;
+}
+.highlight .na {
+  color: #a8e1fe;
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+</style>
+
+  </head>
+
+  <body class="page-agent agent_ruby agent_ruby_Rubyconfig_help">
+      <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-56334895-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+<header class="main-header clearfix">
+	<div class="main-navblock col-lg-12 col-md-12 col-sm-12 col-xs-12"><div>
+		<a href="../index.html" class="logo-container">
+			<div class="oneapm-logo"></div>
+		</a>
+	</div>
+	<a href="#" class="burger-wrapper">
+		<div class="burger"></div>
+	</a>
+	<div class="nav-container">
+		<ul class="nav-list">
+			<li>
+				<a href="/quick-start/">快速入门</a>
+			</li>
+			<li>
+				<a href="/agent/">安装配置</a>
+			</li>
+			<li>
+				<a href="/book/">功能说明</a>
+			</li>
+			<li>
+				<a href="/bestpractice/">最佳实践</a>
+			</li>
+			<li>
+				<a href="/qa/">常见问题</a>
+			</li>
+			<li>
+				<a href="/contact/contact.html">联系我们</a>
+			</li>
+		</ul>
+		<ul class="login-list">
+			<li>
+				<a href="http://user.oneapm.com/pages/v2/login?from=ai-docs" class="btn outline-dark" id="loginIn">登录</a>
+			</li>
+			<li>
+				<a href="https://user.oneapm.com/pages/v2/signup?from=ai-docs" class="btn inside-yellow" id="signUp">注册</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</header>
+
+<script type="text/javascript">
+	$(function () {
+		var key=window.location.pathname;
+		var arr5=['agent','api','cloud-integration','services','services_example'];
+		var arr1=['quick-start'];
+		var arr3=['release-note','platform','dashboard','metric','alert','event'];
+		var arr4=['use-case','best-practise','bestpractice'];
+		var arr2=['qa'];
+		var arr6=['book']
+		var Arr=[arr1,arr2,arr3,arr4,arr5,arr6];
+		for(var i=0;i<6;i++) {
+			$.each(Arr[i], function (e, a) {
+				if (key.indexOf(a) !== -1) {
+					switch (i + 1) {
+						case 1:
+						key = '/quick-start/';
+						break;
+						case 5:
+						key = '/agent/';
+						break;
+						case 3:
+						key = '/platform/';
+						break;
+						case 4:
+						key = '/bestpractice/';
+						break;
+						case 2:
+						key = '/qa/';
+						break;
+						case 6:
+						key = '/book/';
+					}
+				}
+			});
+		}
+		var keyInfo="'"+key+"'";
+		var panelHead;
+		panelHead= $(".nav-container  a[href="+keyInfo+"]");
+		panelHead.addClass('show');
+	});
+</script>
+
+    <div class="page-container">
+      <div class="row">
+        <div class="col-xs-3 page-sidebar hidden-sm hidden-xs">
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a href="/agent/java/java_index.html" role="button">
+          Java
+        </a>
+      </h4>
+    </div>
+     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/java/installAgent.html">Java Agent 安装</a></li>
+          <li><a href="/agent/java/auto.html">Java Agent 自动安装方法</a></li>
+          <li><a href="/agent/java/manual.html">Java Agent 手动安装方法</a></li>
+          <li><a href="/agent/java/AWS.html">AWS Wlastic Beanstalk 安装</a></li>
+          <li><a href="/agent/java/coldFusionInstall.html">ColdFusion 安装</a></li>
+          <li><a href="/agent/java/glassfishInstall.html">Glassfish 安装</a></li>
+          <li><a href="/agent/java/jbossInstall.html">JBoos 安装</a></li>
+          <li><a href="/agent/java/jettyInstall.html">Jetty 安装</a></li>
+          <li><a href="/agent/java/jsvcInstall.html">Jsvc 安装</a></li>
+          <li><a href="/agent/java/playInstall.html">Play 安装</a></li>
+          <li><a href="/agent/java/ResinInstall.html">Resin 安装</a></li>
+          <li><a href="/agent/java/weblogicInstall.html">WebLogic 安装</a></li>
+          <li><a href="/agent/java/websphereInstall.html">WebSphere 安装</a></li>
+          <li><a href="/agent/java/updateAgent.html">Java Agent 更新</a></li>
+          <li><a href="/agent/java/javauninstall.html">Java Agent 卸载</a></li>
+           <li><a href="/agent/java/config_help.html">Java Agent 参数配置</a></li>
+          <li><a href="/agent/java/javaSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+    <!--<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">-->
+      <!--<div class="panel-body">-->
+        <!--<ul>-->
+        <!--</ul>-->
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/agent/php/php_index.html" class="collapsed">
+          PHP
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/php/phpinstall.html">PHP Agent 安装</a></li>
+           <li><a href="/agent/php/handinstall.html">PHP Agent 手动安装</a></li>
+          <li><a href="/agent/php/phpupdate.html">PHP Agent 更新</a></li>
+          <li><a href="/agent/php/phpuninstall.html">PHP Agent 卸载</a></li>
+          <li><a href="/agent/php/phpconfig_help.html">PHP Agent 参数配置</a></li>
+          <li><a href="/agent/php/phpSupport_help.html">兼容环境支持</a></li>
+      </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+       <a href="/agent/net/dotnet_index.html" class="collapsed">
+         .NET
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/net/netinstall.html">.NET Agent 安装</a></li>
+          <li><a href="/agent/net/netupdate.html">.NET Agent 更新</a></li>
+          <li><a href="/agent/net/netuninstall.html">.NET Agent 卸载</a></li>
+          <li><a href="/agent/net/netconfig_help.html">.NET Agent 参数配置</a></li>
+          <li><a href="/agent/net/netSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFour">
+      <h4 class="panel-title">
+        <a href="/agent/python/python_index.html" class="collapsed">
+          Python
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/python/Pythoninstall.html">Python Agent 安装</a></li>
+          <li><a href="/agent/python/PythonAgentupdate.html">Python Agent 更新</a></li>
+          <li><a href="/agent/python/Pythonuninstall.html">Python Agent 卸载</a></li>
+          <li><a href="/agent/python/Pythonconfig_help.html">Python Agent 参数配置</a></li>
+          <li><a href="/agent/python/PythonSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFive">
+      <h4 class="panel-title">
+        <a href="/agent/nodejs/nodejs_index.html" class="collapsed">
+          Node.js
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/nodejs/Nodejsinstall.html">Node.js Agent 安装</a></li>
+          <li><a href="/agent/nodejs/Nodejsupdate.html">Node.js Agent 更新</a></li>
+          <li><a href="/agent/nodejs/Nodejsuninstall.html">Node.js Agent 卸载</a></li>
+          <li><a href="/agent/nodejs/Nodejsconfig_help.html">Node.js Agent 参数配置</a></li>
+          <li><a href="/agent/nodejs/NodejsSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSix">
+      <h4 class="panel-title">
+       <a href="/agent/ruby/ruby_index.html" class="collapsed">
+          Ruby
+        </a>
+      </h4>
+    </div>
+    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/ruby/Rubyinstall.html">Ruby Agent 安装</a></li>
+          <li><a href="/agent/ruby/DockerRuby.html">OSX 环境下部署 Docker 并安装 Ruby 探针</a></li>
+          <li><a href="/agent/ruby/Rubyupdate.html">Ruby Agent 更新</a></li>
+          <li><a href="/agent/ruby/Rubyuninstall.html">Ruby Agent 卸载</a></li>
+          <li><a href="/agent/ruby/Rubyconfig_help.html">Ruby Agent 参数配置</a></li>
+          <li><a href="/agent/ruby/RubySupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+        <div class="col-lg-9 page-body">
+          <div class="body-box">
+            <h1>Ruby Agent 参数说明</h1>
+
+<p>OneAPM Ruby Agent 从 oneapm.yml 配置文件中获取配置信息。您可以在本文中了解各个参数的意义，以及对应的配置方式。</p>
+
+<h2>License_key</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">这里请输入第二步生成的License Key</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">OneAPM 提供的 License Key</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">请填写 OneAPM  安装步骤提供 License Key。配置正确 <br>的 License Key后，OneAPM agent 将与 OneAPM server <br>通信，使得 OneAPM agent 正常工作。</td>
+</tr>
+</tbody></table>
+
+<h2>agent_enabled（适用于Ruby/Rails）</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">auto</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">auto or true or false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置为 auto，由 OneAPM agent 自动判断是否启动，OneAPM<br> agent 设置为 true 将启用 OneAPM agent，设置为 false 将停用<br> OneAPM agent。</td>
+</tr>
+</tbody></table>
+
+<h2>app_name</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">MyApplication</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">这个名称是在登录到 oneapm.com 中所看到的应用程序名称。<br>注意：如果修改了这个名称，一个新命名的应用会出现在 OneAPM<br>的界面里，并且旧名称的应用下将看不到新数据。</td>
+</tr>
+</tbody></table>
+
+<h2>monitor_mode</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true or false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置为 true，这个 agent 会收集应用的性能数据并上传到<br>oneapm.com 上的 OneAPM 服务。每个环境下这个全局开<br>关都可以被 true 覆盖。（以前称为：enable)</td>
+</tr>
+</tbody></table>
+
+<h2>log_level</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">info</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">立即生效</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">debug or info or warn or error or fatal</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">将记录 OneAPM agent 的工作日志，当您需要进行<br>故障分析时，参数级别决定日志的细度。</td>
+</tr>
+</tbody></table>
+
+<h2>日志输出级别</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">类型</th>
+<th style="text-align: left">无日志</th>
+<th style="text-align: left">范围</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">fatal</td>
+<td style="text-align: left">严重</td>
+<td style="text-align: left">fatal</td>
+</tr>
+<tr>
+<td style="text-align: left">error</td>
+<td style="text-align: left">错误</td>
+<td style="text-align: left">fatal + error</td>
+</tr>
+<tr>
+<td style="text-align: left">warn</td>
+<td style="text-align: left">警告</td>
+<td style="text-align: left">fatal + error + warn</td>
+</tr>
+<tr>
+<td style="text-align: left">info</td>
+<td style="text-align: left">正常</td>
+<td style="text-align: left">fatal + error + warn + info</td>
+</tr>
+<tr>
+<td style="text-align: left">debug</td>
+<td style="text-align: left">调试</td>
+<td style="text-align: left">fatal + error + warn + info + debug</td>
+</tr>
+</tbody></table>
+
+<h2>log _ file _ name</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">oneapm_agent.log</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">指定 OneAPM agent 日志输出的名称。</td>
+</tr>
+</tbody></table>
+
+<h2>log _ file _ path</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">tmp/</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">指定 OneAPM agent 日志位置。</td>
+</tr>
+</tbody></table>
+
+<h2>ssl</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true or false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置为 true，指定 OneAPM agent 使用 HTTPS <br>与 OneAPM Server 加密通信，设置为 false 则采用 <br>HTTP 方式通信。</td>
+</tr>
+</tbody></table>
+
+<h2>proxy_host</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">生效方式</th>
+<th style="text-align: left">重启应用服务器</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">IP 地址 or 域名</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">OneAPM agent 使用代理与 OneAPM server <br>通信时配置指定代理的主机地址。</td>
+</tr>
+</tbody></table>
+
+<h2>proxy_port</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">生效方式</th>
+<th style="text-align: left">重启应用服务器</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">OneAPM agent 使用代理与 OneAPM server <br>通信时配置指定代理的主机端口。</td>
+</tr>
+</tbody></table>
+
+<h2>proxy_user</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">生效方式</th>
+<th style="text-align: left">重启应用服务器</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">OneAPM agent 使用代理与 OneAPM server <br>通信时配置指定代理的用户名。</td>
+</tr>
+</tbody></table>
+
+<h2>proxy_password</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">生效方式</th>
+<th style="text-align: left">重启应用服务器</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">OneAPM agent 使用代理与 OneAPM server <br>通信时配置指定代理的密码。</td>
+</tr>
+</tbody></table>
+
+<h2>capture_params</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true or false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">告诉事务追踪器及错误收集器是否捕捉 HTTP 参数，<br>设置为 true，框架被捕捉时并不包括 HTTP 的参数，<br>设置为 false 将忽略 HTTP 参数。对于 Rails，RoR 的<br><code>filter_parameter_logging</code>可设置过滤参数，会影响<br>HTTP 参数的捕获结果</td>
+</tr>
+</tbody></table>
+
+<h2>transaction_tracer</h2>
+
+<p>功能说明:深度捕捉缓慢事务，每分钟将数据发送至 OneAPM server，包括事务中包含的 SQL 语句信息。  |</p>
+
+<h2>transaction_tracer.enabled</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true or false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">慢 Web 事务。参数为 transaction_tracer 的子参数<br>，用于控制是否启用 transaction_tracer 功能。</td>
+</tr>
+</tbody></table>
+
+<h2>transaction _ tracer.transaction _ threshold</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">apdex_f</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String (Float)</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">慢 Web 事务。当事务执行时间超过该值时，事务将<br>生成 Trace。该参数以秒为单位可以设置整数或浮点数。</td>
+</tr>
+<tr>
+<td style="text-align: left">注意</td>
+<td style="text-align: left">参数为 apdex_f 时，OneAPM 将使用 apdex_t 的 4 倍参数值。</td>
+</tr>
+</tbody></table>
+
+<h2>transaction _ tracer.record _ sql</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">obfuscated</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">off or raw or obfuscated</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">当启用 transaction_tracer 功能时，该参数标记 SQL<br> 记录的模式，off 为不记录 SQL，raw 为不进行处理并<br>记录原始的 SQL 语句，obfuscated 为经过处理的 SQL<br> 语句，加密显示语句的 String 串或数字参数。</td>
+</tr>
+</tbody></table>
+
+<h2>transaction _ tracer.stack _ trace _ threshold</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">0.5</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Float</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">慢 SQL 调用。参数以秒为单位，当 SQL 响应时间超过该值<br>时，事务将生成 SQL 语句 Trace，解析运行时间较长的 SQL。</td>
+</tr>
+</tbody></table>
+
+<h2>transaction _ tracer.explain _ enabled</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true or false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置为 true，将在 SQL 语句的 Trace 中生成缓慢 SQL<br> 语句的执行计划，仅支持 MySQL 和 PostgreSQL，使<br>用其它数据库时请设置为 false。</td>
+</tr>
+</tbody></table>
+
+<h2>transaction _ tracer.explain _ threshold</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">0.5</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Float</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">当启用 explain_enabled 功能时，OneAPM agent <br>捕捉 SQL 执行时间超过该值的 SQL 并生成执行计划。</td>
+</tr>
+</tbody></table>
+
+<h2>error_collector</h2>
+
+<p>功能说明:捕捉业务使用过程中抛出的异常信息，发送到 OneAPM 中以便查看。 </p>
+
+<h2>error_collector.enabled</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true or false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">参数为 error_collector 的子参数，用于控制是否启用<br> error_collector 功能。</td>
+</tr>
+</tbody></table>
+
+<h2>error _ collector.ignore _ errors</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">ActionController::RoutingError,Sinatra::NotFound</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">当启用 error_collector 功能后，该参数用于忽略指定<br>业务代码中类引发的错误信息。多个类名称以逗号分隔。</td>
+</tr>
+</tbody></table>
+
+<h1>配置浏览器监控</h1>
+
+<h2>browser_monitoring</h2>
+
+<p>功能说明:启用真实用户体验，OneAPM agent 能够记录用户浏览器下载和加载应用系统的时间。</p>
+
+<h2>browser _ monitoring.auto _ instrument</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true or false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置为 true，OneAPM agent 自动在 Web 页面中插入监<br>控 JavaScript 代码。设置为 false 关闭这个特性。</td>
+</tr>
+</tbody></table>
+
+<h2>browser _ monitoring.whitelist _ ips</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">生效方式</th>
+<th style="text-align: left">重启应用服务器</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">当启用 auto_instrument 功能后，该参数用于指定 ip<br>和 ip 段的用户在 Web 页面插入监控 JavaScript 代码，<br>多个 ip 用逗号分隔。</td>
+</tr>
+</tbody></table>
+
+<h2>browser_monitoring.position</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">空</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">可配置插码位置，默认情况下插码在 head 部分，<br>修改为 &lsquo;footer&rsquo; 则在页尾插码。</td>
+</tr>
+</tbody></table>
+
+<h2>redis.ignore_commands</h2>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">[ ]</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Array</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置不需要监控的 redis 指令字符串。</td>
+</tr>
+</tbody></table>
+
+            <!--<hr style="margin-top: 50px;" />
+<div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
+  <p style="font-size: 16px;">
+    如果您对 AI 感兴趣，可以选择试用我们的产品，只需要点击下面的按钮免费注册即可。
+  </p>
+  <br />
+  <p>
+    <a href="https://user.oneapm.com/account/register.do?ref=https://cloud.oneapm.com&from=ci-docs" class="btn btn-info btn-lg" target="_blank">
+      立即注册 AI
+    </a>
+  </p>
+</div>
+<hr />
+<!-多说评论框 start -->
+<!--<div class="ds-thread"
+     id="ds-thread"
+     data-thread-key=""
+     data-title=""
+   data-url=""></div>
+<!-多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!--<script type="text/javascript">
+  var titleTag = document.getElementsByTagName("h1")[0];
+
+  if (titleTag) {
+    title = document.getElementsByTagName("h1")[0].innerText;
+  } else {
+    title = "";
+  }
+
+  var duoshuoTag = document.getElementById('ds-thread');
+  duoshuoTag.setAttribute('data-thread-key', title.replace(/\s/g, ''));
+  duoshuoTag.setAttribute('data-title', title);
+
+  var duoshuoQuery = {short_name:"docs-ci"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>-->
+<!-- 多说公共JS代码 end -->
+
+
+            <div class="return"></div>
+          </div>
+          <div class="footer-in">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+      $(function() {
+        // $(".navbar-default .navbar-nav a[href='/agent/']").parent().addClass("active");
+        (function () {
+            $('.panel-default').mouseenter(function () {
+              if(!$(this).hasClass('active')){
+                $(this).children().addClass('in');
+              }
+            });
+            $('.panel-default').mouseleave(function () {
+              if(!$(this).hasClass('active')) {
+                $(this).children().removeClass('in');
+              }
+            });
+            var key=window.location.pathname;
+            var keyInfo="'"+key+"'";
+            var panelHead;
+            if(keyInfo.indexOf('index') !== -1){
+              panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+              panelHead.siblings().addClass('in');
+              panelHead.parent().siblings('div').map(function () {
+                $(this).removeClass('active');
+              });
+              panelHead.parent().addClass('active');
+            }else if(keyInfo.indexOf('.') <0) {
+              keyInfo="'"+key+"java_index.html"+"'";
+              panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+              panelHead.siblings().addClass('in');
+              panelHead.parent().siblings('div').map(function () {
+                $(this).removeClass('active');
+              });
+              panelHead.parent().addClass('active');
+            }else {
+                panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent().parent().parent();
+                panelHead.addClass('in');
+                panelHead.parent().siblings('div').map(function () {
+                  $(this).removeClass('active');
+                });
+                panelHead.parent().addClass('active');
+              }
+          })();
+      });
+    </script>
+  </body>
+</html>

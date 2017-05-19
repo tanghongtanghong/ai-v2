@@ -1,0 +1,703 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="keywords" content="端到端应用性能管理,Application Insight,OneAPM Ai">
+<meta name="description" content="OneAPM Application Insight是一个真实可见的应用性能监控系统，从用户体验到网络服务，直至应用代码, 帮助您完成端到端的应用性能管理，OneAPM Ai通过 Apdex、报警、错误率让您了解应用性能对用户使用体验的影响，从而挖掘应用可优化的范围">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<!-- Use title if it's in the page YAML frontmatter -->
+<title>Application Insight 文档</title>
+
+  <script type="text/javascript">
+    // if (window.location.hostname === 'www.oneapm.com') {
+    //   var pathnameSegs = window.location.pathname.split("/docs/ci");
+    //   var realPathname = pathnameSegs[pathnameSegs.length - 1];
+    //   window.location.href = 'http://101.200.76.159:4567' + realPathname;
+    // } else if (window.location.hostname !== 'docs-ci.oneapm.com') {
+    //   window.location.href = 'http://101.200.76.159:4567' + window.location.pathname;
+    // }
+  </script>
+
+<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+
+<!-- growingio -->
+<script type='text/javascript'>
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', 'a78f5e02538f4b2b88cd4fee708bc11b']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+  </script>
+
+
+<link href="/stylesheets/site.css" rel="stylesheet" />
+<script src="/javascripts/jquery-2.2.1.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/all.js"></script>
+<style media="screen">
+  .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight {
+  color: #faf6e4;
+  background-color: #122b3b;
+}
+.highlight .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #6c8b9f;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #b2fd6d;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .err {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .gr {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .k, .highlight .kd, .highlight .kv {
+  color: #f6dd62;
+  font-weight: bold;
+}
+.highlight .o, .highlight .ow {
+  color: #4df4ff;
+}
+.highlight .p, .highlight .pi {
+  color: #4df4ff;
+}
+.highlight .gd {
+  color: #cc0000;
+}
+.highlight .gi {
+  color: #b2fd6d;
+}
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .kc {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .nt {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ld {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ss {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+.highlight .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .nb {
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #BBBBBB;
+}
+.highlight .nf {
+  color: #a8e1fe;
+}
+.highlight .py {
+  color: #a8e1fe;
+}
+.highlight .na {
+  color: #a8e1fe;
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+</style>
+
+  </head>
+
+  <body class="page-agent agent_php agent_php_phpinstall">
+      <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-56334895-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+<header class="main-header clearfix">
+	<div class="main-navblock col-lg-12 col-md-12 col-sm-12 col-xs-12"><div>
+		<a href="../index.html" class="logo-container">
+			<div class="oneapm-logo"></div>
+		</a>
+	</div>
+	<a href="#" class="burger-wrapper">
+		<div class="burger"></div>
+	</a>
+	<div class="nav-container">
+		<ul class="nav-list">
+			<li>
+				<a href="/quick-start/">快速入门</a>
+			</li>
+			<li>
+				<a href="/agent/">安装配置</a>
+			</li>
+			<li>
+				<a href="/book/">功能说明</a>
+			</li>
+			<li>
+				<a href="/bestpractice/">最佳实践</a>
+			</li>
+			<li>
+				<a href="/qa/">常见问题</a>
+			</li>
+			<li>
+				<a href="/contact/contact.html">联系我们</a>
+			</li>
+		</ul>
+		<ul class="login-list">
+			<li>
+				<a href="http://user.oneapm.com/pages/v2/login?from=ai-docs" class="btn outline-dark" id="loginIn">登录</a>
+			</li>
+			<li>
+				<a href="https://user.oneapm.com/pages/v2/signup?from=ai-docs" class="btn inside-yellow" id="signUp">注册</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</header>
+
+<script type="text/javascript">
+	$(function () {
+		var key=window.location.pathname;
+		var arr5=['agent','api','cloud-integration','services','services_example'];
+		var arr1=['quick-start'];
+		var arr3=['release-note','platform','dashboard','metric','alert','event'];
+		var arr4=['use-case','best-practise','bestpractice'];
+		var arr2=['qa'];
+		var arr6=['book']
+		var Arr=[arr1,arr2,arr3,arr4,arr5,arr6];
+		for(var i=0;i<6;i++) {
+			$.each(Arr[i], function (e, a) {
+				if (key.indexOf(a) !== -1) {
+					switch (i + 1) {
+						case 1:
+						key = '/quick-start/';
+						break;
+						case 5:
+						key = '/agent/';
+						break;
+						case 3:
+						key = '/platform/';
+						break;
+						case 4:
+						key = '/bestpractice/';
+						break;
+						case 2:
+						key = '/qa/';
+						break;
+						case 6:
+						key = '/book/';
+					}
+				}
+			});
+		}
+		var keyInfo="'"+key+"'";
+		var panelHead;
+		panelHead= $(".nav-container  a[href="+keyInfo+"]");
+		panelHead.addClass('show');
+	});
+</script>
+
+    <div class="page-container">
+      <div class="row">
+        <div class="col-xs-3 page-sidebar hidden-sm hidden-xs">
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a href="/agent/java/java_index.html" role="button">
+          Java
+        </a>
+      </h4>
+    </div>
+     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/java/installAgent.html">Java Agent 安装</a></li>
+          <li><a href="/agent/java/auto.html">Java Agent 自动安装方法</a></li>
+          <li><a href="/agent/java/manual.html">Java Agent 手动安装方法</a></li>
+          <li><a href="/agent/java/AWS.html">AWS Wlastic Beanstalk 安装</a></li>
+          <li><a href="/agent/java/coldFusionInstall.html">ColdFusion 安装</a></li>
+          <li><a href="/agent/java/glassfishInstall.html">Glassfish 安装</a></li>
+          <li><a href="/agent/java/jbossInstall.html">JBoos 安装</a></li>
+          <li><a href="/agent/java/jettyInstall.html">Jetty 安装</a></li>
+          <li><a href="/agent/java/jsvcInstall.html">Jsvc 安装</a></li>
+          <li><a href="/agent/java/playInstall.html">Play 安装</a></li>
+          <li><a href="/agent/java/ResinInstall.html">Resin 安装</a></li>
+          <li><a href="/agent/java/weblogicInstall.html">WebLogic 安装</a></li>
+          <li><a href="/agent/java/websphereInstall.html">WebSphere 安装</a></li>
+          <li><a href="/agent/java/updateAgent.html">Java Agent 更新</a></li>
+          <li><a href="/agent/java/javauninstall.html">Java Agent 卸载</a></li>
+           <li><a href="/agent/java/config_help.html">Java Agent 参数配置</a></li>
+          <li><a href="/agent/java/javaSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+    <!--<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">-->
+      <!--<div class="panel-body">-->
+        <!--<ul>-->
+        <!--</ul>-->
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/agent/php/php_index.html" class="collapsed">
+          PHP
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/php/phpinstall.html">PHP Agent 安装</a></li>
+           <li><a href="/agent/php/handinstall.html">PHP Agent 手动安装</a></li>
+          <li><a href="/agent/php/phpupdate.html">PHP Agent 更新</a></li>
+          <li><a href="/agent/php/phpuninstall.html">PHP Agent 卸载</a></li>
+          <li><a href="/agent/php/phpconfig_help.html">PHP Agent 参数配置</a></li>
+          <li><a href="/agent/php/phpSupport_help.html">兼容环境支持</a></li>
+      </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+       <a href="/agent/net/dotnet_index.html" class="collapsed">
+         .NET
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/net/netinstall.html">.NET Agent 安装</a></li>
+          <li><a href="/agent/net/netupdate.html">.NET Agent 更新</a></li>
+          <li><a href="/agent/net/netuninstall.html">.NET Agent 卸载</a></li>
+          <li><a href="/agent/net/netconfig_help.html">.NET Agent 参数配置</a></li>
+          <li><a href="/agent/net/netSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFour">
+      <h4 class="panel-title">
+        <a href="/agent/python/python_index.html" class="collapsed">
+          Python
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/python/Pythoninstall.html">Python Agent 安装</a></li>
+          <li><a href="/agent/python/PythonAgentupdate.html">Python Agent 更新</a></li>
+          <li><a href="/agent/python/Pythonuninstall.html">Python Agent 卸载</a></li>
+          <li><a href="/agent/python/Pythonconfig_help.html">Python Agent 参数配置</a></li>
+          <li><a href="/agent/python/PythonSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFive">
+      <h4 class="panel-title">
+        <a href="/agent/nodejs/nodejs_index.html" class="collapsed">
+          Node.js
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/nodejs/Nodejsinstall.html">Node.js Agent 安装</a></li>
+          <li><a href="/agent/nodejs/Nodejsupdate.html">Node.js Agent 更新</a></li>
+          <li><a href="/agent/nodejs/Nodejsuninstall.html">Node.js Agent 卸载</a></li>
+          <li><a href="/agent/nodejs/Nodejsconfig_help.html">Node.js Agent 参数配置</a></li>
+          <li><a href="/agent/nodejs/NodejsSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSix">
+      <h4 class="panel-title">
+       <a href="/agent/ruby/ruby_index.html" class="collapsed">
+          Ruby
+        </a>
+      </h4>
+    </div>
+    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/ruby/Rubyinstall.html">Ruby Agent 安装</a></li>
+          <li><a href="/agent/ruby/DockerRuby.html">OSX 环境下部署 Docker 并安装 Ruby 探针</a></li>
+          <li><a href="/agent/ruby/Rubyupdate.html">Ruby Agent 更新</a></li>
+          <li><a href="/agent/ruby/Rubyuninstall.html">Ruby Agent 卸载</a></li>
+          <li><a href="/agent/ruby/Rubyconfig_help.html">Ruby Agent 参数配置</a></li>
+          <li><a href="/agent/ruby/RubySupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+        <div class="col-lg-9 page-body">
+          <div class="body-box">
+            <h1>PHP Agent 安装</h1>
+
+<ul>
+<li><a href="#1">Linux 探针安装</a><br></li>
+<li><a href="#2">windows 探针安装</a><br></li>
+</ul>
+
+<h2><h2 id="1">Linux 探针安装</h2> <br></h2>
+
+<p>安装 PHP 探针需要 root 用户权限，所以在安装探针之前，请先切换为 root 用户。</p>
+
+<p>解压缩安装包</p>
+
+<p>命令：tar -xzvf OneAPM<em>php</em>Agent_latest.tar.gz</p>
+
+<p>进入解压缩的文件夹</p>
+
+<p>命令：cd oneapm-php5-linux-install-script</p>
+
+<!--![](https://oneapm.kf5.com/attachments/download/274057/001562092c5c7406dfc2fdc5e5b4302)-->
+
+<p><img src="/images/myr/p001.png" alt="P001" /></p>
+
+<p>安装探针</p>
+
+<p>命令： ./oneapm-install  install</p>
+
+<!--![](https://oneapm.kf5.com/attachments/download/274060/001562092f1af8d01f1d0aa101cc091)-->
+
+<p><img src="/images/myr/p002.png" alt="P002" /></p>
+
+<p>输入 license 值，即在下载第三步获取的授权编号，输入回车进行安装</p>
+
+<!--![](https://oneapm.kf5.com/attachments/download/274065/0015620934c8b5e09e7bf022374c637)-->
+
+<p><img src="/images/myr/p003.png" alt="P003" /></p>
+
+<p>如果您的服务器上安装了多个 PHP，您需要选择当前要执行的 PHP 安装目录，走第 5 步。</p>
+
+<p>选择 PHP 的安装目录</p>
+
+<!--![](https://oneapm.kf5.com/attachments/download/274070/0015620939faf0aed5ccb86f0eb4bcd)-->
+
+<p><img src="/images/myr/p004.png" alt="P004" /></p>
+
+<p>如果您的 PHP 安装目录没有在 OneAPM 探针搜索到的安装目录下(/usr/… 或 /opt/… 开头的目录下)，请选择 3 并用安装脚本的提示命令搜索您的安装目录</p>
+
+<!--![](https://oneapm.kf5.com/attachments/download/274072/001562093e37db88747860f49786daa)-->
+
+<p><img src="/images/myr/p005.png" alt="P005" /></p>
+
+<p>将您的安装目录输入</p>
+
+<!--![](https://oneapm.kf5.com/attachments/download/274074/001562094030f867580d1d607719969)-->
+
+<p><img src="/images/myr/p006.png" alt="P006" /></p>
+
+<p>安装成功标志</p>
+
+<!--![](https://oneapm.kf5.com/attachments/download/274075/0015620941362ec2cda9b6949d558b6)-->
+
+<p><img src="/images/myr/p007.png" alt="P007" /></p>
+
+<p>修改 oneapm.cfg 里 collector_host 和 port 参数的值分别为 app.collector.oneapm.com 和 80</p>
+
+<p><img src="/images/myr/p012.png" alt="P012" /></p>
+
+<p>重启 PHP 服务器(例如 Apache、PHP-FPM)</p>
+
+<p>本例使用的服务器为 Nginx+PHP-FPM ，所以只需重启 PHP-FPM 即可</p>
+
+<!--![](https://oneapm.kf5.com/attachments/download/274077/0015620944ea9a3cafc781f54787c52)-->
+
+<p><img src="/images/myr/p008.png" alt="P008" /></p>
+
+<p>在重启 PHP-FPM 或者 httpd 时，oneapm-daemon 进程自动启动</p>
+
+<!--![](https://oneapm.kf5.com/attachments/download/274081/0015620946c57a915d640fe5b709e3c)-->
+
+<p><img src="/images/myr/p009.png" alt="P009" /></p>
+
+<p>回到 OneAPM 页面查看应用性能，应用程序名的颜色会因 PHP 应用性能不同而显示的颜色不同，点击进入就可以查看相关数据。</p>
+
+<p>安装完毕，回到 OneAPM 应用首页可以看到安装的 PHP 应用</p>
+
+<!--![](https://oneapm.kf5.com/attachments/download/274084/001562094ef4873a4d43b462b31f84b)-->
+
+<p><img src="/images/myr/p010.png" alt="P010" /></p>
+
+<h2><h2 id="1">windows 探针安装</h2> <br></h2>
+
+<ul>
+<li>双击安装文件</li>
+</ul>
+
+<p><img src="/images/myr/wind01.png" alt="Wind01" /></p>
+
+<ul>
+<li>按照安装提示进行下一步</li>
+</ul>
+
+<p><img src="/images/myr/wind02.png" alt="Wind02" />
+将 oneapm 官网显示用户的 php license 拷入，并点击下一步</p>
+
+<ul>
+<li>选择输入要监控的 php 版本信息</li>
+</ul>
+
+<p><img src="/images/myr/wind03.png" alt="Wind03" /></p>
+
+<ul>
+<li>安装</li>
+</ul>
+
+<p><img src="/images/myr/wind04.png" alt="Wind04" />
+点击完成。</p>
+
+<p><strong>相关配置</strong></p>
+
+<ul>
+<li>探针配置文件在 php.ini 的最后方</li>
+<li>daemon 配置文件</li>
+</ul>
+
+<p><img src="/images/myr/wind05.png" alt="Wind05" />
+回车，该目录下有文件夹 &ldquo; OneAPM PHP Agent &quot;，点击进入</p>
+
+<p><img src="/images/myr/wind06.png" alt="Wind06" />
+oneapm.cfg：在此配置daemon日志级别，或者是修改 ipt 和 host 地址（saas用户不需要修改）。</p>
+
+<ul>
+<li>agent 和 daemon 日志</li>
+</ul>
+
+<p><img src="/images/myr/wind07.png" alt="Wind07" /></p>
+
+<p>回车并查看日志信息
+ <img src="/images/myr/wind08.png" alt="Wind08" /></p>
+
+            <!--<hr style="margin-top: 50px;" />
+<div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
+  <p style="font-size: 16px;">
+    如果您对 AI 感兴趣，可以选择试用我们的产品，只需要点击下面的按钮免费注册即可。
+  </p>
+  <br />
+  <p>
+    <a href="https://user.oneapm.com/account/register.do?ref=https://cloud.oneapm.com&from=ci-docs" class="btn btn-info btn-lg" target="_blank">
+      立即注册 AI
+    </a>
+  </p>
+</div>
+<hr />
+<!-多说评论框 start -->
+<!--<div class="ds-thread"
+     id="ds-thread"
+     data-thread-key=""
+     data-title=""
+   data-url=""></div>
+<!-多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!--<script type="text/javascript">
+  var titleTag = document.getElementsByTagName("h1")[0];
+
+  if (titleTag) {
+    title = document.getElementsByTagName("h1")[0].innerText;
+  } else {
+    title = "";
+  }
+
+  var duoshuoTag = document.getElementById('ds-thread');
+  duoshuoTag.setAttribute('data-thread-key', title.replace(/\s/g, ''));
+  duoshuoTag.setAttribute('data-title', title);
+
+  var duoshuoQuery = {short_name:"docs-ci"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>-->
+<!-- 多说公共JS代码 end -->
+
+
+            <div class="return"></div>
+          </div>
+          <div class="footer-in">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+      $(function() {
+        // $(".navbar-default .navbar-nav a[href='/agent/']").parent().addClass("active");
+        (function () {
+            $('.panel-default').mouseenter(function () {
+              if(!$(this).hasClass('active')){
+                $(this).children().addClass('in');
+              }
+            });
+            $('.panel-default').mouseleave(function () {
+              if(!$(this).hasClass('active')) {
+                $(this).children().removeClass('in');
+              }
+            });
+            var key=window.location.pathname;
+            var keyInfo="'"+key+"'";
+            var panelHead;
+            if(keyInfo.indexOf('index') !== -1){
+              panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+              panelHead.siblings().addClass('in');
+              panelHead.parent().siblings('div').map(function () {
+                $(this).removeClass('active');
+              });
+              panelHead.parent().addClass('active');
+            }else if(keyInfo.indexOf('.') <0) {
+              keyInfo="'"+key+"java_index.html"+"'";
+              panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+              panelHead.siblings().addClass('in');
+              panelHead.parent().siblings('div').map(function () {
+                $(this).removeClass('active');
+              });
+              panelHead.parent().addClass('active');
+            }else {
+                panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent().parent().parent();
+                panelHead.addClass('in');
+                panelHead.parent().siblings('div').map(function () {
+                  $(this).removeClass('active');
+                });
+                panelHead.parent().addClass('active');
+              }
+          })();
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,3191 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="keywords" content="端到端应用性能管理,Application Insight,OneAPM Ai">
+<meta name="description" content="OneAPM Application Insight是一个真实可见的应用性能监控系统，从用户体验到网络服务，直至应用代码, 帮助您完成端到端的应用性能管理，OneAPM Ai通过 Apdex、报警、错误率让您了解应用性能对用户使用体验的影响，从而挖掘应用可优化的范围">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<!-- Use title if it's in the page YAML frontmatter -->
+<title>Application Insight 文档</title>
+
+  <script type="text/javascript">
+    // if (window.location.hostname === 'www.oneapm.com') {
+    //   var pathnameSegs = window.location.pathname.split("/docs/ci");
+    //   var realPathname = pathnameSegs[pathnameSegs.length - 1];
+    //   window.location.href = 'http://101.200.76.159:4567' + realPathname;
+    // } else if (window.location.hostname !== 'docs-ci.oneapm.com') {
+    //   window.location.href = 'http://101.200.76.159:4567' + window.location.pathname;
+    // }
+  </script>
+
+<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+
+<!-- growingio -->
+<script type='text/javascript'>
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', 'a78f5e02538f4b2b88cd4fee708bc11b']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+  </script>
+
+
+<link href="/stylesheets/site.css" rel="stylesheet" />
+<script src="/javascripts/jquery-2.2.1.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/all.js"></script>
+<style media="screen">
+  .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight {
+  color: #faf6e4;
+  background-color: #122b3b;
+}
+.highlight .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #6c8b9f;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #b2fd6d;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .err {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .gr {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .k, .highlight .kd, .highlight .kv {
+  color: #f6dd62;
+  font-weight: bold;
+}
+.highlight .o, .highlight .ow {
+  color: #4df4ff;
+}
+.highlight .p, .highlight .pi {
+  color: #4df4ff;
+}
+.highlight .gd {
+  color: #cc0000;
+}
+.highlight .gi {
+  color: #b2fd6d;
+}
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .kc {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .nt {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ld {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ss {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+.highlight .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .nb {
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #BBBBBB;
+}
+.highlight .nf {
+  color: #a8e1fe;
+}
+.highlight .py {
+  color: #a8e1fe;
+}
+.highlight .na {
+  color: #a8e1fe;
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+</style>
+
+  </head>
+
+  <body class="page-agent agent_java agent_java_config_help">
+      <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-56334895-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+<header class="main-header clearfix">
+	<div class="main-navblock col-lg-12 col-md-12 col-sm-12 col-xs-12"><div>
+		<a href="../index.html" class="logo-container">
+			<div class="oneapm-logo"></div>
+		</a>
+	</div>
+	<a href="#" class="burger-wrapper">
+		<div class="burger"></div>
+	</a>
+	<div class="nav-container">
+		<ul class="nav-list">
+			<li>
+				<a href="/quick-start/">快速入门</a>
+			</li>
+			<li>
+				<a href="/agent/">安装配置</a>
+			</li>
+			<li>
+				<a href="/book/">功能说明</a>
+			</li>
+			<li>
+				<a href="/bestpractice/">最佳实践</a>
+			</li>
+			<li>
+				<a href="/qa/">常见问题</a>
+			</li>
+			<li>
+				<a href="/contact/contact.html">联系我们</a>
+			</li>
+		</ul>
+		<ul class="login-list">
+			<li>
+				<a href="http://user.oneapm.com/pages/v2/login?from=ai-docs" class="btn outline-dark" id="loginIn">登录</a>
+			</li>
+			<li>
+				<a href="https://user.oneapm.com/pages/v2/signup?from=ai-docs" class="btn inside-yellow" id="signUp">注册</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</header>
+
+<script type="text/javascript">
+	$(function () {
+		var key=window.location.pathname;
+		var arr5=['agent','api','cloud-integration','services','services_example'];
+		var arr1=['quick-start'];
+		var arr3=['release-note','platform','dashboard','metric','alert','event'];
+		var arr4=['use-case','best-practise','bestpractice'];
+		var arr2=['qa'];
+		var arr6=['book']
+		var Arr=[arr1,arr2,arr3,arr4,arr5,arr6];
+		for(var i=0;i<6;i++) {
+			$.each(Arr[i], function (e, a) {
+				if (key.indexOf(a) !== -1) {
+					switch (i + 1) {
+						case 1:
+						key = '/quick-start/';
+						break;
+						case 5:
+						key = '/agent/';
+						break;
+						case 3:
+						key = '/platform/';
+						break;
+						case 4:
+						key = '/bestpractice/';
+						break;
+						case 2:
+						key = '/qa/';
+						break;
+						case 6:
+						key = '/book/';
+					}
+				}
+			});
+		}
+		var keyInfo="'"+key+"'";
+		var panelHead;
+		panelHead= $(".nav-container  a[href="+keyInfo+"]");
+		panelHead.addClass('show');
+	});
+</script>
+
+    <div class="page-container">
+      <div class="row">
+        <div class="col-xs-3 page-sidebar hidden-sm hidden-xs">
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a href="/agent/java/java_index.html" role="button">
+          Java
+        </a>
+      </h4>
+    </div>
+     <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/java/installAgent.html">Java Agent 安装</a></li>
+          <li><a href="/agent/java/auto.html">Java Agent 自动安装方法</a></li>
+          <li><a href="/agent/java/manual.html">Java Agent 手动安装方法</a></li>
+          <li><a href="/agent/java/AWS.html">AWS Wlastic Beanstalk 安装</a></li>
+          <li><a href="/agent/java/coldFusionInstall.html">ColdFusion 安装</a></li>
+          <li><a href="/agent/java/glassfishInstall.html">Glassfish 安装</a></li>
+          <li><a href="/agent/java/jbossInstall.html">JBoos 安装</a></li>
+          <li><a href="/agent/java/jettyInstall.html">Jetty 安装</a></li>
+          <li><a href="/agent/java/jsvcInstall.html">Jsvc 安装</a></li>
+          <li><a href="/agent/java/playInstall.html">Play 安装</a></li>
+          <li><a href="/agent/java/ResinInstall.html">Resin 安装</a></li>
+          <li><a href="/agent/java/weblogicInstall.html">WebLogic 安装</a></li>
+          <li><a href="/agent/java/websphereInstall.html">WebSphere 安装</a></li>
+          <li><a href="/agent/java/updateAgent.html">Java Agent 更新</a></li>
+          <li><a href="/agent/java/javauninstall.html">Java Agent 卸载</a></li>
+           <li><a href="/agent/java/config_help.html">Java Agent 参数配置</a></li>
+          <li><a href="/agent/java/javaSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+    <!--<div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">-->
+      <!--<div class="panel-body">-->
+        <!--<ul>-->
+        <!--</ul>-->
+      <!--</div>-->
+    <!--</div>-->
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/agent/php/php_index.html" class="collapsed">
+          PHP
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/php/phpinstall.html">PHP Agent 安装</a></li>
+           <li><a href="/agent/php/handinstall.html">PHP Agent 手动安装</a></li>
+          <li><a href="/agent/php/phpupdate.html">PHP Agent 更新</a></li>
+          <li><a href="/agent/php/phpuninstall.html">PHP Agent 卸载</a></li>
+          <li><a href="/agent/php/phpconfig_help.html">PHP Agent 参数配置</a></li>
+          <li><a href="/agent/php/phpSupport_help.html">兼容环境支持</a></li>
+      </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+       <a href="/agent/net/dotnet_index.html" class="collapsed">
+         .NET
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/net/netinstall.html">.NET Agent 安装</a></li>
+          <li><a href="/agent/net/netupdate.html">.NET Agent 更新</a></li>
+          <li><a href="/agent/net/netuninstall.html">.NET Agent 卸载</a></li>
+          <li><a href="/agent/net/netconfig_help.html">.NET Agent 参数配置</a></li>
+          <li><a href="/agent/net/netSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFour">
+      <h4 class="panel-title">
+        <a href="/agent/python/python_index.html" class="collapsed">
+          Python
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/python/Pythoninstall.html">Python Agent 安装</a></li>
+          <li><a href="/agent/python/PythonAgentupdate.html">Python Agent 更新</a></li>
+          <li><a href="/agent/python/Pythonuninstall.html">Python Agent 卸载</a></li>
+          <li><a href="/agent/python/Pythonconfig_help.html">Python Agent 参数配置</a></li>
+          <li><a href="/agent/python/PythonSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingFive">
+      <h4 class="panel-title">
+        <a href="/agent/nodejs/nodejs_index.html" class="collapsed">
+          Node.js
+        </a>
+      </h4>
+    </div>
+    <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/nodejs/Nodejsinstall.html">Node.js Agent 安装</a></li>
+          <li><a href="/agent/nodejs/Nodejsupdate.html">Node.js Agent 更新</a></li>
+          <li><a href="/agent/nodejs/Nodejsuninstall.html">Node.js Agent 卸载</a></li>
+          <li><a href="/agent/nodejs/Nodejsconfig_help.html">Node.js Agent 参数配置</a></li>
+          <li><a href="/agent/nodejs/NodejsSupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingSix">
+      <h4 class="panel-title">
+       <a href="/agent/ruby/ruby_index.html" class="collapsed">
+          Ruby
+        </a>
+      </h4>
+    </div>
+    <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/agent/ruby/Rubyinstall.html">Ruby Agent 安装</a></li>
+          <li><a href="/agent/ruby/DockerRuby.html">OSX 环境下部署 Docker 并安装 Ruby 探针</a></li>
+          <li><a href="/agent/ruby/Rubyupdate.html">Ruby Agent 更新</a></li>
+          <li><a href="/agent/ruby/Rubyuninstall.html">Ruby Agent 卸载</a></li>
+          <li><a href="/agent/ruby/Rubyconfig_help.html">Ruby Agent 参数配置</a></li>
+          <li><a href="/agent/ruby/RubySupport_help.html">兼容环境支持</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+        </div>
+        <div class="col-lg-9 page-body">
+          <div class="body-box">
+            <h1>JAVA Agent 参数配置</h1>
+
+<ul>
+<li>OneAPM Java Agent 从 oneapm.properites  配置文件中获取配置信息。您可以在本文中了解各个参数的意义，以及对应的配置方式。
+oneapm.properites 目录位置 解压oneapm的位置/OneAPM/oneapm.properites </li>
+</ul>
+
+<h3>license_key</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">这里请输入第二步生成的 License Key</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">String</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">OneAPM 提供的 License Key</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">请填写 OneAPM 安装步骤提供 License Key，.配置正确的 License Key 后，OneAPM Agent 将与 OneAPM server 通信，使得 OneAPM Agent 正常工作。</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>transaction<em>sample.processor</em>count</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">默认为系统CPU核数</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">OneAPM 提供的 License Key</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">默认关闭 ，开启采样后, 用于计算CPU比率的CPU核数</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>agent_enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置为 true 将启用 OneAPM Agent，设置为 false 将停用 OneAPM Agent。</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>enable<em>auto</em>tier_naming</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">enable<em>auto</em>tier<em>naming 的值设定为 true 时, 可以启用对 auto</em>tier_naming 的支持,会自动检测您的每一个 web app 的名字,同时将不同 Agent 的数据对应到不同的web app中.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>enable<em>auto</em>transaction_naming</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">1.设置为 true，启用基于 component-based 事务命名;2.设置为 false 将按照事务请求的 URI 进行命名;</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>slow_sql.enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">1.设置为 true，启用基于 component-based 事务命名;2.设置为 false 将按照事务请求的 URI 进行命名;</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">采用appname获取配置</td>
+</tr>
+</tbody></table>
+
+<h3>transaction_tracer.enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">是否开启事务追踪，需要与 collect_traces ＝ true 时，才可以是能事务追踪</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">采用appname，但是与defaultConfig中的值一样</td>
+</tr>
+</tbody></table>
+
+<h3>transaction<em>tracer.explain</em>enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">是否开启慢SQL的执行计划。见慢 SQL 追踪实现逻辑</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname</td>
+</tr>
+</tbody></table>
+
+<h3>transaction<em>tracer.explain</em>threshold</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">0.5</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Float</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">合法浮点数</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">慢 SQL 执行时间阈值，执行时间超过该参数的 SQL 查询会被认为是慢查询。见慢 SQL 追踪实现逻辑</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname</td>
+</tr>
+</tbody></table>
+
+<h3>transaction<em>tracer.stack</em>trace_threshold</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">0.5</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Float</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">合法浮点数</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">当 Transaction Segment 的执行时间超过该阈值时，Agent 会抓取当前线程的调用栈，以供用户分析。一般的，执行 SQL 查询也是一种 Segment，所以如果 SQL 语句的执行时间大于这个阈值，在 Transaction Tracer 页面详情也会看到执行 SQL 时的调用栈信息</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname</td>
+</tr>
+</tbody></table>
+
+<h3>transaction<em>tracer.transaction</em>threshold</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">apdex_f</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串 ｜Double</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">字符串或者合法浮点数</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">用来确定是否纪录特定事务的详细踪迹，如果超过该阈值，那么就会被纪录上传。默认为所设定的apdex_f值的4倍</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname</td>
+</tr>
+</tbody></table>
+
+<h3>transaction<em>tracer.log</em>sql</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">是否将SQL语句录入日志</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname，但是与defaultConfig的相同</td>
+</tr>
+</tbody></table>
+
+<h3>transaction<em>tracer.top</em>n</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">50</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Integer</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">合法整型数字</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">参数控制事务URL产生的trace数量，URL产生超过参数限制的trace将会被丢弃。当参数设置为0时，始终显示URL最慢的trace。另见TransactionSampler 的四种实现中的 TransactionTraceBucket。</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>obfuscated<em>sql</em>fields</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">credit_card, ssn, password</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">该配置在代码中并没有被处理，该功能已经失效，会自动将其变成obfuscated的方式</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>transaction<em>tracer.record</em>sql</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">obfuscated</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">off ｜ raw ｜ obfuscated</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">当启用transaction_tracer功能时，该参数标记SQL记录的模式，off为不记录SQL，raw为不进行处理并记录原始的SQL语 句，obfuscated为经过处理的SQL语句，加密显示语句的字符串或数字参数（将 SQL 中的变量都替换为“?”）。</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname</td>
+</tr>
+</tbody></table>
+
+<h3>transaction<em>tracer.slow</em>sampler_enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">将响应时间大于transaction<em>tracer.transaction</em>threshold的事务进行收集上报</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname， 但是与defaultConfig中的相同</td>
+</tr>
+</tbody></table>
+
+<h3>transaction_sample.enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">默认为 true, 表示开启，是否开启事务采样, 开启后将按照规则采样事务</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname， 但是与defaultConfig中的相同</td>
+</tr>
+</tbody></table>
+
+<h3>transaction_sample.crontab</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">none</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">事务采样定时修改任务，任务配置使用 crontab 格式，后跟采样时长和固定采样比 ，例如transaction_sample.crontab = 30 12 * * * 300 1，表示每天 12 点 30 分，在 5 分钟内，事务采样比是 1%。默认为 none，表示不使用此配置，修改后可动态生效。</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>transaction<em>tracer.min</em>sql_time</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">0</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">探针会对执行时间小于min<em>sql</em>time的 sql 合并到other中，默认值为 0 毫秒, 即不进行合并</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>error_collector.enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">是否开启错误收集</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname</td>
+</tr>
+</tbody></table>
+
+<h3>error<em>collector.ignore</em>errors</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">空</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">过滤事务中的信息，现在一般用来过滤静态文件，不让其上传</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname</td>
+</tr>
+</tbody></table>
+
+<h3>error<em>collector.ignore</em>status_codes</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">404</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">整型数字</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">错误代码</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">需要过滤的特定状态码错误信息</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname</td>
+</tr>
+</tbody></table>
+
+<h3>ignore_transaction</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">.js,.css,.jpg,.jpeg,.gif,.png,.bmp,.ico</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">过滤事务中的信息，现在一般用来过滤静态文件，不让其上传</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>cross<em>application</em>tracer.enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">是否开启跨应用追踪</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname，但是与defaultConfig的值一样</td>
+</tr>
+</tbody></table>
+
+<h3>cross<em>application</em>tracer.internal_host</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">none</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">在cross<em>application</em>tracer.enabled=true条件下,此配置才有用.配置所要调用内部应用服务的host, 多个host直接用逗号分隔.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname，但是与defaultConfig的值一样</td>
+</tr>
+</tbody></table>
+
+<h3>capture_params</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">是否捕捉事务的http参数</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname</td>
+</tr>
+</tbody></table>
+
+<h3>ignored_params</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">credit_card, ssn, password</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">过滤http参数配置</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">只在配置文件中写的起作用，虽然tps端下发了，但是不起作用， defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>transaction<em>tracer.stack</em>details_enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置是否记录慢事务以及慢SQL中的详细栈信息,&ldquo;false&rdquo; 不记录栈详情 &ldquo;true&rdquo; 记录栈详情</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname</td>
+</tr>
+</tbody></table>
+
+<h3>apdex_t</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">0.5</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">热部署</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Float</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">合法浮点数</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">agent衡量阈值</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">appname</td>
+</tr>
+</tbody></table>
+
+<h3>thread_profiler.enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">是否开启线程分析</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>app_name</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">MyApplication</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">用户自行命名应用</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>tier_name</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">MyTier</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">tier<em>name 是为应用指定 tierName,相同 app</em>name 的所有 tier(应用) 被视为同一个业务, 但不同的 tier 是不同的应用.如果 enable<em>auto</em>tier<em>naming 设定为 false, agent 将发送所有数据给这里配置的 tier.如果 enable</em>auto<em>tier</em>naming 设定为 true, agent 将非 Web 的事务数据(即后台任务的数据)发送给这里配置的 tier, 并且 agent 会将 Web 事务数据,数据库的数据等发送给探针自动命名的 tier</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>log_level</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">off</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">热部署</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">off ｜severe ｜ waring ｜ info ｜ fine ｜ finer ｜ finest</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">日志等级，severe 严重 severewaring 警告 severe + warninginfo 正常 severe + warning + infofine 精度 severe + warning + info+ fine finer 细度 severe + warning + info+ fine + finer finest 最好 severe + warning + info + fine + finer + finest</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>audit_mode</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">热部署</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">将上传以及接收的数据以json的形式写入到日志，方便调试</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">ocalAgentConfig</td>
+</tr>
+</tbody></table>
+
+<h3>log<em>file</em>count</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">1</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">int</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">The number of log files to use</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>log<em>limit</em>in_kbytes</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">0</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">写入 log 文件的最大字节数.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>log<em>file</em>name</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">oneapm.log</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">探针日志名称</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>log<em>file</em>path</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">application server path/OneAPM/logs</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">日志目录地址</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>appserver_port</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left"></th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">客户服务器端口,设置后是agent名称一部分.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>delay<em>time</em>for<em>gather</em>port</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">5</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">配置启动探针后等待获取接口的时间，如果在delay<em>time</em>for<em>gather</em>port时间内获取到了port,则不再获取如果在delay<em>time</em>for<em>gather</em>port时间内没有获取到port,则会根据中间件信息设置一个默认的port</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>weblogicejb2.enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">启动weblogic下EJB关系抓取</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>weblogicejb2.ignore_method</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">lookup,create</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">weblogic下EJB系统方法忽略</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>is<em>osb</em>enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用服务器</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">启动OSB监控</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>custom_namer.enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">自定义事务统一命名.注意在ejb关系抓取时需要关闭,即把值设定为false.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>instrumentation_ejb2.enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">ejb2监控.需要ejb关系抓取时，要关闭该监控, 即把值设定为false.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>instrumentation_ejb3.enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">ejb3监控.需要ejb关系抓取时，要关闭该监控, 即把值设定为false.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>uri<em>encoding</em>enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">是否在 agent 端开启对 URL 中非 ISO-8859-1 字符的处理.例如在 tomcat 应用中, URL 中包含的中文参数无法在 TPS 服务端正确显示时, 而又不想在 tomcat 的 server.xml 中设置 URIEncoding 参数, 则需要开启 uri<em>encoding</em>enable 选项, 同时配置 original<em>uri</em>encoding 和 target<em>uri</em>encoding.默认值为 false, 表示不开启 agent 端对 非 ISO-8859-1 字符的处理,另外，此项配置不能支持post中数据编码解码处理，如果遇到post中乱码情况，请在中间件中加入 URIEncoding 字段，该字段值应与 post 数据编码方式相同，该值设置为 true 后，original<em>uri</em>encoding与target<em>uri</em>encoding 的值也应与post数据编码方式相同</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>original<em>uri</em>encoding</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">ISO-8859-1</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">Java 运行时字符集设置.例如当 tomcat 未设置 URIEncoding 时, 默认字符集为 ISO-8859-1, 这个配置项通常不需要修改.仅当 uri<em>encoding</em>enabled = true 时, 该配置项才生效.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>target<em>uri</em>encoding</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">UTF-8</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">需要将 URL 字符串转换成的编码, 例如在 tomcat 应用中 URL 参数含有中文, 而又不想在 tomcat 的server.xml 中设置 URIEncoding 参数可以设置该配置项为 UTF-8.仅当 uri<em>encoding</em>enabled = true 时, 该配置项才生效.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>tcross<em>sampler</em>enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true 和 false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">分布式tracer规则，上传整条链路的tracer</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>cross<em>sampler</em>count</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">5</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">分布式tracer一个周期内最多采集数量</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>cross<em>sampler</em>minduration</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">0</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">分布式tracer最小响应时间阈值，大于0ms的tracer才会捕获</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>trouble<em>sampler</em>enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">有问题的tracer规则，上传存在错误、慢sql的事务tracer</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>cross<em>process</em>key</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">_oneapmHeader</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">用于配置需要客户修报文做分布式的字段</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>was<em>permission</em>enabled</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">用于配置是否开启安全策略 (注:只针对IBM的websphere即was环境)，在was环境下,该参数要设置true</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>allow_permissions</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">当was<em>permission</em>enabled为true时，探针还出现权限问题，把探针所需的权限配置到该参数。只有was<em>permission</em>enabled 为true时,该参数才生效</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>header<em>to</em>next_node</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">X-BlueWare-Transaction-Orgion</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">需要转发到下一个节点的头信息名</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>is<em>old</em>server</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">标识使用的server版本为新版还是旧版，旧版server为4.0.x版本，不支持4.0.x以下版本，新版server为4.1.x版本，默认为false，表示使用的server为新版，如果server为旧版，则需要改为true，此配置针对企业级server配置</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>collector.ip</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">127.0.0.1</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">ip</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">collector client的配置信息配置 collector server的ip地址 若部署模式为LOCAL(本机部署),建议配置为当前主机ip地址</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>collector.port</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">19876</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">collector server的监听端口</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>collector.buffer<em>pool</em>size</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">5</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">向collector发送的事务数据会在JAVAGENT被预先缓存，缓存池总容量为: buffer<em>pool</em>size * single<em>buffer</em>size 向collector发送的事务数据,在JAVAAGENT端的缓冲池数量,提高数量有利于减少对于高TPS应用的同步阻塞</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>collector.single<em>buffer</em>size</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">128</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">向collector发送的事务数据,在JAVAAGENT端的缓冲池容量。缓冲池内为循环写入,过小的缓冲池大小,容易造成transaction数据在发送前被覆盖。</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>collector<em>deployment</em>mode</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">LOCAL</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">LOCAL ｜REMOTE</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">Collector 部署模式:LOCAL(本机部署) REMOTE(远程部署)</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>auto_profiler.enable</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">LOCAL ｜REMOTE</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">自动性能剖析开关，默认为false，如果需要打开，则修改为true，重启后生效</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>auto<em>profiler.max</em>thread_count</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">2</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">LOCAL ｜REMOTE</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">自动性能剖析最大剖析线程数，默认为2, 重启后生效</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>auto<em>profiler.sample</em>period</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">10</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">LOCAL ｜REMOTE</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">自动性能剖析默认采样周期，单位 ms, 默认10ms</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>auto<em>profiler.interrupt</em>period</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">2</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">LOCAL ｜REMOTE</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">自动剖析时采样线程超时阀值，单位 min 默认 2 min</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>connection<em>cache</em>enable</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">LOCAL ｜REMOTE</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">针对数据库使用连接池或缓存Connection时,配置全局Connection缓存</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h2>浏览器参数配置</h2>
+
+<h3>browser<em>monitoring.is</em>oneapm_ai</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true ｜false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">是否在在cookie或者header中写入ONEAPM_AI,用于AI和BI关联.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>browser<em>monitoring.is</em>js_text</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true ｜false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">赋值 true js以纯文本方式插入到页面中</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>browser_monitoring.transform</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">Boolean</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true ｜false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">赋值为 false 可以关闭在页面中Javascript 语句的插入.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>browser<em>monitoring.content</em>type</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">text/html</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">动态</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">配置可以插码的contentType,可动态配置.当配置多个contentType时,请用&quot;,&ldquo;分隔 如: text/html,text/plain</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>browser_monitoring.ignore</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">.js,.css,.jpg,.jpeg,.gif,.png,.bmp</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">浏览器js插入时要忽略的静态文件，如果插入的js导致部分页面工作不正常</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+<h3>browser_monitoring.request.ip</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">all</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">浏览器js插入时ip校验, 配置后, 在开启js插入功能下, 只对以下指定的ip进行js插入.多个ip通过逗号进行分隔, 若要关闭ip校验, 请将其值设为all</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>browser_monitoring.request.url</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">all</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">浏览器js插入时request校验, 只对指定的url及特定参数的参数值进行js插入. 若要关闭url校验, 请将其值设为all.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>browser_monitoring.request.param</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">all</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">配置文件</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left"></td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">url请求参数配置: 参数名:参数值, 多个参数用&rdquo;,&ldquo;分隔开. 若要关闭参数校验, 请将其配置设为all.</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left"></td>
+</tr>
+</tbody></table>
+
+<h3>environment.encoding</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">utf-8</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">字符串</td>
+</tr>
+<tr>
+<td style="text-align: left">来源（服务器下发还是配置文件）</td>
+<td style="text-align: left">tps端</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">编码方式</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置浏览器页面编码方式</td>
+</tr>
+<tr>
+<td style="text-align: left">sagent 中始能方式（即是来自defaultConfig 还是根据 appname 获取的 config）</td>
+<td style="text-align: left">defaultConfig</td>
+</tr>
+</tbody></table>
+
+            <!--<hr style="margin-top: 50px;" />
+<div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
+  <p style="font-size: 16px;">
+    如果您对 AI 感兴趣，可以选择试用我们的产品，只需要点击下面的按钮免费注册即可。
+  </p>
+  <br />
+  <p>
+    <a href="https://user.oneapm.com/account/register.do?ref=https://cloud.oneapm.com&from=ci-docs" class="btn btn-info btn-lg" target="_blank">
+      立即注册 AI
+    </a>
+  </p>
+</div>
+<hr />
+<!-多说评论框 start -->
+<!--<div class="ds-thread"
+     id="ds-thread"
+     data-thread-key=""
+     data-title=""
+   data-url=""></div>
+<!-多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!--<script type="text/javascript">
+  var titleTag = document.getElementsByTagName("h1")[0];
+
+  if (titleTag) {
+    title = document.getElementsByTagName("h1")[0].innerText;
+  } else {
+    title = "";
+  }
+
+  var duoshuoTag = document.getElementById('ds-thread');
+  duoshuoTag.setAttribute('data-thread-key', title.replace(/\s/g, ''));
+  duoshuoTag.setAttribute('data-title', title);
+
+  var duoshuoQuery = {short_name:"docs-ci"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>-->
+<!-- 多说公共JS代码 end -->
+
+
+            <div class="return"></div>
+          </div>
+          <div class="footer-in">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+      $(function() {
+        // $(".navbar-default .navbar-nav a[href='/agent/']").parent().addClass("active");
+        (function () {
+            $('.panel-default').mouseenter(function () {
+              if(!$(this).hasClass('active')){
+                $(this).children().addClass('in');
+              }
+            });
+            $('.panel-default').mouseleave(function () {
+              if(!$(this).hasClass('active')) {
+                $(this).children().removeClass('in');
+              }
+            });
+            var key=window.location.pathname;
+            var keyInfo="'"+key+"'";
+            var panelHead;
+            if(keyInfo.indexOf('index') !== -1){
+              panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+              panelHead.siblings().addClass('in');
+              panelHead.parent().siblings('div').map(function () {
+                $(this).removeClass('active');
+              });
+              panelHead.parent().addClass('active');
+            }else if(keyInfo.indexOf('.') <0) {
+              keyInfo="'"+key+"java_index.html"+"'";
+              panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+              panelHead.siblings().addClass('in');
+              panelHead.parent().siblings('div').map(function () {
+                $(this).removeClass('active');
+              });
+              panelHead.parent().addClass('active');
+            }else {
+                panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent().parent().parent();
+                panelHead.addClass('in');
+                panelHead.parent().siblings('div').map(function () {
+                  $(this).removeClass('active');
+                });
+                panelHead.parent().addClass('active');
+              }
+          })();
+      });
+    </script>
+  </body>
+</html>

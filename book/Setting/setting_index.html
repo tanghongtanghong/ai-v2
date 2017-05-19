@@ -1,0 +1,807 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="keywords" content="端到端应用性能管理,Application Insight,OneAPM Ai">
+<meta name="description" content="OneAPM Application Insight是一个真实可见的应用性能监控系统，从用户体验到网络服务，直至应用代码, 帮助您完成端到端的应用性能管理，OneAPM Ai通过 Apdex、报警、错误率让您了解应用性能对用户使用体验的影响，从而挖掘应用可优化的范围">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<!-- Use title if it's in the page YAML frontmatter -->
+<title>Application Insight 文档</title>
+
+  <script type="text/javascript">
+    // if (window.location.hostname === 'www.oneapm.com') {
+    //   var pathnameSegs = window.location.pathname.split("/docs/ci");
+    //   var realPathname = pathnameSegs[pathnameSegs.length - 1];
+    //   window.location.href = 'http://101.200.76.159:4567' + realPathname;
+    // } else if (window.location.hostname !== 'docs-ci.oneapm.com') {
+    //   window.location.href = 'http://101.200.76.159:4567' + window.location.pathname;
+    // }
+  </script>
+
+<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+
+<!-- growingio -->
+<script type='text/javascript'>
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', 'a78f5e02538f4b2b88cd4fee708bc11b']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+  </script>
+
+
+<link href="/stylesheets/site.css" rel="stylesheet" />
+<script src="/javascripts/jquery-2.2.1.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/all.js"></script>
+<style media="screen">
+  .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight {
+  color: #faf6e4;
+  background-color: #122b3b;
+}
+.highlight .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #6c8b9f;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #b2fd6d;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .err {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .gr {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .k, .highlight .kd, .highlight .kv {
+  color: #f6dd62;
+  font-weight: bold;
+}
+.highlight .o, .highlight .ow {
+  color: #4df4ff;
+}
+.highlight .p, .highlight .pi {
+  color: #4df4ff;
+}
+.highlight .gd {
+  color: #cc0000;
+}
+.highlight .gi {
+  color: #b2fd6d;
+}
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .kc {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .nt {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ld {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ss {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+.highlight .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .nb {
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #BBBBBB;
+}
+.highlight .nf {
+  color: #a8e1fe;
+}
+.highlight .py {
+  color: #a8e1fe;
+}
+.highlight .na {
+  color: #a8e1fe;
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+</style>
+
+  </head>
+
+  <body class="page-book book_Setting book_Setting_setting_index">
+      <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-56334895-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+<header class="main-header clearfix">
+	<div class="main-navblock col-lg-12 col-md-12 col-sm-12 col-xs-12"><div>
+		<a href="../index.html" class="logo-container">
+			<div class="oneapm-logo"></div>
+		</a>
+	</div>
+	<a href="#" class="burger-wrapper">
+		<div class="burger"></div>
+	</a>
+	<div class="nav-container">
+		<ul class="nav-list">
+			<li>
+				<a href="/quick-start/">快速入门</a>
+			</li>
+			<li>
+				<a href="/agent/">安装配置</a>
+			</li>
+			<li>
+				<a href="/book/">功能说明</a>
+			</li>
+			<li>
+				<a href="/bestpractice/">最佳实践</a>
+			</li>
+			<li>
+				<a href="/qa/">常见问题</a>
+			</li>
+			<li>
+				<a href="/contact/contact.html">联系我们</a>
+			</li>
+		</ul>
+		<ul class="login-list">
+			<li>
+				<a href="http://user.oneapm.com/pages/v2/login?from=ai-docs" class="btn outline-dark" id="loginIn">登录</a>
+			</li>
+			<li>
+				<a href="https://user.oneapm.com/pages/v2/signup?from=ai-docs" class="btn inside-yellow" id="signUp">注册</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</header>
+
+<script type="text/javascript">
+	$(function () {
+		var key=window.location.pathname;
+		var arr5=['agent','api','cloud-integration','services','services_example'];
+		var arr1=['quick-start'];
+		var arr3=['release-note','platform','dashboard','metric','alert','event'];
+		var arr4=['use-case','best-practise','bestpractice'];
+		var arr2=['qa'];
+		var arr6=['book']
+		var Arr=[arr1,arr2,arr3,arr4,arr5,arr6];
+		for(var i=0;i<6;i++) {
+			$.each(Arr[i], function (e, a) {
+				if (key.indexOf(a) !== -1) {
+					switch (i + 1) {
+						case 1:
+						key = '/quick-start/';
+						break;
+						case 5:
+						key = '/agent/';
+						break;
+						case 3:
+						key = '/platform/';
+						break;
+						case 4:
+						key = '/bestpractice/';
+						break;
+						case 2:
+						key = '/qa/';
+						break;
+						case 6:
+						key = '/book/';
+					}
+				}
+			});
+		}
+		var keyInfo="'"+key+"'";
+		var panelHead;
+		panelHead= $(".nav-container  a[href="+keyInfo+"]");
+		panelHead.addClass('show');
+	});
+</script>
+
+    <div class="page-container">
+      <div class="row">
+        <div class="col-xs-3 page-sidebar hidden-sm hidden-xs">
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a href="/book/Application/app_index.html" role="button">
+          应用
+        </a>
+      </h4>
+    </div>
+<!--    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/monitor/monitor_overview.html">总览</a></li>
+          <li><a href="/book/monitor/monitor_map.html">拓扑</a></li>
+          <li><a href="/book/monitor/monitor_webTransaction.html">web 事务</a></li>
+          <li><a href="/book/monitor/monitor_dataBase.html">数据库</a></li>
+          <li><a href="/book/monitor/monitor_external.html">外部服务</a></li>
+          <li><a href="/book/monitor/monitor_bgTask.html">后台任务</a></li>
+          <li><a href="/book/monitor/monitor_jvm.html">JVM</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Web_trans_entr/entr_index.html" class="collapsed">
+          web 事务入口
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Web_trans/web_index.html" class="collapsed">
+         web 事务
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/report/report_webTransaction.html">web 事务</a></li>
+          <li><a href="/book/report/report_dataBase.html">数据库</a></li>
+          <li><a href="/book/report/report_jvm.html">JVM</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+
+ <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Trace/trace_index.html" class="collapsed">
+          调用链追踪
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Tiers/tiers_index.html" class="collapsed">
+          Tiers
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Database_calls/database_index.html" class="collapsed">
+          数据库列表
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Remote_service/remote_index.html" class="collapsed">
+          远程服务
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Setting/setting_index.html" class="collapsed">
+          设置
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/event/event_errorInfo.html">错误信息</a></li>
+          <li><a href="/book/event/event_performanceProfiling.html">性能剖析</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Alert/alert_index.html" class="collapsed">
+          报警
+        </a>
+      </h4>
+    </div>
+   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/Alert/Alert_strategy.html">报警策略</a></li>
+          <li><a href="/book/Alert/Alert_rule.html">报警规则</a></li>
+          <li><a href="/book/Alert/Alert_action.html">报警行为</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Report/report_index.html" class="collapsed">
+            报表
+        </a>
+      </h4>
+    </div>
+ <!--   <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <ul>
+          <li><a href="/book/systemSet/account.html">账号管理</a></li>
+          <li><a href="/book/systemSet/alarmPolicy.html">报警策略</a></li>
+           <li><a href="/book/systemSet/alarmPolicy02.html">报警记录</a></li>
+        </ul>
+      </div>
+    </div>-->
+  </div>
+</div>
+
+        </div>
+        <div class="col-lg-9 page-body">
+          <div class="body-box">
+            <h1>设置</h1>
+
+<p>该页面为设置页面，包含以下四部分：</p>
+
+<ul>
+<li><a href="#1">设置－自定义参数</a><br></li>
+<li><a href="#2">设置－自定义事务</a><br></li>
+<li><a href="#3">设置－自定义远程服务</a><br></li>
+<li><a href="#4">设置－应用设置</a><br></li>
+</ul>
+
+<p><img src="/images/set_01.png" alt="Set 01" /></p>
+
+<h2><h2 id="1">设置 － 自定义参数</h2></h2>
+
+<ul>
+<li>此页面为设置自定义参数页面，主要由设置名称、设置 HTTP 请求参数、参数提取规则、适用 Business 四部分组成。如图：</li>
+</ul>
+
+<p><img src="/images/set_02.png" alt="Set 02" /></p>
+
+<ul>
+<li><p>设置名称就是根据自己的需求起一个名字。</p></li>
+<li><p>HTTP 参数：可以收集以下信息：</p>
+
+<ul>
+<li>URL</li>
+<li>Session Id</li>
+<li>Cookie 中的参数</li>
+<li>Session 的属性</li>
+<li>HTTP 请求参数</li>
+<li>HTTP Header 中的参数</li>
+</ul></li>
+<li><p>参数提取规则由规则名、提取范围、Key 组成，点击添加即可对参数提取规则进行配置。</p></li>
+</ul>
+
+<h2><h2 id="2">设置 － 自定义事务</h2></h2>
+
+<ul>
+<li><p>选择要配的 Tiername 点击添加，进入到配自定义事务。如图：
+<img src="/images/set_0301.png" alt="Set 0301" /></p></li>
+<li><p>该页面由设置名称、业务匹配范围和使用请求数据拆分业务 3 部分组成。</p></li>
+<li><p>设置名称就是根据自己的需求起一个名字。</p></li>
+<li><p>优先级是必须写的，当一个 Tiername 配置多个自定义事务的时候，一个 URL 符合多个配置的自定义事务，根据优先级进行查找，优先级高的会展示出来。</p></li>
+</ul>
+
+<p><strong>业务匹配范围</strong></p>
+
+<ul>
+<li>业务匹配范围是对监控的事务进行描述，由请求方法、URL、HTTP 参数、Header 参数、请求主机地址、请求主机端口 6 部分组成。
+
+<ul>
+<li>请求方法有 POST 和 GET 两个选项，可以 根据需求来进行选择。</li>
+<li> URL 有包含、存在于、结束等于、开始等于、等于、不为空 6 个 选项。包含是 URL 里包含了那个信息、存在于是多个 URL 里存在某个 URL 、不为空是所有的 URL 、结束等于是 URL 的结束等于某个参数、开始等于是 URL 的开始等于某个参数。取反，就是就是非，是对前面配置的规则进行取反。</li>
+<li> HTTP 参数当勾选上前面的对勾后，点击添加即可设置 HTTP 参数。HTTP 参数就是 URL ？后面为第一个参数 ，&amp; 是后面参数，这里就是对这些参数进行配置，同样也是有包含、存在于、结束等于、开始等于、等于、不为空 6 个 选项。</li>
+<li> Header 参数勾选前面的对勾，点击添加即可对 Header 参数进行配置。同样也是有包含、存在于、结束等于、开始等于、等于、不为空 6 个 选项。</li>
+<li> 请求主机地址，是对访问的主机进行规则配置，有包含、存在于、结束等于、开始等于、等于 5 个 选项。</li>
+<li> 请求主机端口，是对请求主机的端口号进行规则配置，有包含、存在于、结束等于、开始等于、等于 5 个 选项。</li>
+</ul></li>
+</ul>
+
+<p><strong>使用请求数据拆分业务</strong></p>
+
+<ul>
+<li><p>使用请求数据拆分业务是对左半部分（业务匹配范围）匹配出来的 Web 事务进行如何展示。</p>
+
+<ul>
+<li>使用请求数据拆分业务，由 从开头的第几段来拆分事务、尾部的第几段来拆分、中间的第几段来拆分 3 部分组成。</li>
+<li>HTTP 参数拆分事务，是问号之后的参数进行拆分事务，例如一个 URL 是</li>
+</ul>
+<pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
+</code></pre>
+<p>当用 ddd 来拆分事务，展示出来的就是</p>
+<pre class="highlight plaintext"><code>aaa/bbb/ccc/eee
+</code></pre>
+<ul>
+<li>使用 Header 参数来拆分事务，例如</li>
+</ul>
+<pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
+</code></pre>
+<p>Connection 是 Keep-alive，用 Connection 来进行拆分事务，展示出来就是</p>
+<pre class="highlight plaintext"><code>aaa/bbb/ccc/keep-alive
+</code></pre>
+<ul>
+<li>按照请求方式拆分事务，根据配置规则来进行展示，当配置规则是 POST 就会展示出 POST。</li>
+<li>按照请求主机地址来拆分事务，会根据请求的主机地址来展示。</li>
+<li>请求来源主机地址拆分事务，就是用户访问的主机来展示。</li>
+</ul></li>
+</ul>
+
+<h2><h2 id="3">设置 － 自定义远程服务</h2></h2>
+
+<ul>
+<li><p>选择要配的 Tiername 点击添加，进入到配自定义远程服务。如图
+<img src="/images/set_0401.png" alt="Set 0401" /></p></li>
+<li><p>该添加设置由设置名称、业务匹配范围、使用请求数据拆分业务 3 部分组成。</p></li>
+<li><p>设置名称就是根据自己的需求起一个名字。</p></li>
+<li><p>优先级是必须写的，当一个 Tiername 配置多个自定义远程的时候，一个 URL 符合多个配置的自定义远程，根据优先级进行查找，优先级高的会展示出来。</p></li>
+</ul>
+
+<p><strong>业务匹配范围</strong></p>
+
+<ul>
+<li>业务匹配范围是对远程事务进行描述，由拆分对象、请求方法、URL 3 部分组成。
+
+<ul>
+<li>请求方法有 POST 和 GET 两个选项，可以根据需求来进行选择。</li>
+<li> URL 有包含、存在于、结束等于、开始等于、等于、不为空 6 个 选项。包含是 URL 里包含了那个信息、存在于是多个 URL 里存在某个 URL 、不为空是所有的 URL 、结束等于是 URL 的结束等于某个参数、开始等于是 URL 的开始等于某个参数。取反，就是就是非，是对前面配置的规则进行取反。</li>
+</ul></li>
+</ul>
+
+<p><strong>使用请求数据拆分业务</strong></p>
+
+<ul>
+<li><p>使用请求数据拆分业务是对左半部分（业务匹配范围）匹配出来的 Web 事务进行如何展示。</p>
+
+<ul>
+<li>使用请求数据拆分业务，由从开头的第几段来拆分事务、尾部的第几段来拆分、中间的第几段来拆分 3 部分组成。</li>
+<li>HTTP 参数拆分事务，是问号之后的参数进行拆分事务，例如一个 URL 是</li>
+</ul>
+<pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
+</code></pre>
+<p>当用 ddd 来拆分事务，展示出来的就是</p>
+<pre class="highlight plaintext"><code>aaa/bbb/ccc/eee
+</code></pre>
+<ul>
+<li>使用 Header 参数来拆分事务，例如</li>
+</ul>
+<pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
+</code></pre>
+<p>Connection 是 Keep-alive，用 Connection 来进行拆分事务，展示出来就是</p>
+<pre class="highlight plaintext"><code>aaa/bbb/ccc/keep-alive
+</code></pre></li>
+</ul>
+
+<h2><h2 id="4">设置 － 应用设置</h2></h2>
+
+<p>在应用设置页面,可以自行配置实例的各个参数。<br>
+应用设置页面分为基本信息、慢事务、浏览器监控、Web 事务、HTTP 请求参数、错误信息、数据库、过滤指定事务这 8 个部分。</p>
+
+<p><strong>1.应用设置 - 基本信息</strong>
+<img src="/images/set_05.png" alt="Set 05" /></p>
+
+<p>基本信息:修改当前应用的展示名称。
+<img src="/images/set_051.png" alt="Set 051" /></p>
+
+<p><strong>2.应用设置 - 慢事务</strong></p>
+
+<ul>
+<li>修改慢事务追踪的阈值。当事务的响应时间超过阈值,则开始记录“慢事务追踪”(默认为 4 倍 Apdex T)</li>
+<li>修改 Agent 最多能够传回的慢事务的个数(默认为 20 个,最小为 1)</li>
+<li>修改性能指数 Apdex T。(默认为 0.5 秒)
+<img src="/images/set_052.png" alt="Set 052" /></li>
+</ul>
+
+<p><strong>3.应用设置 - 浏览器监控</strong></p>
+
+<p>通过勾选或者取消勾选,可以启用或者停用浏览器监控。
+<img src="/images/set_053.png" alt="Set 053" /></p>
+
+<p><strong>4.应用设置 - Web 事务</strong></p>
+
+<ul>
+<li>勾选“自动命名 Web 事务”,则会根据应用框架和组件来命名 Web 事务;若不勾选,则使用 
+Web 事务的 URI 来命名 Web 事务。</li>
+<li>在过滤静态资源栏,可以用逗号分隔,填写多个赋值内容。则会自动过滤以上格式的静态文件,避免生成过多的事务。
+<img src="/images/set_054.png" alt="Set 054" /></li>
+</ul>
+
+<p><strong>5.应用设置 - HTTP 请求参数</strong></p>
+
+<ul>
+<li>勾选“采集 HTTP 请求参数”,则会捕捉 HTTP 参数,并将它展示在慢追踪和错误信息中。</li>
+<li>忽略参数:在忽略参数行,填写需要忽略的参数,并使用逗号分隔。则会有选择的放弃收集这些 HTTP 参数。
+若用户既需要看到某些重要的 HTTP 参数,但同时也要保护敏感信息。则可以使用该部分功能实现。
+<img src="/images/set_055.png" alt="Set 055" /></li>
+</ul>
+
+<p><strong>6.应用设置 - 错误信息</strong></p>
+
+<ul>
+<li>勾选“采集错误信息”,则将采集该应用所有的错误和异常信息。</li>
+<li>在过滤类名栏,可以用逗号分隔,填写多个赋值内容。则会过滤掉这些特定的类名,不作为错误信息报告。
+<img src="/images/set_056.png" alt="Set 056" /></li>
+</ul>
+
+<p><strong>7.应用设置 - 数据库</strong></p>
+
+<ul>
+<li>勾选“启用慢 SQL 追踪”,则会捕捉运行缓慢的 SQL 语句。<br><br></li>
+<li>追踪模式:通过下拉列表,修改 SQL 的追踪模式 ——“关闭”表示不记录 SQL;“原始 SQL” 表示按原模式纪录 SQL;“混淆 SQL 表示不纪录数字和字符串。<br><br></li>
+<li>勾选“执行计划追踪”,则会捕捉执行计划。(目前只支持 MySQL 和 PostgreSQL 的 Select 语句)<br><br></li>
+<li>慢 SQL 追踪阈值:该选项只有在“启用慢 SQL 追踪”时才生效。当 SQL 的执行时间大于该阈值的时候,将其记录为慢 SQL;如果开启“执行计划追踪”,同时也会收集该 SQL 的执行计划。(默认值为 0.5 秒)<br><br></li>
+<li>Stacktrace 阈值:作用于 Web 事务的 Trace 功能和慢 SQL 追踪功能,当某组件的响应时间超过该阈值,则收集并展示 Stacktrace。(默认值为 0.5 秒)
+<img src="/images/set_057.png" alt="Set 057" /></li>
+</ul>
+
+<p><strong>8.应用设置 - 过滤指定事务</strong></p>
+
+<p><img src="/images/set_058.png" alt="Set 058" />
+对指定的过滤事务进行修改
+<img src="/images/set_059.png" alt="Set 059" /></p>
+
+            <!--<hr style="margin-top: 50px;" />
+<div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
+  <p style="font-size: 16px;">
+    如果您对 AI 感兴趣，可以选择试用我们的产品，只需要点击下面的按钮免费注册即可。
+  </p>
+  <br />
+  <p>
+    <a href="https://user.oneapm.com/account/register.do?ref=https://cloud.oneapm.com&from=ci-docs" class="btn btn-info btn-lg" target="_blank">
+      立即注册 AI
+    </a>
+  </p>
+</div>
+<hr />
+<!-多说评论框 start -->
+<!--<div class="ds-thread"
+     id="ds-thread"
+     data-thread-key=""
+     data-title=""
+   data-url=""></div>
+<!-多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!--<script type="text/javascript">
+  var titleTag = document.getElementsByTagName("h1")[0];
+
+  if (titleTag) {
+    title = document.getElementsByTagName("h1")[0].innerText;
+  } else {
+    title = "";
+  }
+
+  var duoshuoTag = document.getElementById('ds-thread');
+  duoshuoTag.setAttribute('data-thread-key', title.replace(/\s/g, ''));
+  duoshuoTag.setAttribute('data-title', title);
+
+  var duoshuoQuery = {short_name:"docs-ci"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>-->
+<!-- 多说公共JS代码 end -->
+
+
+            <div class="return"></div>
+          </div>
+          <div class="footer-in">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <script type="text/javascript">
+      $(function() {
+        // $(".navbar-default .navbar-nav a[href='/agent/']").parent().addClass("active");
+        (function () {
+            $('.panel-default').mouseenter(function () {
+              if(!$(this).hasClass('active')){
+                $(this).children().addClass('in');
+              }
+            });
+            $('.panel-default').mouseleave(function () {
+              if(!$(this).hasClass('active')) {
+                $(this).children().removeClass('in');
+              }
+            });
+            var key=window.location.pathname;
+            var keyInfo="'"+key+"'";
+            var panelHead;
+            if(keyInfo.indexOf('index') !== -1){
+              panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+              panelHead.siblings().addClass('in');
+              panelHead.parent().siblings('div').map(function () {
+                $(this).removeClass('active');
+              });
+              panelHead.parent().addClass('active');
+            }else if(keyInfo.indexOf('.') <0) {
+              keyInfo="'"+key+"book_index.html"+"'";
+              panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+              panelHead.siblings().addClass('in');
+              panelHead.parent().siblings('div').map(function () {
+                $(this).removeClass('active');
+              });
+              panelHead.parent().addClass('active');
+            }else {
+                panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent().parent().parent();
+                panelHead.addClass('in');
+                panelHead.parent().siblings('div').map(function () {
+                  $(this).removeClass('active');
+                });
+                panelHead.parent().addClass('active');
+              }
+          })();
+      });
+    </script>
+  </body>
+</html>
