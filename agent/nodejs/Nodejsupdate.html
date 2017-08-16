@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -469,8 +478,8 @@
 <p>1.定位路径至你的应用程序根目录；</p>
 
 <p>2.运行以下指令：</p>
-<pre class="highlight plaintext"><code>npm install oneapm
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>npm install oneapm
+</code></pre></div>
 <p>3.重启应用。</p>
 
 <h2>更新方法二</h2>
@@ -480,8 +489,8 @@
 <li>定位路径至你的应用程序根目录。</li>
 <li>在你的应用程序根目录下，运行以下指令：</li>
 </ol>
-<pre class="highlight plaintext"><code>npm install &lt;LocationOfYourOneAPMagent&gt; /oneapm-x.x.x.tgz
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>npm install &lt;LocationOfYourOneAPMagent&gt; /oneapm-x.x.x.tgz
+</code></pre></div>
 <p>4.重启应用。</p>
 
             <!--<hr style="margin-top: 50px;" />

@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -473,16 +482,16 @@ Agent 版本为 .NET Agent v1.2.0.0及以上：</p></li>
 <ul>
 <li>OneAPM Agent 安装后的目录：</li>
 </ul>
-<pre class="highlight plaintext"><code>Default： %ALLUSERSPROFILE%\OneAPM\.NET Agent
+<div class="highlight"><pre class="highlight plaintext"><code>Default： %ALLUSERSPROFILE%\OneAPM\.NET Agent
 Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
-</code></pre>
+</code></pre></div>
 <p><strong>注：</strong> %ALLUSERSPROFILE% 是指列出所有用户 Profile 文件位置。</p>
 
 <hr>
 
 <h2>探针生效配置</h2>
-<pre class="highlight plaintext"><code>&lt;configuration xmlns="urn:blueware-config" agentEnabled="true" apdex_t="0.5" identifierFormat="{AppPoolAndPath}_{ShortAppId}"&gt;
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;configuration xmlns="urn:blueware-config" agentEnabled="true" apdex_t="0.5" identifierFormat="{AppPoolAndPath}_{ShortAppId}"&gt;
+</code></pre></div>
 <h3>agentEnabled</h3>
 
 <table><thead>
@@ -570,8 +579,8 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>连接服务器配置</h2>
-<pre class="highlight plaintext"><code>&lt;service ssl="false" host="tpm.oneapm.com" port="80" licenseKey="OneAPM 提供的 LICENSE"/&gt;
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;service ssl="false" host="tpm.oneapm.com" port="80" licenseKey="OneAPM 提供的 LICENSE"/&gt;
+</code></pre></div>
 <h3>ssl</h3>
 
 <table><thead>
@@ -655,8 +664,8 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>配置代理服务器（可选）</h2>
-<pre class="highlight plaintext"><code>&lt;proxy host="hostname"  port="81"  domain="mydomain.com"  user="oneapm"  password="xyz"/&gt;
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;proxy host="hostname"  port="81"  domain="mydomain.com"  user="oneapm"  password="xyz"/&gt;
+</code></pre></div>
 <p>使用代理服务器上网时，需要配置 Proxy 节点。它是 Service 节点的子节点。</p>
 
 <h3>host</h3>
@@ -752,10 +761,10 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>配置IIS站点显示名称</h2>
-<pre class="highlight plaintext"><code>&lt;application enableAutoAppNaming="false"&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;application enableAutoAppNaming="false"&gt;
  &lt;name&gt;MyApplication&lt;/name&gt;
 &lt;/application&gt;
-</code></pre>
+</code></pre></div>
 <h3>enableAutoAppNaming</h3>
 
 <table><thead>
@@ -799,13 +808,13 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>配置Non-IIS站点名称（可选）</h2>
-<pre class="highlight plaintext"><code>&lt;instrumentation&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;instrumentation&gt;
   &lt;applications&gt;
     &lt;application name="NonIIS_App1" /&gt;
     &lt;application name="NonIIS_App2" /&gt;  
   &lt;/applications&gt;
 &lt;/instrumentation&gt;
-</code></pre>
+</code></pre></div>
 <h3>application name</h3>
 
 <table><thead>
@@ -821,8 +830,8 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 </tbody></table>
 
 <h2>analytic_data开关配置</h2>
-<pre class="highlight plaintext"><code>&lt;analyticsEvents enabled="true"&gt;&lt;transactions enabled="true"/&gt;&lt;/analyticsEvents&gt;
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;analyticsEvents enabled="true"&gt;&lt;transactions enabled="true"/&gt;&lt;/analyticsEvents&gt;
+</code></pre></div>
 <h3>analyticsEvents enabled</h3>
 
 <table><thead>
@@ -870,8 +879,8 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>日志状态及大小配置</h2>
-<pre class="highlight plaintext"><code>&lt;log level="off" singleFileSize="50000000"/&gt;
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;log level="off" singleFileSize="50000000"/&gt;
+</code></pre></div>
 <h3>log level</h3>
 
 <table><thead>
@@ -965,10 +974,10 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>配置请求参数</h2>
-<pre class="highlight plaintext"><code>&lt;requestParameters enabled="false"&gt;   
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;requestParameters enabled="false"&gt;   
   &lt;ignore&gt;credit_card&lt;/ignore&gt;
 &lt;/requestParameters&gt;
-</code></pre>
+</code></pre></div>
 <h3>requestParameters enabled</h3>
 
 <table><thead>
@@ -1008,8 +1017,8 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>追踪阈值配置</h2>
-<pre class="highlight plaintext"><code>&lt;transactionTracer enabled="true" transactionThreshold="apdex_f" stackTraceThreshold="500" recordSql="obfuscated" explainEnabled="true" explainThreshold="500" /&gt;
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;transactionTracer enabled="true" transactionThreshold="apdex_f" stackTraceThreshold="500" recordSql="obfuscated" explainEnabled="true" explainThreshold="500" /&gt;
+</code></pre></div>
 <h3>transactionTracer enabled</h3>
 
 <table><thead>
@@ -1137,8 +1146,8 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>跨应用调用配置</h2>
-<pre class="highlight plaintext"><code>&lt;crossApplicationTracer enabled="true" /&gt;
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;crossApplicationTracer enabled="true" /&gt;
+</code></pre></div>
 <h3>crossApplicationTracer enabled</h3>
 
 <table><thead>
@@ -1168,7 +1177,7 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>错误收集功能配置</h2>
-<pre class="highlight plaintext"><code>&lt;errorCollector enabled="true" exceptionEnhancer="Inline"&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;errorCollector enabled="true" exceptionEnhancer="Inline"&gt;
   &lt;ignoreErrors&gt; 
     &lt;exception&gt;System.IO.FileNotFoundException&lt;/exception&gt;  
     &lt;exception&gt;System.Threading.ThreadAbortException&lt;/exception&gt;   
@@ -1178,7 +1187,7 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
     &lt;code&gt;404&lt;/code&gt;
   &lt;/ignoreStatusCodes&gt;
 &lt;/errorCollector&gt;
-</code></pre>
+</code></pre></div>
 <h3>errorCollector enabled</h3>
 
 <table><thead>
@@ -1266,14 +1275,14 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>浏览器监控配置</h2>
-<pre class="highlight plaintext"><code>&lt;browserMonitoring autoInstrument="false" sslForHttp="false" isJsText="false" byteMode="true"&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;browserMonitoring autoInstrument="false" sslForHttp="false" isJsText="false" byteMode="true"&gt;
   &lt;request&gt;
     &lt;ip&gt;all&lt;/ip&gt;
     &lt;url&gt;all&lt;/url&gt;
     &lt;params&gt;all&lt;/params&gt;
   &lt;/request&gt;
 &lt;/browserMonitoring&gt;
-</code></pre>
+</code></pre></div>
 <h3>autoInstrument</h3>
 
 <table><thead>
@@ -1407,12 +1416,12 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>应用程序池监控配置（可选）</h2>
-<pre class="highlight plaintext"><code>&lt;applicationPools&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;applicationPools&gt;
    &lt;defaultBehavior instrument="true"/&gt;
    &lt;applicationPool name="appPoolName1" instrument="false"/&gt;
    &lt;applicationPool name="appPoolName1" instrument="false"/&gt;
 &lt;/applicationPools&gt;
-</code></pre>
+</code></pre></div>
 <h3>defaultBehavior instrument</h3>
 
 <table><thead>
@@ -1456,12 +1465,12 @@ Windows 2003 only： %ALLUSEQinRSPROFILE%\Application Data\OneAPM\.NET.Agent
 <hr>
 
 <h2>忽略assembly配置</h2>
-<pre class="highlight plaintext"><code>&lt;assembles&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;assembles&gt;
  &lt;ignore name="PllC.Comm.Trace"/&gt;
  &lt;ignore name="PllC.Runtime.Protect"/&gt;
  &lt;ignore name="PllC.Runtime.Protect64"/&gt;
 &lt;/assembles&gt;
-</code></pre>
+</code></pre></div>
 <h3>assembles</h3>
 
 <table><thead>

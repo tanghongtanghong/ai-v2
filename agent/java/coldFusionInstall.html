@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -476,21 +485,21 @@
 <img src="/images/agent_download01.png" alt="Agent download01" /></p></li>
 <li><p>JDK 1.6 - 1.8  请下载</p></li>
 </ul>
-<pre class="highlight plaintext"><code> wget: https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_latest.zip
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> wget: https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_latest.zip
+</code></pre></div>
 <ul>
 <li>JDK 1.5 请下载</li>
 </ul>
-<pre class="highlight plaintext"><code> wget:https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_legacy.zip
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> wget:https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_legacy.zip
+</code></pre></div>
 <h3>3. 安装</h3>
 
 <ul>
 <li>解压「Agent」至「ColdFusion的根目录」下</li>
 </ul>
-<pre class="highlight plaintext"><code> unzip OneAPM_java_Agent_latest.zip -d
+<div class="highlight"><pre class="highlight plaintext"><code> unzip OneAPM_java_Agent_latest.zip -d
  &lt;Application Server Path&gt;/
-</code></pre>
+</code></pre></div>
 <ul>
 <li><p>写入「License Key」至配置文件「OneAPM/oneapm.properties」<br>
 模板如下：<br>
@@ -501,8 +510,8 @@
 <li><p>第二步：在左侧的导航栏中选择 SERVER SETTINGS &gt; Java and JVM.</p></li>
 <li><p>第三步：在 JVM Arguments 文本框中， 添加 -javaagent 标签:</p></li>
 </ul>
-<pre class="highlight plaintext"><code> -javaagent:/full/path/to/oneapm.ja
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> -javaagent:/full/path/to/oneapm.ja
+</code></pre></div>
 <p><img src="/images/wwp7.png" alt="Wwp7" /></p>
 
 <ul>

@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -470,16 +479,16 @@
 
 <p>支持列表
 OS</p>
-<pre class="highlight plaintext"><code>windows 7、windows 8
+<div class="highlight"><pre class="highlight plaintext"><code>windows 7、windows 8
 
 CentOS 5.5 以上
 
 Ubuntu 11 以上
 
 RedHat  Enterprise Linux （RHEL） 5 or later
-</code></pre>
+</code></pre></div>
 <p>PHP版本</p>
-<pre class="highlight plaintext"><code>PHP 5.3 及以上
+<div class="highlight"><pre class="highlight plaintext"><code>PHP 5.3 及以上
 
 PHP 5.4 及以上
 
@@ -490,28 +499,28 @@ PHP 5.6 及以上
 PHP 7.0.9 及以下
 
 不支持 PHP 所有版本的 debug 版
-</code></pre>
+</code></pre></div>
 <p>数据库</p>
-<pre class="highlight plaintext"><code>mysql [mysql ， pdo ， mysqli]
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>mysql [mysql ， pdo ， mysqli]
+</code></pre></div>
 <p>webServer</p>
-<pre class="highlight plaintext"><code>Apache 2.2 或 2.4 mod_php 模式
+<div class="highlight"><pre class="highlight plaintext"><code>Apache 2.2 或 2.4 mod_php 模式
 （线程安全与非线程安全）
 
 任何用通过 FastCGI 连接 php-fpm （如 Nginx）
-</code></pre>
+</code></pre></div>
 <p>明确不支持的框架</p>
-<pre class="highlight plaintext"><code>Yaf （phalcon 暂不支持）
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>Yaf （phalcon 暂不支持）
+</code></pre></div>
 <p>可以安装的框架</p>
-<pre class="highlight plaintext"><code>所有基于 PHP 语言写的框架都可以安装 PHP-Agent （对于yaf , phalcon 这种c语言写的 PHP 框架不支持）
+<div class="highlight"><pre class="highlight plaintext"><code>所有基于 PHP 语言写的框架都可以安装 PHP-Agent （对于yaf , phalcon 这种c语言写的 PHP 框架不支持）
 
 PHP 语言写的框架中支持的有 ci、thinkphp、yii、Laravel。
 
 已测试框架有： wordpress ， onethink ， discuz 。
-</code></pre>
+</code></pre></div>
 <p>兼容的扩展</p>
-<pre class="highlight plaintext"><code>bz2
+<div class="highlight"><pre class="highlight plaintext"><code>bz2
 calendar
 Core
 ctype
@@ -561,14 +570,14 @@ xmlwriter
 xsl
 zip
 zlib &lt;br&gt;
-</code></pre>
+</code></pre></div>
 <p>备注说明：</p>
-<pre class="highlight plaintext"><code>所有基于 PHP 语言写的框架都可以安装 PHP Agent（对于yaf这种c语言写的PHP 框架不支持）
+<div class="highlight"><pre class="highlight plaintext"><code>所有基于 PHP 语言写的框架都可以安装 PHP Agent（对于yaf这种c语言写的PHP 框架不支持）
 
 PHP 语言写的框架中， MVC 单一入口模式的，对用户数据展示的不够友好。需要继续优化。因为不能根据参数区分出真正想看到的页面数据。
 
 已测试框架有： wordpress ， onethink ， discuz 。 onethink 这种单一入口（每次都是经过index.php来路由的）。
-</code></pre>
+</code></pre></div>
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
   <p style="font-size: 16px;">

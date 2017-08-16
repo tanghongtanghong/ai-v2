@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -453,17 +462,17 @@
 
 <p>优先级最高的配置方式，应该尽量在 <code>transaction</code> 最早的时间配置 <code>app_name</code>
 <strong>Note</strong>：只针对 <code>servlet request</code> 生效</p>
-<pre class="highlight java"><code><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ServletException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
+<div class="highlight"><pre class="highlight java"><code><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ServletException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
  <span class="o">...</span>
  <span class="n">String</span> <span class="n">requestUri</span> <span class="o">=</span> <span class="n">httpServletRequest</span><span class="o">.</span><span class="na">getRequestURI</span><span class="o">();</span> 
  <span class="k">if</span> <span class="o">(</span><span class="n">requestUri</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"/my-special-request/"</span><span class="o">)){</span>
      <span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"com.blueware.monitor.APPLICATION_NAME"</span><span class="o">,</span> <span class="s">"MySpecialWebApp"</span><span class="o">);</span>
  <span class="o">}</span> <span class="o">...</span>
-</code></pre>
+</code></pre></div>
 <h3>2. Servlet context</h3>
 
 <p>如果访问了多个 <code>servlet</code>，最早执行结束的 <code>servlet</code> 的配置生效</p>
-<pre class="highlight java"><code><span class="o">&lt;</span><span class="n">servlet</span><span class="o">&gt;</span>
+<div class="highlight"><pre class="highlight java"><code><span class="o">&lt;</span><span class="n">servlet</span><span class="o">&gt;</span>
  <span class="o">&lt;</span><span class="n">servlet</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">SqlServlet</span><span class="o">&lt;/</span><span class="n">servlet</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
  <span class="o">&lt;</span><span class="n">servlet</span><span class="o">-</span><span class="kd">class</span><span class="err">&gt;</span><span class="nc">test</span><span class="o">.</span><span class="na">SqlServlet</span><span class="o">&lt;/</span><span class="n">servlet</span><span class="o">-</span><span class="kd">class</span><span class="err">&gt;</span>
  <span class="err">&lt;</span><span class="nc">init</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span>
@@ -471,11 +480,11 @@
     <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span><span class="n">MyServletApp</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span>
  <span class="o">&lt;/</span><span class="n">init</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">servlet</span><span class="o">&gt;</span>
-</code></pre>
+</code></pre></div>
 <h3>3. Filter context</h3>
 
 <p>最早执行结束的 <code>filter</code> 的配置生效</p>
-<pre class="highlight java"><code><span class="o">&lt;</span><span class="n">filter</span><span class="o">&gt;</span> 
+<div class="highlight"><pre class="highlight java"><code><span class="o">&lt;</span><span class="n">filter</span><span class="o">&gt;</span> 
  <span class="o">&lt;</span><span class="n">filter</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">SqlFilter</span><span class="o">&lt;/</span><span class="n">filter</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> 
  <span class="o">&lt;</span><span class="n">filter</span><span class="o">-</span><span class="kd">class</span><span class="err">&gt;</span><span class="nc">test</span><span class="o">.</span><span class="na">SqlFilter</span><span class="o">&lt;/</span><span class="n">filter</span><span class="o">-</span><span class="kd">class</span><span class="err">&gt;</span> 
  <span class="err">&lt;</span><span class="nc">init</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span> 
@@ -483,16 +492,16 @@
     <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span><span class="n">MyFilterApp</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span> 
  <span class="o">&lt;/</span><span class="n">init</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span> 
 <span class="o">&lt;/</span><span class="n">filter</span><span class="o">&gt;</span>
-</code></pre>
+</code></pre></div>
 <h3>4. Web context</h3>
-<pre class="highlight java"><code><span class="o">&lt;</span><span class="n">context</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span>
+<div class="highlight"><pre class="highlight java"><code><span class="o">&lt;</span><span class="n">context</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span>
  <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">com</span><span class="o">.</span><span class="na">blueware</span><span class="o">.</span><span class="na">monitor</span><span class="o">.</span><span class="na">APPLICATION_NAME</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
  <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span><span class="n">MyWebApp</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span> 
 <span class="o">&lt;/</span><span class="n">context</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span>
-</code></pre>
+</code></pre></div>
 <h3>5. Display name</h3>
-<pre class="highlight java"><code><span class="o">&lt;</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">MyWebApp</span><span class="o">&lt;/</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
-</code></pre>
+<div class="highlight"><pre class="highlight java"><code><span class="o">&lt;</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">MyWebApp</span><span class="o">&lt;/</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+</code></pre></div>
 <h3>6. Context path</h3>
 
 <p>如果完整的一次请求地址，如 URL 为：<code>http://example.com/oneapm-axis2-ws/getWeather</code>:</p>

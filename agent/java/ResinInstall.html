@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -476,21 +485,21 @@
 <img src="/images/agent_download01.png" alt="Agent download01" /></p></li>
 <li><p>JDK 1.6 - 1.8  请下载</p></li>
 </ul>
-<pre class="highlight plaintext"><code> wget: https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_latest.zip
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> wget: https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_latest.zip
+</code></pre></div>
 <ul>
 <li>JDK 1.5 请下载</li>
 </ul>
-<pre class="highlight plaintext"><code> wget:https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_legacy.zip
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> wget:https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_legacy.zip
+</code></pre></div>
 <h3>3. 安装</h3>
 
 <ul>
 <li>解压「Agent」至「Resin 的根目录」下</li>
 </ul>
-<pre class="highlight plaintext"><code> unzip OneAPM_java_Agent_latest.zip -d
+<div class="highlight"><pre class="highlight plaintext"><code> unzip OneAPM_java_Agent_latest.zip -d
  &lt;Application Server Path&gt;/
-</code></pre>
+</code></pre></div>
 <ul>
 <li><p>写入「License Key」至配置文件「OneAPM/oneapm.properties」<br>
 模板如下：<br>
@@ -504,8 +513,8 @@
 <li><p>linux /unix &gt; bin/httpd.sh -Xms200m -Xmx1024m -Xloggc:./log/gc.log -XX:MaxNewSize=256m -XX:MaxPermSize=256m -Djava.awt.headless=true</p></li>
 <li><p>编辑 httpd.sh, 如下内容：</p></li>
 </ul>
-<pre class="highlight plaintext"><code>args='-J-server -Xms200m -Xmx1024m -javaagent:/full/path/to/OneAPM/oneapm.jar -Xloggc:./log/gc.log -XX:MaxNewSize=256m -XX:MaxPermSize=256m -Djava.awt.headless=true'
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>args='-J-server -Xms200m -Xmx1024m -javaagent:/full/path/to/OneAPM/oneapm.jar -Xloggc:./log/gc.log -XX:MaxNewSize=256m -XX:MaxPermSize=256m -Djava.awt.headless=true'
+</code></pre></div>
 <ul>
 <li><p>win&gt;   bin/httpd.exe -Xmn100M -Xms500M -Xmx500M -javaagent:/full/path/to/OneAPM/oneapm.jar</p></li>
 <li><p>install win service&gt; bin/httpd.exe -Xmn100M -Xms500M -Xmx500M -javaagent:/full/path/to/OneAPM/oneapm.jar -install -Xss1m.</p></li>
@@ -517,10 +526,10 @@
 <ul>
 <li>只需修改 resin.conf ,如下配置即可，比如：</li>
 </ul>
-<pre class="highlight plaintext"><code>&lt;jvm-arg&gt;-Xmx2048m&lt;/jvm-arg&gt;
+<div class="highlight"><pre class="highlight plaintext"><code>&lt;jvm-arg&gt;-Xmx2048m&lt;/jvm-arg&gt;
 &lt;jvm-arg&gt;-Xms1024m&lt;/jvm-arg&gt;
 &lt;jvm-arg&gt;-javaagent:/full/path/to/OneAPM/oneapm.jar&lt;/jvm-arg&gt;
-</code></pre>
+</code></pre></div>
 <ul>
 <li>注意 -javaagent: 后面跟 oneapm.jar 安装的绝对路径。</li>
 </ul>

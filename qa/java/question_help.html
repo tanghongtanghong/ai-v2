@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -441,8 +450,8 @@
 <ul>
 <li>在 jar 的启动命令中执行如下命令，即可完成对指定 jar 的监控：</li>
 </ul>
-<pre class="highlight plaintext"><code> java -javaagent:/path/to/oneapm.jar -jar *.jar
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> java -javaagent:/path/to/oneapm.jar -jar *.jar
+</code></pre></div>
 <p><strong>注意：</strong></p>
 
 <ul>
@@ -504,7 +513,7 @@
 <p>3.打开并检查／OneAPM/oneapm.properties 文件配置，设置 ssl = true；host = tpm.oneapm.com；port = 443；<br></p>
 
 <p>4.检查 tomcat 根目录下是否有 temp 目录，如果没有请手动创建 temp 目录；例如：<br></p>
-<pre class="highlight plaintext"><code> ➜  apache-tomcat-8.0.28  ls -l
+<div class="highlight"><pre class="highlight plaintext"><code> ➜  apache-tomcat-8.0.28  ls -l
  total 14896
  -rw-r--r--@  1 qinheng  staff    58068 Oct  7 19:26 LICENSE
  -rw-r--r--@  1 qinheng  staff     1489 Oct  7 19:26 NOTICE
@@ -520,7 +529,7 @@ drwxr-xr-x@  9 qinheng  staff      306 Nov 27 21:50 temp
 drwxr-xr-x@ 10 qinheng  staff      340 Nov 27 21:50 webapps
 drwxr-xr-x@  3 qinheng  staff      102 Nov 26 23:28 work
 ➜  apache-tomcat-8.0.28
-</code></pre>
+</code></pre></div>
 <p><br>
  注意：Tomcat根目录下必须要有temp目录；<br><br>
  5.检查 collector是否正常启动，查看是否存在collector的进程。</p>
@@ -536,16 +545,16 @@ drwxr-xr-x@  3 qinheng  staff      102 Nov 26 23:28 work
 </ul>
 
 <p>2.通过脚本启动 jar 程序，脚本模版如下：</p>
-<pre class="highlight plaintext"><code>source /etc/profile
+<div class="highlight"><pre class="highlight plaintext"><code>source /etc/profile
 cd 'dirname $0'
 cmd="java -Xms512m -Xmx2048m -XX:PermSize=256m -jar test.jar"
 exec ${cmd}
 echo "execute test.jar finish......"
-</code></pre>
+</code></pre></div>
 <p><br>
 正确引入 oneapm.jar 方式 脚本应修改为：</p>
-<pre class="highlight plaintext"><code>cmd="java -Xms512m -Xmx2048m -XX:PermSize=256m －javaagent:/full/path/to/oneapm.jar -XX:PermSize=256m -XX:MaxPermSize=256m -jar test.jar"
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>cmd="java -Xms512m -Xmx2048m -XX:PermSize=256m －javaagent:/full/path/to/oneapm.jar -XX:PermSize=256m -XX:MaxPermSize=256m -jar test.jar"
+</code></pre></div>
 <p><br>
 注意：－javaagent: 后面跟安装 oneapm.jar 的绝对路径；<br></p>
 
@@ -557,7 +566,7 @@ echo "execute test.jar finish......"
 <li>回答：检查／OneAPM 的权限，保证／OneAPM／目录及目录下的文件有执行的权限，再重启启动 tomcat；<br>
 例如：<br></li>
 </ul>
-<pre class="highlight plaintext"><code>➜  apache-tomcat-8.0.28  ls -l OneAPM
+<div class="highlight"><pre class="highlight plaintext"><code>➜  apache-tomcat-8.0.28  ls -l OneAPM
 total 11864
 drwxrwxrwx@ 42 qinheng  staff     1428 Aug 27 02:50 extensions
 drwxr-xr-x@ 25 qinheng  staff      850 Aug 27 10:51 lib
@@ -565,7 +574,7 @@ drwxr-xr-x   3 qinheng  staff      102 Nov 26 23:13 logs
 -rw-r--r--@  1 qinheng  staff  6057639 Aug 27 10:51 oneapm.jar
 -rw-r--r--@  1 qinheng  staff    13679 Nov 26 23:10 oneapm.properties
 ➜  apache-tomcat-8.0.28
-</code></pre>
+</code></pre></div>
 <p><br></p>
 
 <hr>
@@ -694,7 +703,7 @@ collector.audit_mode = true</li>
 <li>2.如果 test.xml 文件中配置方法类的调用逻辑是异步调用，请在 pointcut 标签中增加 transactionStartPoint=&quot;true&rdquo; 属性</li>
 <li>例如：</li>
 </ul>
-<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;extension</span>
   <span class="na">xmlns=</span><span class="s">"https://blueware.com/docs/java/xsd/v1.0"</span>
       <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
@@ -713,7 +722,7 @@ collector.audit_mode = true</li>
               <span class="nt">&lt;/pointcut&gt;</span>
       <span class="nt">&lt;/instrumentation&gt;</span>
 <span class="nt">&lt;/extension&gt;</span>
-</code></pre>
+</code></pre></div>
 <hr>
 
 <h3>21.应用程序的名称如何修改；</h3>

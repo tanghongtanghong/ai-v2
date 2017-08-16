@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -472,18 +481,18 @@
 <p>一、获取相关信息</p>
 
 <p>1.获取 php 版本信息</p>
-<pre class="highlight plaintext"><code>php -v
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>php -v
+</code></pre></div>
 <p><img src="/images/myr/s001.png" alt="S001" /></p>
 
 <p>2.获取 php 扩展目录</p>
-<pre class="highlight plaintext"><code>php -i|grep -i "extension_dir“
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>php -i|grep -i "extension_dir“
+</code></pre></div>
 <p><img src="/images/myr/s002.png" alt="S002" /></p>
 
 <p>3.查看 php 是否是线程安全版本</p>
-<pre class="highlight plaintext"><code>php -i|grep -i "Thread Safety”
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>php -i|grep -i "Thread Safety”
+</code></pre></div>
 <p><img src="/images/myr/s003.png" alt="S003" /></p>
 
 <p>4.查看系统为 x86 还是 x86_64</p>
@@ -509,8 +518,8 @@
 <p>PHP 扩展部分负责搜集数据，oneapm-daemon 负责合并数据并定时发送给 Server 端。</p>
 
 <p>下载安装包到本地后，解压，并进入安装目录</p>
-<pre class="highlight plaintext"><code>tar zxvf OneAPM_PHP_Agent_2.5.1-b.tar.gz &amp;&amp; cd oneapm-php-install-b
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>tar zxvf OneAPM_PHP_Agent_2.5.1-b.tar.gz &amp;&amp; cd oneapm-php-install-b
+</code></pre></div>
 <p>查看目录结构</p>
 
 <p><img src="/images/myr/s005.png" alt="S005" /></p>
@@ -520,38 +529,38 @@
 </ul>
 
 <p>根据第一步得到的信息，我们需要的 PHP 扩展为 agent/x64 下的 oneapm-php5.5.so</p>
-<pre class="highlight plaintext"><code>\cp -p agent/x64/oneapm-php5.5.so 
-</code></pre><pre class="highlight plaintext"><code>/usr/local/php5/lib/php/extensions/no-debug-non-zts-20121212/oneapm.so
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>\cp -p agent/x64/oneapm-php5.5.so 
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>/usr/local/php5/lib/php/extensions/no-debug-non-zts-20121212/oneapm.so
+</code></pre></div>
 <p>修改 php.ini 文件，添加</p>
-<pre class="highlight plaintext"><code>oneapm.key="Your License"
+<div class="highlight"><pre class="highlight plaintext"><code>oneapm.key="Your License"
 extension=oneapm.so
 oneapm.appname="PHP Application"
 oneapm.tier_name="PHP_TIER" （企业版专有）
 oneapm.cross_application_tracer.enabled=true （企业版专有）
-</code></pre>
+</code></pre></div>
 <p><img src="/images/myr/s006.png" alt="S006" /></p>
 
 <p>创建 log 目录</p>
-<pre class="highlight plaintext"><code>mkdir -p /var/log/oneapm/ &amp;&amp; chmod 777 /var/log/oneapm/
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>mkdir -p /var/log/oneapm/ &amp;&amp; chmod 777 /var/log/oneapm/
+</code></pre></div>
 <ul>
 <li>2. 安装 oneapm-daemon</li>
 </ul>
 
 <p>创建 oneapm-daemon 配置文件目录</p>
-<pre class="highlight plaintext"><code>mkdir -p /etc/oneapm/ &amp;&amp; chmod 755 /etc/oneapm
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>mkdir -p /etc/oneapm/ &amp;&amp; chmod 755 /etc/oneapm
+</code></pre></div>
 <p>拷贝 oneapm-daemon 配置文件</p>
-<pre class="highlight plaintext"><code>\cp -p scripts/oneapm.cfg.template /etc/oneapm/oneapm.cfg
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>\cp -p scripts/oneapm.cfg.template /etc/oneapm/oneapm.cfg
+</code></pre></div>
 <p>拷贝 oneapm-daemon 二进制程序</p>
-<pre class="highlight plaintext"><code>\cp -p daemon/oneapm-daemon-x64 /usr/bin/oneapm-daemon
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>\cp -p daemon/oneapm-daemon-x64 /usr/bin/oneapm-daemon
+</code></pre></div>
 <p>修改 vi /etc/oneapm/oneapm.cfg 中的配置 （企业版）</p>
-<pre class="highlight plaintext"><code>collector_host=Your Enterprise Server IP
+<div class="highlight"><pre class="highlight plaintext"><code>collector_host=Your Enterprise Server IP
 port=Your port
-</code></pre>
+</code></pre></div>
 <p><img src="/images/myr/s007.png" alt="S007" /></p>
 
 <p>三、 启动</p>
@@ -690,8 +699,8 @@ oneapm.loglevel=&ldquo;info&rdquo;</p>
 <p>目录修改oneapm-daemon-x86.exe名称为oneapm-daemon.exe</p>
 
 <p>在开始菜单输入cmd，右键cmd，以管理员身份运行，输入以下命令：</p>
-<pre class="highlight plaintext"><code>sc create "OneAPM PHP Daemon" binPath= "C:\ProgramData\oneapm-daemon\oneapm-daemon.exe"
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>sc create "OneAPM PHP Daemon" binPath= "C:\ProgramData\oneapm-daemon\oneapm-daemon.exe"
+</code></pre></div>
 <p><img src="/images/myr/shou14.png" alt="Shou14" />   </p>
 
 <p>如上出现 CreateService 成功的时候，证明注册服务成功</p>

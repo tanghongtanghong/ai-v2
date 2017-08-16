@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -570,19 +579,19 @@
 <li>使用请求数据拆分业务，由 从开头的第几段来拆分事务、尾部的第几段来拆分、中间的第几段来拆分 3 部分组成。</li>
 <li>HTTP 参数拆分事务，是问号之后的参数进行拆分事务，例如一个 URL 是</li>
 </ul>
-<pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
+</code></pre></div>
 <p>当用 ddd 来拆分事务，展示出来的就是</p>
-<pre class="highlight plaintext"><code>aaa/bbb/ccc/eee
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>aaa/bbb/ccc/eee
+</code></pre></div>
 <ul>
 <li>使用 Header 参数来拆分事务，例如</li>
 </ul>
-<pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
+</code></pre></div>
 <p>Connection 是 Keep-alive，用 Connection 来进行拆分事务，展示出来就是</p>
-<pre class="highlight plaintext"><code>aaa/bbb/ccc/keep-alive
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>aaa/bbb/ccc/keep-alive
+</code></pre></div>
 <ul>
 <li>按照请求方式拆分事务，根据配置规则来进行展示，当配置规则是 POST 就会展示出 POST。</li>
 <li>按照请求主机地址来拆分事务，会根据请求的主机地址来展示。</li>
@@ -620,19 +629,19 @@
 <li>使用请求数据拆分业务，由从开头的第几段来拆分事务、尾部的第几段来拆分、中间的第几段来拆分 3 部分组成。</li>
 <li>HTTP 参数拆分事务，是问号之后的参数进行拆分事务，例如一个 URL 是</li>
 </ul>
-<pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
+</code></pre></div>
 <p>当用 ddd 来拆分事务，展示出来的就是</p>
-<pre class="highlight plaintext"><code>aaa/bbb/ccc/eee
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>aaa/bbb/ccc/eee
+</code></pre></div>
 <ul>
 <li>使用 Header 参数来拆分事务，例如</li>
 </ul>
-<pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
+</code></pre></div>
 <p>Connection 是 Keep-alive，用 Connection 来进行拆分事务，展示出来就是</p>
-<pre class="highlight plaintext"><code>aaa/bbb/ccc/keep-alive
-</code></pre></li>
+<div class="highlight"><pre class="highlight plaintext"><code>aaa/bbb/ccc/keep-alive
+</code></pre></div></li>
 </ul>
 
 <h2><h2 id="4">设置 － 应用设置</h2></h2>

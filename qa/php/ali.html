@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -443,15 +452,15 @@
 <!--![](http://club.oneapm.com/uploads/default/original/2X/6/6aaecb6917c176d965ebf5fa8ed87bbd0ae85a48.png)-->
 
 <p><img src="/images/myr/011.png" alt="011" /></p>
-<pre class="highlight plaintext"><code>php-fpm 启动失败，报错：/etc/init.d/php-fpm restart Gracefully shutting down php-fpm warning， no pid file found - php-fpm is not running ? Starting php-fpm
+<div class="highlight"><pre class="highlight plaintext"><code>php-fpm 启动失败，报错：/etc/init.d/php-fpm restart Gracefully shutting down php-fpm warning， no pid file found - php-fpm is not running ? Starting php-fpm
 
 Fatal error:  Directive 'allow_call_time_pass_reference' is no longer available in PHP in Unknown on line 0
-</code></pre>
+</code></pre></div>
 <p><strong>分析解决：</strong></p>
 
 <p>failed 现象一般是由于 php.ini 配置中开启了 allow_call_time_pass_reference = on 参数导致，在 php 目前的高版本中未对此参数提供兼容支持，需要注释掉。</p>
-<pre class="highlight plaintext"><code>在 php.ini 中找到对应条目，前面加；号注释后，重新启动 php-fpm 即可。
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>在 php.ini 中找到对应条目，前面加；号注释后，重新启动 php-fpm 即可。
+</code></pre></div>
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
   <p style="font-size: 16px;">

@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -470,8 +479,8 @@
 <h2>2. 下载 oneapm.yml</h2>
 
 <p>将文件放入应用的配置目录下，替换已有文件</p>
-<pre class="highlight plaintext"><code>oneapm.yml
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>oneapm.yml
+</code></pre></div>
 <h2>3. 配置 license</h2>
 
 <p>将「License Key」写入配置文件「oneapm.yml」，并修改应用名称</p>
@@ -479,15 +488,15 @@
 <h2>4. 以 gem 形式安装 OneAPM Ruby Agent</h2>
 
 <p>在 Gemfile 中添加以下 gem:</p>
-<pre class="highlight plaintext"><code>gem 'oneapm_rpm'
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>gem 'oneapm_rpm'
+</code></pre></div>
 <p>在应用所属目录中执行 bundle 命令：</p>
-<pre class="highlight plaintext"><code>$ bundle install
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>$ bundle install
+</code></pre></div>
 <p>结果如下：</p>
-<pre class="highlight plaintext"><code>Your bundle is complete!
+<div class="highlight"><pre class="highlight plaintext"><code>Your bundle is complete!
 Use 'bundle show [gemname]' to see where a bundled gem is installed.
-</code></pre>
+</code></pre></div>
 <h2>5. 运行应用程序</h2>
 
 <p>静候5分钟后，若无应用程序相关性能数据展现，或安装过程中出现问题请联系 OneAPM 获取技术支持：support@oneapm.com 或<a href="https://oneapm.kf5.com/request/new/">提交工单</a>。</p>

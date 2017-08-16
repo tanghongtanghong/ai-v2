@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -468,13 +477,13 @@
 <li><p>OneAPM PHP Agent 从 oneapm.cfg 和 php.ini 两个配置文件中获取配置信息。您可以在本文中了解各个参数的意义，以及对应的配置方式。</p></li>
 <li><p>你可以在这些位置找到该配置文件：</p></li>
 </ul>
-<pre class="highlight plaintext"><code>oneapm.cfg 的位置：/etc/oneapm/oneapm.cfg
+<div class="highlight"><pre class="highlight plaintext"><code>oneapm.cfg 的位置：/etc/oneapm/oneapm.cfg
 
 php.ini 的位置: 自定义路径
 
 oneapm.cfg 配置文件
 
-</code></pre>
+</code></pre></div>
 <h4>打开配置文件</h4>
 
 <p><img src="/images/php01.png" alt="Php01" /></p>
@@ -1113,10 +1122,10 @@ oneapm.cfg 配置文件
 <li>browser_monitoring.request.param = mod:forumdisplay，fid:2，page:1，uid:6 配置参数多于实际参数，被过滤，不能插码</li>
 </ul></li>
 </ul>
-<pre class="highlight plaintext"><code>Qi
+<div class="highlight"><pre class="highlight plaintext"><code>Qi
 &lt;br&gt;
 备注：以下参数的优先级顺序为（按从高到低排列）
-</code></pre><pre class="highlight plaintext"><code>btm
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code>btm
 
 oneapm.usesitename
 
@@ -1129,7 +1138,7 @@ oneapm.auto_transaction_post
 oneapm.is_pathinfo
 
 default
-</code></pre>
+</code></pre></div>
 <p><br></p>
 
 <p>修改 php.ini 文件后，需要重启 PHP 服务器（例如 Apache、PHP-FPM）才能生效。</p>

@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -441,12 +450,12 @@
 <p>Extension 可以针对 Java Agent 不支持的同步框架做扩展配置。比如目前 Java Agent 不支持 neo4j，就可以使用这种方式解决。</p>
 
 <p>在 oneapm.jar 同级目录创建文件夹 extensions(注意：3.1.8及以后的探针不用自己建立，已经有了)</p>
-<pre class="highlight plaintext"><code>mkdir extensions
+<div class="highlight"><pre class="highlight plaintext"><code>mkdir extensions
 cd extensions  //在新建的目录下面创建文件
 touch neo4j.xml    //创建扩展配置文件
-</code></pre>
+</code></pre></div>
 <p>例1：</p>
-<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
     <span class="nt">&lt;extension</span>
     <span class="na">xmlns=</span><span class="s">"https://blueware.com/docs/java/xsd/v1.0"</span>
     <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
@@ -462,7 +471,7 @@ touch neo4j.xml    //创建扩展配置文件
         <span class="nt">&lt;/pointcut&gt;</span>
     <span class="nt">&lt;/instrumentation&gt;</span>
     <span class="nt">&lt;/extension&gt;</span>
-</code></pre>
+</code></pre></div>
 <p><strong>参数解释：</strong></p>
 
 <ul>
@@ -477,7 +486,7 @@ touch neo4j.xml    //创建扩展配置文件
 也可以这样配置</p>
 
 <p>例2:</p>
-<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
     <span class="nt">&lt;extension</span>
         <span class="na">xmlns=</span><span class="s">"https://blueware.com/docs/java/xsd/v1.0"</span>
             <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
@@ -499,13 +508,13 @@ touch neo4j.xml    //创建扩展配置文件
                 <span class="nt">&lt;/pointcut&gt;</span>
             <span class="nt">&lt;/instrumentation&gt;</span>
     <span class="nt">&lt;/extension&gt;</span>
-</code></pre>
+</code></pre></div>
 <p>从 BookService 到 BookDao 是一个业务，这里采用 className 和 interfaceName 的方式配置扩展，达到业务配置的目的。（备注：在这里配置扩展，不一定会在 server 端看到它们的事务，响应时间达到要求才会显示）</p>
 
 <p>packageName 的配置要慎重，包下可能包含大量的 class。如果不想全部 class 都监控，可以定义模糊配置。</p>
 
 <p>例3:</p>
-<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
     <span class="nt">&lt;extension</span>
         <span class="na">xmlns=</span><span class="s">"https://blueware.com/docs/java/xsd/v1.0"</span>
         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
@@ -520,7 +529,7 @@ touch neo4j.xml    //创建扩展配置文件
             <span class="nt">&lt;/pointcut&gt;</span>
         <span class="nt">&lt;/instrumentation&gt;</span>
     <span class="nt">&lt;/extension&gt;</span>
-</code></pre>
+</code></pre></div>
 <p>com.etc.webbookshop.service.impl 包下的以 ServiceImpl 结尾的 class</p>
 
 <h3><strong>注意事项：</strong></h3>
@@ -528,7 +537,7 @@ touch neo4j.xml    //创建扩展配置文件
 <ul>
 <li>1、将 custom 的后台任务转换成 web 事务，在 pointcut 标签中增加 transactionType=&ldquo;web&rdquo; 属性。<br></li>
 </ul>
-<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;extension</span>
     <span class="na">xmlns=</span><span class="s">"https://blueware.com/docs/java/xsd/v1.0"</span>
         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
@@ -544,13 +553,13 @@ touch neo4j.xml    //创建扩展配置文件
                 <span class="nt">&lt;/pointcut&gt;</span>
         <span class="nt">&lt;/instrumentation&gt;</span>
 <span class="nt">&lt;/extension&gt;</span>
-</code></pre>
+</code></pre></div>
 <p><br></p>
 
 <ul>
 <li>2、extension 功能的开启和关闭，在 extension 标签中增加 enabled=&ldquo;false&rdquo; 属性可以关闭 extension<br></li>
 </ul>
-<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;extension</span>
     <span class="na">xmlns=</span><span class="s">"https://blueware.com/docs/java/xsd/v1.0"</span>
         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
@@ -567,13 +576,13 @@ touch neo4j.xml    //创建扩展配置文件
                 <span class="nt">&lt;/pointcut&gt;</span>
         <span class="nt">&lt;/instrumentation&gt;</span>
 <span class="nt">&lt;/extension&gt;</span>
-</code></pre>
+</code></pre></div>
 <p><br></p>
 
 <ul>
 <li>3、改变生成的 metric type，在 instrumentation 中增加 metricPrefix=&ldquo;Customes&rdquo; 属性<br></li>
 </ul>
-<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;extension</span>
     <span class="na">xmlns=</span><span class="s">"https://blueware.com/docs/java/xsd/v1.0"</span>
         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
@@ -589,13 +598,13 @@ touch neo4j.xml    //创建扩展配置文件
                 <span class="nt">&lt;/pointcut&gt;</span>
         <span class="nt">&lt;/instrumentation&gt;</span>
 <span class="nt">&lt;/extension&gt;</span>
-</code></pre>
+</code></pre></div>
 <p><br></p>
 
 <ul>
 <li>4、增加确定的方法，对method使用确定的方法和返回类型，目前只能在 className 中使用。</li>
 </ul>
-<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;extension</span>
     <span class="na">xmlns=</span><span class="s">"https://blueware.com/docs/java/xsd/v1.0"</span>
         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
@@ -614,13 +623,13 @@ touch neo4j.xml    //创建扩展配置文件
                 <span class="nt">&lt;/pointcut&gt;</span>
         <span class="nt">&lt;/instrumentation&gt;</span>
 <span class="nt">&lt;/extension&gt;</span>
-</code></pre>
+</code></pre></div>
 <p><br></p>
 
 <ul>
 <li>5、非常重要的一点，在后台任务中配置 extension，如果上下文中没有 transaction 或有异步调用会导致有些数据抓取不到，在 pointcut 标签中增加 transactionStartPoint=&ldquo;true&rdquo; 属性。<br></li>
 </ul>
-<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<div class="highlight"><pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="nt">&lt;extension</span>
     <span class="na">xmlns=</span><span class="s">"https://blueware.com/docs/java/xsd/v1.0"</span>
         <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
@@ -639,7 +648,7 @@ touch neo4j.xml    //创建扩展配置文件
                 <span class="nt">&lt;/pointcut&gt;</span>
         <span class="nt">&lt;/instrumentation&gt;</span>
 <span class="nt">&lt;/extension&gt;</span>
-</code></pre>
+</code></pre></div>
 <p><strong>extension 功能帮助：</strong>
 <br></p>
 

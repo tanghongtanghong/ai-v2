@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -476,21 +485,21 @@
 <img src="/images/agent_download01.png" alt="Agent download01" /></p></li>
 <li><p>JDK 1.6 - 1.8  请下载</p></li>
 </ul>
-<pre class="highlight plaintext"><code> wget: https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_latest.zip
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> wget: https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_latest.zip
+</code></pre></div>
 <ul>
 <li>JDK 1.5 请下载</li>
 </ul>
-<pre class="highlight plaintext"><code> wget:https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_legacy.zip
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> wget:https://user.oneapm.com/account/5dad74ffe945c060/agent/java/OneAPM_java_Agent_legacy.zip
+</code></pre></div>
 <h3>3. 安装</h3>
 
 <ul>
 <li>解压「Agent」至「Play 的根目录」下</li>
 </ul>
-<pre class="highlight plaintext"><code> unzip OneAPM_java_Agent_latest.zip -d
+<div class="highlight"><pre class="highlight plaintext"><code> unzip OneAPM_java_Agent_latest.zip -d
  &lt;Application Server Path&gt;/
-</code></pre>
+</code></pre></div>
 <ul>
 <li><p>写入「License Key」至配置文件「OneAPM/oneapm.properties」<br>
 模板如下：<br>
@@ -500,27 +509,27 @@
 <li><p><strong>注意：</strong> play 启动命令不支持 -javaagent 选项。</p></li>
 <li><p>使用解压命令：</p></li>
 </ul>
-<pre class="highlight plaintext"><code> play clean dist &amp;&amp; unzip target/universal/*.zip
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> play clean dist &amp;&amp; unzip target/universal/*.zip
+</code></pre></div>
 <ul>
 <li>在启动 Play 框架的应用程序时添加 -J-javaagent 选项。例如：</li>
 </ul>
-<pre class="highlight plaintext"><code> cd UNZIPPEDFOLDER;
-</code></pre><pre class="highlight plaintext"><code> ./bin/SCRIPTNAME -J-javaagent:path/to/oneapm.jar
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> cd UNZIPPEDFOLDER;
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code> ./bin/SCRIPTNAME -J-javaagent:path/to/oneapm.jar
+</code></pre></div>
 <ul>
 <li><p>Play 2 production 模式安装方法</p></li>
 <li><p>注意：play 启动命令不支持 -javaagent 选项。</p></li>
 </ul>
-<pre class="highlight plaintext"><code> play clean dist &amp;&amp; unzip dist/*.zip
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> play clean dist &amp;&amp; unzip dist/*.zip
+</code></pre></div>
 <ul>
 <li>在启动 play 框架的应用程序时添加 -javaagent 选项。例如：</li>
 </ul>
-<pre class="highlight plaintext"><code> cd UNZIPPEDFOLDER;
-</code></pre><pre class="highlight plaintext"><code> chmod a+x start;
-</code></pre><pre class="highlight plaintext"><code> ./start -javaagent:path/to/oneapm.jar
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code> cd UNZIPPEDFOLDER;
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code> chmod a+x start;
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code> ./start -javaagent:path/to/oneapm.jar
+</code></pre></div>
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
   <p style="font-size: 16px;">

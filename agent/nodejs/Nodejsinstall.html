@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -497,13 +506,13 @@
 <li><p>定位至你的应用程序的根目录下</p></li>
 <li><p>1.2.8 以下的版本，请在应用程序的根目录下运行以下指令：</p></li>
 </ul>
-<pre class="highlight plaintext"><code>npm install oneapm --registry http://npm.oneapm.com
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>npm install oneapm --registry http://npm.oneapm.com
+</code></pre></div>
 <ul>
 <li>1.2.8 及以上的版本，请在应用程序的根目录下运行以下指令：</li>
 </ul>
-<pre class="highlight plaintext"><code>npm install oneapm
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>npm install oneapm
+</code></pre></div>
 <ul>
 <li>等待安装成功</li>
 </ul>
@@ -513,14 +522,14 @@
 <p>1.下载 OneAPM Nodejs Agent</p>
 
 <p>下载 OneAPM Nodejs Agent 安装程序到所在项目的文件夹下或者使用</p>
-<pre class="highlight plaintext"><code>wget https://user.oneapm.com/account/&lt;The-string-associated-with-your-account&gt;/agent/
+<div class="highlight"><pre class="highlight plaintext"><code>wget https://user.oneapm.com/account/&lt;The-string-associated-with-your-account&gt;/agent/
 node/OneAPM_node_Agent_latest.tgz
-</code></pre>
+</code></pre></div>
 <p>2.安装 OneAPM Nodejs Agent</p>
 
 <p>定位至你的应用程序的根目录下并运行</p>
-<pre class="highlight plaintext"><code>npm install &lt;Location Of Your OneAPM Agent&gt;/oneapm-latest.tgz
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>npm install &lt;Location Of Your OneAPM Agent&gt;/oneapm-latest.tgz
+</code></pre></div>
 <p>3.等待安装成功</p>
 
 <p>二、配置</p>
@@ -530,8 +539,8 @@ node/OneAPM_node_Agent_latest.tgz
 <li>修改配置文件 oneapm.js，设置 app_name，将 license_key 替换为 OneAPM 提供的 license_key</li>
 <li>复制以下代码至应用程序主模块文件第一行</li>
 </ol>
-<pre class="highlight plaintext"><code>require('oneapm');
-</code></pre>
+<div class="highlight"><pre class="highlight plaintext"><code>require('oneapm');
+</code></pre></div>
 <p>三、如有可能，重启您的应用服务器</p>
 
 <p>四、静候几分钟开启您的应用性能监控之旅</p>

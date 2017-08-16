@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -474,7 +483,7 @@
 <p>1.新建立一个目录 my_rails。</p>
 
 <p>2.在 my_rails 目录下创建 Dockerfile，内容如下：</p>
-<pre class="highlight plaintext"><code>FROM ruby:2.2
+<div class="highlight"><pre class="highlight plaintext"><code>FROM ruby:2.2
 RUN apt-get update &amp;&amp; apt-get install -y nodejs --no-install-recommends &amp;&amp; rm -rf
  /var/lib/apt/lists/*
 RUN apt-get update &amp;&amp; apt-get install -y mysql-client postgresql-client sqlite3 
@@ -488,7 +497,7 @@ RUN rails new . --force --skip-bundle
 ADD Gemfile /myapp/
 RUN bundle install 
 ADD oneapm.yml /myapp/config/
-</code></pre>
+</code></pre></div>
 <p><br>
  3.在 my_rails 目录下， 创建 Gemfile,将需要安装的 gem 提前写好。请注意：最好改一个 source，默认的 https://rubygems.org  总是报错 ssl 联网超时，改成淘宝的源 https://ruby.taobao.org 就没有这个问题。本文主题是安装 Ruby 探针，故需要将 gem ‘oneapm_rpm’放到 Gemfile。</p>
 
@@ -497,9 +506,9 @@ ADD oneapm.yml /myapp/config/
 <p>5.在 my_rails 目录运行 docker build -t my_rails 。会看到 docker 正在创建镜像文件。创建成功后，用 docker images 查看会发现 my_rails 镜像已经存在。</p>
 
 <p>6.接下来可以运行 docker，开启我们的容器之旅了。</p>
-<pre class="highlight plaintext"><code>docker run -d -p 3000:3000 my_rails rails s -p 3000 -b ‘0.0.0.0'
+<div class="highlight"><pre class="highlight plaintext"><code>docker run -d -p 3000:3000 my_rails rails s -p 3000 -b ‘0.0.0.0'
 docker run -d -p 3001:3001 my_rails rails s -p 3001 -b ‘0.0.0.0'
-</code></pre>
+</code></pre></div>
 <p>上面开启了2个 container，需要注意：</p>
 
 <ul>

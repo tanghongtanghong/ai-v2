@@ -10,7 +10,7 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <!-- Use title if it's in the page YAML frontmatter -->
-<title>Application Insight 文档</title>
+<title> Ai - 快速入门 - 什么是应用</title>
 
   <script type="text/javascript">
     // if (window.location.hostname === 'www.oneapm.com') {
@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -337,7 +346,7 @@
       <div class="panel-body">
         <ul>
           <li><a href="/quick-start/application.html">应用</a></li>
-          <li><a href="/quick-start/tier.html">Tier</a></li>
+          <li><a href="/quick-start/tier.html">Tier(层、集群)</a></li>
           <li><a href="/quick-start/readme.html">常用术语</a></li>
         </ul>
       </div>
@@ -355,12 +364,11 @@
     <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
       <div class="panel-body">
         <ul>
-          <li><a href="/quick-start/videos01.html">如何使用 web 事务</a></li>
-          <li><a href="/quick-start/videos02.html">如何使用外部服务</a></li>
-          <li><a href="/quick-start/videos03.html">如何使用错误信息</a></li>
-          <li><a href="/quick-start/videos04.html">如何使用 JVM</a></li>
-          <li><a href="/quick-start/videos05.html">如何使用性能剖析</a></li>
-          <li><a href="/quick-start/videos06.html">如何使用关键事务</a></li>
+          <li><a href="/quick-start/how-to-use-business-transactions.html">如何使用 Web事务入口</a></li>
+          <li><a href="/quick-start/how-to-use-service-endpoints.html">如何使用 Web事务</a></li>
+          <li><a href="/quick-start/how-to-use-tiers.html">如何使用 Tier（层、集群）</a></li>
+          <li><a href="/quick-start/how-to-use-remote-services.html">如何使用远程服务</a></li>
+          <li><a href="/quick-start/how-to-use-thread-profiling.html">如何使用性能剖析</a></li>
         </ul>
       </div>
     </div>
@@ -374,7 +382,7 @@
 
 <h3>定义</h3>
 
-<p>描述一整套应用运行环境的逻辑概念，包括多个服务端，多个存储，组件等，例如 AcmeAir 应用中包含 zuul，webapp，auth，MySQL等。</p>
+<p>描述一整套应用运行环境的逻辑概念，包括多个服务端，多个存储，组件等，例如 AcmeAir 应用中包含 zuul，webapp，auth，MySQL 等。</p>
 
 <h3>说明</h3>
 
@@ -382,22 +390,22 @@
 在一个小型的 Ai 部署中，只需要一个应用来为环境建模。在更大一些的部署中，可以选择将环境模型划分为若干个应用。
 哪种组织方式算是最佳方式，取决于你的环境。但在大多数情况下，应当首先考虑能够反映用户的工作团队，以我们OneAPM举例，那么就是AI应该就是一个应用，而用户中心是另外一个应用。
 实例（探针）
-实例是建模环境中的最小单位。一般来说，一个实例对应于安装了 AI agent的单个应用服务器（JVM 或 CLR）。在配置agent时，需要指定层和应用的名字，agent将根据此向 AI server 报告数据。</p>
+实例是建模环境中的最小单位。一般来说，一个实例对应于安装了 Ai agent的单个应用服务器（JVM 或 CLR）。在配置 agent 时，需要指定层和应用的名字，agent 将根据此向 Ai server 报告数据。</p>
 
             <hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
   <p style="font-size: 16px;">
-    如果您对 AI 感兴趣，可以选择试用我们的产品，只需要点击下面的按钮免费注册即可。
+    如果您对 Ai 感兴趣，可以选择试用我们的产品，只需要点击下面的按钮免费注册即可。
   </p>
   <br />
   <p>
     <a href="https://user.oneapm.com/account/register.do?ref=https://www.oneapm.com&from=ai-docs" class="btn btn-info btn-lg" target="_blank">
-      立即注册 AI
+      立即注册 Ai
     </a>
   </p>
 </div>
 <hr />
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- Discourse公共JS代码 start (一个网页只需插入一次) -->
 <div id='discourse-comments'></div>
 
 <script type="text/javascript">
@@ -410,7 +418,7 @@
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
   })();
 </script>
-<!-- 多说公共JS代码 end -->
+<!-- Discourse公共JS代码 end -->
 
             <div class="return"></div>
           </div>

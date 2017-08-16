@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -483,10 +492,10 @@
 <p>1.打开 tomcat bin/catalina.sh 或者 tomcat bin/catalina.bat</p>
 
 <p>2.搜索 oneapm ，会找到如下：</p>
-<pre class="highlight plaintext"><code># ---- oneapm switch automatically added to start command on 2015 Nov 05， 17：23：31
+<div class="highlight"><pre class="highlight plaintext"><code># ---- oneapm switch automatically added to start command on 2015 Nov 05， 17：23：31
 BW_JAR=/usr/local/server/tomcat7/OneAPM/oneapm.jar; export BW_JAR
 CATALINA_OPTS="$CATALINA_OPTS -javaagent：$BW_JAR"; export CATALINA_OPTS
-</code></pre>
+</code></pre></div>
 <p>3.把这几行删除或者注释掉</p>
 
 <p>4.重启应用服务器</p>

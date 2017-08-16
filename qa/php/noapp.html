@@ -22,7 +22,7 @@
     // }
   </script>
 
-<script>var _hmt = _hmt || [];(function() {    var hm = document.createElement("script");    hm.src = "https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";    var s = document.getElementsByTagName("script")[0];    s.parentNode.insertBefore(hm, s);})();</script>
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script>
 
 <!-- growingio -->
 <script type='text/javascript'>
@@ -57,6 +57,10 @@
   color: #dee5e7;
   background-color: #4e5d62;
 }
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
@@ -71,8 +75,9 @@
   background-color: #cc0000;
 }
 .highlight .gr {
-  color: #fefeec;
-  background-color: #cc0000;
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
 }
 .highlight .k, .highlight .kd, .highlight .kv {
   color: #f6dd62;
@@ -80,6 +85,7 @@
 }
 .highlight .o, .highlight .ow {
   color: #4df4ff;
+  font-weight: bold;
 }
 .highlight .p, .highlight .pi {
   color: #4df4ff;
@@ -196,6 +202,9 @@
   font-weight: bold;
 }
 .highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
   color: #BBBBBB;
 }
 .highlight .nf {
@@ -457,10 +466,10 @@
 </ul>
 
 <p>如果仍然没有数据请修改配置文件，开启日志 debug 模式，打印详细的日志。</p>
-<pre class="highlight plaintext"><code>修改 php.ini 配置文件 ，修改参数 oneapm.loglevel=debug 。
+<div class="highlight"><pre class="highlight plaintext"><code>修改 php.ini 配置文件 ，修改参数 oneapm.loglevel=debug 。
 
 修改 oneapm.cfg 配置文件，修改参数 loglevel=debug。
-</code></pre>
+</code></pre></div>
 <p>然后将产生的两个日志文件发送给我们，可以更快的解决你的问题。</p>
 
 <p>发送方式：support@oneapm.com 或者 提交工单。</p>
@@ -476,10 +485,10 @@
 <h2>解决方案</h2>
 
 <p>在 Ubuntu 系统中，对于使用 apt-get 方式安装的 PHP 环境，存在一个比较特殊的问题，Ubuntu 会把 PHP 的 php.ini 拆分成多个：</p>
-<pre class="highlight plaintext"><code>如果是 Apache 环境，会生成两个 php.ini 文件，分别位于 Apache 目录和 CLI 目录。
+<div class="highlight"><pre class="highlight plaintext"><code>如果是 Apache 环境，会生成两个 php.ini 文件，分别位于 Apache 目录和 CLI 目录。
 
 如果是 Nginx 环境，会分别位于 php-fpm 目录和 CLI 目录。
-</code></pre>
+</code></pre></div>
 <p>而安装的时候安装脚本是无法区分这两个文件的，如果默认安装到了 CLI 目录的 php.ini 配置文件中，需要您手动将 CLI 目录中的 [oneapm] 这一行以及下面的全部 OneAPM 配置部分剪切到另外一个 Web 服务器使用的 php.ini 文件中。然后重启 Apache、Nginx、php-fpm 等等 PHP 容器，静等 5 分钟之后就能获取数据了。</p>
 
 <h2>故障说明</h2>
