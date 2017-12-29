@@ -224,7 +224,7 @@
 
   </head>
 
-  <body class="page-agent agent_php agent_php_phpSupport_help">
+  <body class="page-agent agent_ruby agent_ruby_Ruby-Release-Note">
       <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -469,117 +469,143 @@
         </div>
         <div class="col-lg-9 page-body">
           <div class="body-box">
-            <h1>PHP Agent 兼容环境和功能列表</h1>
+            <h1>Ruby Release Note</h1>
 
-<p>兼容性和安装要求</p>
+<p>OneAPM 管理员 发表于 2015年06月09日 15:38 最后修改于 2016年05月13日 11:04 
+如何更新最新的 Ruby Agent？请查看 Ruby Agent 更新方法</p>
 
-<p>我们支持的应用服务器和应用框架如下表所示：</p>
+<p>*OneAPM Ruby Agent 1.3.6
+发布日期：2016/5/13
+改进功能：
+    1.支持Grape0.16。
+    2.更新文件。</p>
 
-<p>类型</p>
+<p>*OneAPM Ruby Agent 1.3.5
+发布日期：2016/1/28
+改进功能：
+   1.压缩回传数据，提高数据回传率。
+ 
+*OneAPM Ruby Agent 1.3.4
+发布日期：2016/1/4
+改进功能：
+   1.重构获取内存与 CPU 占用率功能，让数据更准确。</p>
 
-<p>支持列表
-OS</p>
-<div class="highlight"><pre class="highlight plaintext"><code>windows 7、windows 8
+<p>*OneAPM Ruby Agent 1.3.3
+发布日期：2015/12/23
+新增功能：
+   1.支持 Rails 5.0.</p>
 
-CentOS 5.5 以上
+<p>*OneAPM Ruby Agent 1.3.2
+发布日期：2015/12/18
+新增功能：
+   1.开发模式支持 ruby-prof 的调用堆栈展示和 graphviz 展示。</p>
 
-Ubuntu 11 以上
+<p>*OneAPM Ruby Agent 1.3.1
+发布日期：2015/12/4
+新增功能：
+    1.支持Thrift
+    2.可配置自动插码位置</p>
 
-RedHat  Enterprise Linux （RHEL） 5 or later
-</code></pre></div>
-<p>PHP版本</p>
-<div class="highlight"><pre class="highlight plaintext"><code>PHP 5.3 及以上
+<p>*OneAPM Ruby Agent 1.3.0
+发布日期：2015/11/30
+新增功能：
+    1.支持慢事务跟踪中显示MongoDB的查询.</p>
 
-PHP 5.4 及以上
+<p>*OneAPM Ruby Agent 1.2.9
+发布日期：2015/11/20
+优化功能：
+    1.修复Ubuntu下内存不准确的bug</p>
 
-PHP 5.5 及以上
+<p>*OneAPM Ruby Agent 1.2.8
+发布日期：2015/11/13
+新增功能：
+    1.支持监控 RabbitMQ。</p>
 
-PHP 5.6 及以上
+<p>*OneAPM Ruby Agent 1.2.7
+发布日期：2015/11/6
+优化功能：
+    1.重构开发模式界面。</p>
 
-PHP 7.0.9 及以上
+<p>*OneAPM Ruby Agent 1.2.6
+发布日期：2015/10/29
+优化功能：
+    1.修复部分用户无法获取服务器名称的问题；
+    2.优化“服务器环境”中的参数列表；
+    3.优化用户在不同平台的配置文件编码问题。</p>
 
-PHP 7.1 及以下
+<p>*OneAPM Ruby Agent 1.2.5
+发布日期：2015/10/23
+新增功能：
+    1.支持 Mongoid 5.0。</p>
 
-不支持 PHP 所有版本的 debug 版
-</code></pre></div>
-<p>数据库</p>
-<div class="highlight"><pre class="highlight plaintext"><code>mysql [mysql ， pdo ， mysqli]
-</code></pre></div>
-<p>webServer</p>
-<div class="highlight"><pre class="highlight plaintext"><code>Apache 2.2 或 2.4 mod_php 模式
-（线程安全与非线程安全）
+<p>*OneAPM Ruby Agent 1.2.4
+发布日期：2015/10/10
+优化功能：
+    1.修复了内存数据不准确的问题。</p>
 
-任何用通过 FastCGI 连接 php-fpm （如 Nginx）
-</code></pre></div>
-<p>明确不支持的框架</p>
-<div class="highlight"><pre class="highlight plaintext"><code>Yaf （phalcon 暂不支持）
-</code></pre></div>
-<p>可以安装的框架</p>
-<div class="highlight"><pre class="highlight plaintext"><code>所有基于 PHP 语言写的框架都可以安装 PHP-Agent （对于yaf , phalcon 这种c语言写的 PHP 框架不支持）
+<p>*OneAPM Ruby Agent 1.2.3
+发布日期：2015/9/30
+优化功能：
+    1.修复了在线修改应用配置后导致应用无数据的问题；
+    2.修复了 Bi 注入时偶尔出现注入失败的问题。</p>
 
-PHP 语言写的框架中支持的有 ci、thinkphp、yii、Laravel。
+<p>*OneAPM Ruby Agent 1.2.2
+发布日期：2015/9/22
+优化功能：
+    1.重构代码，统一了发给 APM 服务器与 JavaScript 探针的 TransactionName，实现从 Bi 到 Ai 的跳转。</p>
 
-已测试框架有： wordpress ， onethink ， discuz 。
-</code></pre></div>
-<p>兼容的扩展</p>
-<div class="highlight"><pre class="highlight plaintext"><code>bz2
-calendar
-Core
-ctype
-curl
-date
-dom
-ereg
-exif
-fileinfo
-filter
-ftp
-gd
-gettext
-gmp
-hash
-iconv
-imap
-json
-ldap
-libxml
-mysql
-mysqli
-odbc
-openssl
-pcntl
-pcre
-PDO
-pdo_mysql
-PDO_ODBC
-pdo_sqlite
-Phar
-readline
-Reflection
-session
-shmop
-SimpleXML
-sockets
-SPL
-sqlite3
-standard
-tokenizer
-wddx
-xml
-xmlreader
-xmlrpc
-xmlwriter
-xsl
-zip
-zlib &lt;br&gt;
-</code></pre></div>
-<p>备注说明：</p>
-<div class="highlight"><pre class="highlight plaintext"><code>所有基于 PHP 语言写的框架都可以安装 PHP Agent（对于yaf这种c语言写的PHP 框架不支持）
+<p>*OneAPM Ruby Agent 1.2.1
+发布日期：2015/9/15
+新增功能：
+    1.可配置 redis<em>ignore</em>commands，忽略配置列表中 Redis 命令的性能数据收集；
+    2.可配置 disable<em>rails</em>middleware，默认打开，以防止 Breakdown Table 中出现大量 Middleware。
+修复问题：
+    1.优化跨应用的探针间性能数据的回传格式；
+    2.修复 ignore_error 不生效的错误。</p>
 
-PHP 语言写的框架中， MVC 单一入口模式的，对用户数据展示的不够友好。需要继续优化。因为不能根据参数区分出真正想看到的页面数据。
+<p>*OneAPM Ruby Agent 1.2.0
+发布日期：2015/7/1
+新增功能：
+    1.支持开启开发模式。</p>
 
-已测试框架有： wordpress ， onethink ， discuz 。 onethink 这种单一入口（每次都是经过index.php来路由的）。
-</code></pre></div>
+<p><em>OneAPM Ruby Agent 1.1.3
+发布日期：2015/6/18
+新增功能：
+    1.支持 Puma Server 2.11.</em>；
+    2.修复对多进程 Server（如 unicorn 等）的支持问题；
+    3.精简 oneapm.yml 的配置参数。</p>
+
+<p>*OneAPM Ruby Agent 1.1.2
+发布日期：2015/6/8
+新增功能：
+    1.支持 EventMachine 的 periodic 作为后台任务的监控。
+修复问题：
+    2.ActiveRecord 的标识统一为数据库格式显示，可显示增删改查四种类型。</p>
+
+<p>*OneAPM Ruby Agent 1.1.1
+发布日期：2015/6/1
+修复问题：
+    1.修复数据库性能数据上传不完善导致数据库吞吐量和响应时间缺失。</p>
+
+<p>*OneAPM Ruby Agent 1.1.0
+发布日期：2015/6/1
+修复问题：
+    1.修复CPU性能数据在某些情况下会出现负值；
+    2.修复在某些情况下无法检测到 Thin Server；
+    3.性能提升。
+增加功能：
+    1.支持 Mongoid-Moped、redis、memcache 的数据抓取；
+    2.支持在线修改探针配置；
+    3.支持 Goliath 自动注入；
+    4.支持 rubygems.org 安装探针。</p>
+
+<p>*OneAPM Ruby Agent 1.0.1
+发布日期：2015/4/14
+增加功能：
+    1.解决同时使用 NewRelic 探针引发的冲突问题；
+    2.支持 Rack 1.3 &amp; 1.6；
+    3.支持 ActiveRecord 4.0.11 &amp; 4.2.0。</p>
+
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
   <p style="font-size: 16px;">
