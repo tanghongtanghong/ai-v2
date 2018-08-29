@@ -473,7 +473,6 @@
 
 <ul>
 <li><a href="#1">Linux 探针安装</a><br></li>
-<li><a href="#2">windows 探针安装</a><br></li>
 </ul>
 
 <h2><h2 id="1">Linux 探针安装</h2> <br></h2>
@@ -532,7 +531,7 @@
 
 <p><img src="/images/myr/p007.png" alt="P007" /></p>
 
-<p>修改 oneapm.cfg 里 collector_host 和 port 参数的值分别为 app.collector.oneapm.com 和 80</p>
+<p>修改 oneapm.cfg 里 collector_host 和 port 参数的值分别为 apmdc.oneapm.com 和 80</p>
 
 <p><img src="/images/myr/p012.png" alt="P012" /></p>
 
@@ -557,56 +556,6 @@
 <!--![](https://oneapm.kf5.com/attachments/download/274084/001562094ef4873a4d43b462b31f84b)-->
 
 <p><img src="/images/myr/p010.png" alt="P010" /></p>
-
-<h2><h2 id="1">windows 探针安装</h2> <br></h2>
-
-<ul>
-<li>双击安装文件</li>
-</ul>
-
-<p><img src="/images/myr/wind01.png" alt="Wind01" /></p>
-
-<ul>
-<li>按照安装提示进行下一步</li>
-</ul>
-
-<p><img src="/images/myr/wind02.png" alt="Wind02" />
-将 oneapm 官网显示用户的 php license 拷入，并点击下一步</p>
-
-<ul>
-<li>选择输入要监控的 php 版本信息</li>
-</ul>
-
-<p><img src="/images/myr/wind03.png" alt="Wind03" /></p>
-
-<ul>
-<li>安装</li>
-</ul>
-
-<p><img src="/images/myr/wind04.png" alt="Wind04" />
-点击完成。</p>
-
-<p><strong>相关配置</strong></p>
-
-<ul>
-<li>探针配置文件在 php.ini 的最后方</li>
-<li>daemon 配置文件</li>
-</ul>
-
-<p><img src="/images/myr/wind05.png" alt="Wind05" />
-回车，该目录下有文件夹 &ldquo; OneAPM PHP Agent &quot;，点击进入</p>
-
-<p><img src="/images/myr/wind06.png" alt="Wind06" />
-oneapm.cfg：在此配置daemon日志级别，或者是修改 ipt 和 host 地址（saas用户不需要修改）。</p>
-
-<ul>
-<li>agent 和 daemon 日志</li>
-</ul>
-
-<p><img src="/images/myr/wind07.png" alt="Wind07" /></p>
-
-<p>回车并查看日志信息
- <img src="/images/myr/wind08.png" alt="Wind08" /></p>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
