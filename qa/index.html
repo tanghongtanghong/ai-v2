@@ -448,7 +448,7 @@
 <h2>1. 为什么探针部署后登录 OneAPM 看不到数据？</h2>
 
 <ul>
-<li>请确认网络是否通  在终端输入命令：telnet tpm.oneapm.com 443。</li>
+<li>请确认网络是否通  在终端输入命令：telnet appcollector.oneapm.com 80。</li>
 <li>请检查配置的 licensekey 是否正确, license_key 复制粘贴无误一般最后有个  =。</li>
 <li>请检查 agent 所在的服务器的时间和时区，是否为北京时间。</li>
 <li>探针回传数据周期是 1min 可以稍等一下刷新看看。</li>
@@ -496,11 +496,6 @@
 <h2>6. 如何收集探针的日志？</h2>
 
 <p>探针配置文件中 log_file 文件打开， log_level 设置成 debug 模式，再重新生成 log 文件</p>
-
-<h2>7. 删除应用程序</h2>
-
-<p>默认应用一小时无数据就会隐藏，隐藏的应用才会有删除权限
-<img src="/images/delete.png" alt="Delete" /></p>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
