@@ -403,7 +403,7 @@
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a href="/book/Tiers/tiers_index.html" class="collapsed">
-          Tiers
+          集群(Tier)
         </a>
       </h4>
     </div>
@@ -504,66 +504,63 @@
       </div>
     </div>-->
   </div>
+
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Agent/agent_index.html" class="collapsed">
+            探针管理
+        </a>
+      </h4>
+    </div>
+ </div>
+
 </div>
+
+
 
         </div>
         <div class="col-lg-9 page-body">
           <div class="body-box">
             <h1>报表</h1>
 
-<p><img src="/images/report_01.png" alt="Report 01" /></p>
+<p>OneAPM报表类型包括故障报表、对比报表、性能报表三类。用户可在线查看报表，也可以在报表设置时推送到相应负责人的邮箱。点击报表名称，可进入查看详情。
+<img src="/images/report_13.png" alt="Report 13" /></p>
 
-<p><strong>报表的两种形式</strong></p>
+<h2>1.报表列表</h2>
 
-<ul>
-<li>下载：PDF&amp;Excel格式的报表下载</li>
-<li>邮件发送：定时的进行报表的邮件发送</li>
-</ul>
+<p>报表列表将用户在oneapm AI中自定义的报表进行呈列，包括报表名称、报表类型、</p>
 
-<p><strong>报表获取步骤</strong></p>
+<h2>2. 故障报表</h2>
 
-<ul>
-<li>在左侧的导航栏中点击报表。</li>
-<li>选择报表类型（应用，业务，Tier，JVM，数据库，Web事务）。</li>
-<li>进行添加设置，进行新的报表的设置。</li>
-<li>选择一个报表，点击下载报表/等待邮件发送。</li>
-</ul>
+<p>故障报表根据用户配置的重点应用以及平均响应时间大于2s的缓慢应用开始，从应用、集群、节点、web事务、数据库逐层分析缓慢问题发生的地方，支持日报、周报、月报三种类型。
+<img src="/images/report_12.png" alt="Report 12" /></p>
 
-<p><strong>报表类型</strong></p>
+<h2>3. 对比报表</h2>
 
-<p>用户可以选择以下6种类型中的一种发送给收件人。</p>
+<p>对比报表主要是对同一应用不同时间段的监控数据进行对比。支持两种类型的时间设置：</p>
 
 <ul>
-<li>应用-报表： 展示用户应用的性能数据。<br>
-生成报表包含的指标：平均响应时间，调用次数，吞吐量，错误次数，错误率，Tier情况概览，业务情况概览。<br><br></li>
-<li>业务-报表：展示用户该应用下业务的性能数据。<br>
-生成报表包含的指标：平均响应时间，调用次数，吞吐量，错误次数，错误率，健康度，Tier。<br><br></li>
-<li>Tier-报表：展示用户该应用下Tier的性能数据。<br>
-生成报表包含的指标：平均响应时间，调用次数，吞吐量，错误次数，错误率，Apdex，CPU使用率，内存使用情况。<br><br></li>
-<li>JVM-报表：展示用户该应用下JVM的性能数据。<br>
-生成报表包含的指标：平均响应时间，调用次数，吞吐量，错误次数，错误率，Apdex，CPU使用率，内存使用情况，Tier。<br><br></li>
-<li>Web事务-报表：展示用户该应用下Web事务的性能数据。<br>
-生成报表包含的指标：平均响应时间，调用次数，吞吐量，错误次数，错误率，Apdex， Tier。<br><br></li>
-<li>数据库-报表：展示用户该应用下数据库的性能数据。<br>
-生成报表包含的数据：总响应时间，平均响应时间，调用次数，吞吐量，Tier。</li>
+<li>日对比:昨天vs前天vs上周同一天、自定义（允许30天内选择多个日期）</li>
+<li>周对比：上周vs上月同一周、过去四周
+<img src="/images/report_11.png" alt="Report 11" /></li>
 </ul>
 
-<p><strong>报表设置</strong></p>
+<h2>4. 性能报表</h2>
 
-<p>报表设置由四部分组成，分别是：</p>
+<p>性能报表支持日报、周报、月报，创建时有三个数据需要选择，分别是主对象、分组对象、指标选择。  </p>
 
 <ul>
-<li>名称</li>
-<li>报表时间范围选择</li>
-<li>邮件定时发送（仅支持一条定时发送添加）</li>
-<li>收件人</li>
+<li>主对象：应用与集群</li>
+<li>分组对象：web事务、第三方服务、探针、数据库、SQL语句、无</li>
+<li>指标选择：主指标（平均响应时间、Apdex、每分钟调用次数、错误率），附加指标（可容忍次数、错误次数、缓慢次数等）
+<img src="/images/report_10.png" alt="Report 10" /></li>
 </ul>
 
-<p><img src="/images/report_02.png" alt="Report 02" /></p>
+<h2>5. 报表查看与下载</h2>
 
-<p>当设置完成就可以把关心的数据生成可以供下载的报表，并且可以根据需要定时的发送给特定的邮箱。</p>
-
-<p><strong>注：如果设置每天8:00定时发送，报表中的「今天」数据统计周期为当天 0:00～8:00。</strong></p>
+<p>点击某个报表，进入详情后，在左侧的导航栏中选择报表生成的时间，右侧会展示该时间点生成的报表，用户可直接进行查看，点击右上方，可以下载该报表为pdf或Excel。
+<img src="/images/report_14.png" alt="Report 14" /></p>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">

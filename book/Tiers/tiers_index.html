@@ -403,7 +403,7 @@
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a href="/book/Tiers/tiers_index.html" class="collapsed">
-          Tiers
+          集群(Tier)
         </a>
       </h4>
     </div>
@@ -504,115 +504,107 @@
       </div>
     </div>-->
   </div>
+
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Agent/agent_index.html" class="collapsed">
+            探针管理
+        </a>
+      </h4>
+    </div>
+ </div>
+
 </div>
+
+
 
         </div>
         <div class="col-lg-9 page-body">
           <div class="body-box">
-            <h1>Tiers</h1>
+            <h1>集群</h1>
 
-<p><img src="/images/tiers_01.png" alt="Tiers 01" /></p>
+<p>集群模块呈列了该监控应用中监控的所有集群信息，对于每个集群，从性能总览、拓扑、web事务、后台任务、数据库、远程服务、性能剖析、JVM（仅针对java应用）、错误信息、运行环境等方面进行了详细的分析。</p>
+
+<h2>集群详情查看</h2>
+
+<h3>0. 集群列表</h3>
+
+<p>用户登录后，在集群列表可以查看所有集群相关信息，包括平均响应时间、每分钟调用次数、错误率等，对于集群名称可以进行重命名。点击集群名称或错误率、响应时间可以进入查看详情。
+<img src="/images/tiers_10.png" alt="Tiers 10" /></p>
+
+<h3>1.总览</h3>
+
+<p>集群总览页面包括该集群内所有被调用组件/服务的响应时间叠加图、集群Apdex值、该集群内web事务的每分钟调用次数、慢web事务总览及该慢web事务下最大响应时间数据追踪、该集群内发生的事务错误率曲线图、服务器列表详情。
+<img src="/images/tier_01.png" alt="Tier 01" /><br>
+点击某个响应时间较长的点，钻取该时间段内的trace列表，进行详情查看
+<img src="/images/tier_02.png" alt="Tier 02" /><br>
+点击web事务中追溯的较长响应时间数据，可以查看该慢web事务的详情，包括trace和性能剖析
+<img src="/images/tier_03.png" alt="Tier 03" />  </p>
+
+<h3>2.拓扑</h3>
+
+<p>拓扑页面显示以该集群为起点所产生的调用拓扑，用户可点击右上角的图标，按拓扑图或列表进行显示。<br>
+<img src="/images/tier_04.png" alt="Tier 04" />  </p>
+
+<p>点击节点，可查看当前集群的总览（包括响应时间、apdex、吞吐量、每分钟错误次数）、节点、web事务入口、web事务。 
+<img src="/images/tier_05.png" alt="Tier 05" />  </p>
+
+<h3>3.web事务</h3>
+
+<p>web事务页面显示了该集群下的top5web事务响应时间曲线图，web事务列表，点击某条具体web事务，可进行详细的分析，具体可看<a href="http://docs-ai.oneapm.com/book/Web_trans/web_index.html">web事务</a><br>
+<img src="/images/tier_06.png" alt="Tier 06" />  </p>
+
+<h3>4.后台任务</h3>
+
+<p>后台任务按平均响应时间、性能指数、每分钟调用次数、响应时间占比四个维度进行数据分析。 
+OneAPM AI按平均响应时间最长/apdex值/每分钟最大调用次数/响应时间占比从大到小进行排序，选择某条具体后台任务后，可以查看该任务的执行时间、吞吐量、breakdown table、慢后台任务追踪，对于慢后台任务，可以点击进行详情追踪。
+  <img src="/images/tier_07.png" alt="Tier 07" /> 
+  慢后台任务详情追踪
+  <img src="/images/tier_08.png" alt="Tier 08" /> </p>
+
+<h3>5.数据库</h3>
+
+<p>数据库列表显示了该集群下所调用的数据库，包括关系型数据库和NoSQL，OneAPM AI从平均响应时间、总响应时间、每分钟调用次数三个维度进行划分，点击某个具体的语句，可以查看该语句的响应时间和吞吐量、调用事务时间占比、调用事务列表、慢sql追踪。 
+<img src="/images/tier_09.png" alt="Tier 09" />
+慢sql详情追踪：
+<img src="/images/tier_10.png" alt="Tier 10" />  </p>
+
+<h3>6.远程任务</h3>
+
+<p>远程服务包括应用内部服务和第三方服务两大模块。分别从服务平均响应时间、每分钟调用次数两方面进行性能分析。</p>
 
 <ul>
-<li><a href="#1">Tiers－总览</a><br></li>
-<li><a href="#2">Tiers－拓扑</a><br></li>
-<li><a href="#3">Tiers－Web 事务</a><br></li>
-<li><a href="#4">Tiers－后台任务</a><br></li>
-<li><a href="#5">Tiers－数据库</a><br></li>
-<li><a href="#6">Tiers－远程服务</a><br></li>
-<li><a href="#7">Tiers－性能剖析</a><br></li>
-<li><a href="#8">Tiers－JVM</a><br></li>
-<li><a href="#9">Tiers－错误信息</a><br></li>
-<li><a href="#10">Tiers－运行环境</a><br></li>
+<li><p>远程服务列表<br>
+列表统计了类型、平均响应时间、每分钟调用次数、调用次数等数据，用户可以进行概览。
+<img src="/images/tier_11.png" alt="Tier 11" /> </p></li>
+<li><p>具体远程服务详情查看
+点击相应的远程服务，可以查看该服务的响应时间和吞吐量、调用事务时间占比、调用事务列表，点击事务列表的某条事务，可以进行详情分析。<br>
+<img src="/images/tier_12.png" alt="Tier 12" /></p></li>
 </ul>
 
-<h2><h2 id="1">Tiers－总览</h2></h2>
+<h3>7.性能剖析</h3>
 
-<p>该页面为Tiers总览页面，共由 Web 事务响应时间图、Apdex得分、吞吐量图、错误率图、web
-事务列表、服务器列表这 6 个部分组成。如下图：
-如图：
-<img src="/images/tiers_02.png" alt="Tiers 02" /></p>
+<p>在性能分析板块，用户可以自定义持续时间、采样周期、是否仅包含http请求、服务器名称等参数，进行性能剖析，剖析产生结果后，点击查看即可。
+<img src="/images/tier_13.png" alt="Tier 13" /></p>
 
-<ul>
-<li>Web 事务响应时间图表
-<img src="/images/tiers_021.png" alt="Tiers 021" /></li>
-</ul>
+<h3>8. JVM</h3>
 
-<p>查看具体节点的指标数据：</p>
+<p>对于java语言的应用，OneAPM AI提供了JVM功能，可供用户了解JVM的内存、线程、会话的相关情况。
+<img src="/images/tier_14.png" alt="Tier 14" /></p>
 
-<p>将鼠标悬停在图上某个节点，将显示节点对应时间段内的指标数据（节点对应的时间段，随时间选
-择器选择的时间跨度而变化），包括平均响应时间、执行次数。</p>
+<h3>9.错误信息</h3>
 
-<ul>
-<li><p>Apdex 图，如下图：
-<img src="/images/tiers_022.png" alt="Tiers 022" />
-Apdex 图展示了 Apdex 值随时间的变化情况。</p></li>
-<li><p>吞吐量图，如下图：
-<img src="/images/tiers_023.png" alt="Tiers 023" /></p></li>
-</ul>
+<p>OneAPM AI将错误信息分为两大类，web事务和后台任务错误信息。点击“错误信息”，可以看到每个分类下的相应错误，包括错误出现的第一次时间、最后一次时间、请求地址、错误消息、出现次数。
+<img src="/images/tier_15.png" alt="Tier 15" />  </p>
 
-<h2><h2 id="2">Tiers－拓扑</h2></h2>
+<p>点击相应的请求地址，可以查看错误详情<br>
+<img src="/images/tier_16.png" alt="Tier 16" />  </p>
 
-<p>该页面为应用-总览页面。共由相关指标图、自动刷新勾选栏、全屏化以及时间选择器4个部分组
-成。
-如图：
-<img src="/images/tiers_03.png" alt="Tiers 03" /></p>
+<h3>10.运行环境</h3>
 
-<h2><h2 id="3">Tiers－Web 事务</h2></h2>
-
-<p>该页面为应用-总览页面。共由相关指标图、自动刷新勾选栏、全屏化以及时间选择器4个部分组
-成。
-如图：
-<img src="/images/tiers_04.png" alt="Tiers 04" /></p>
-
-<h2><h2 id="4">Tiers－后台任务</h2></h2>
-
-<p>该页面为应用-总览页面。共由相关指标图、自动刷新勾选栏、全屏化以及时间选择器4个部分组
-成。
-如图：
-<img src="/images/tier_houtai.png" alt="Tier houtai" /></p>
-
-<h2><h2 id="5">Tiers－数据库</h2></h2>
-
-<p>该页面为应用-总览页面。共由相关指标图、自动刷新勾选栏、全屏化以及时间选择器4个部分组
-成。
-如图：
-<img src="/images/tier_shujuku.png" alt="Tier shujuku" /></p>
-
-<h2><h2 id="6">Tiers－远程服务</h2></h2>
-
-<p>该页面为应用-总览页面。共由相关指标图、自动刷新勾选栏、全屏化以及时间选择器4个部分组
-成。
-如图：
-<img src="/images/tier_yuancheng.png" alt="Tier yuancheng" /></p>
-
-<h2><h2 id="7">Tiers－性能剖析</h2></h2>
-
-<p>该页面为应用-总览页面。共由相关指标图、自动刷新勾选栏、全屏化以及时间选择器4个部分组
-成。
-如图：
-<img src="/images/tier_xingnengpouxi.png" alt="Tier xingnengpouxi" /></p>
-
-<h2><h2 id="8">Tiers－JVM</h2></h2>
-
-<p>该页面为应用-总览页面。共由相关指标图、自动刷新勾选栏、全屏化以及时间选择器4个部分组
-成。
-如图：
-<img src="/images/tier_jvm.png" alt="Tier jvm" /></p>
-
-<h2><h2 id="9">Tiers－错误信息</h2></h2>
-
-<p>该页面为应用-总览页面。共由相关指标图、自动刷新勾选栏、全屏化以及时间选择器4个部分组
-成。
-如图：
-<img src="/images/tier_error.png" alt="Tier error" /></p>
-
-<h2><h2 id="10">Tiers－运行环境</h2></h2>
-
-<p>该页面为应用-总览页面。共由相关指标图、自动刷新勾选栏、全屏化以及时间选择器4个部分组
-成。
-如图：
-<img src="/images/tier_environment.png" alt="Tier environment" /></p>
+<p>在运行环境模块，AI列出了整个集群的运行环境，包括每个参数的值、包文件的版本号等，用户可详细了解自己应用集群的相关情况。
+<img src="/images/tier_17.png" alt="Tier 17" />  </p>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">

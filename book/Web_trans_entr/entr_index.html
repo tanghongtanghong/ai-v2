@@ -403,7 +403,7 @@
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a href="/book/Tiers/tiers_index.html" class="collapsed">
-          Tiers
+          集群(Tier)
         </a>
       </h4>
     </div>
@@ -504,24 +504,27 @@
       </div>
     </div>-->
   </div>
+
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Agent/agent_index.html" class="collapsed">
+            探针管理
+        </a>
+      </h4>
+    </div>
+ </div>
+
 </div>
+
+
 
         </div>
         <div class="col-lg-9 page-body">
           <div class="body-box">
             <h1>Web 事务入口</h1>
 
-<ul>
-<li><a href="#1">什么是 Web 事务入口</a></li>
-<li><a href="#2">Web 事务入口列表</a></li>
-<li><a href="#3">Web 事务入口 - 总览</a></li>
-</ul>
-
-<h2><span id="1">什么是 Web 事务入口</span></h2>
-
-<p><img src="/images/book/web_trans_entr/book_web_trans_entr_1.png" alt="Book web trans entr 1" /></p>
-
-<p>在 Ai 数据模型中，Web 事务入口表示由受监视应用提供的特定服务。用现实生活中的语言来说，就是类似下面的服务：</p>
+<p>在 Ai 数据模型中，Web 事务入口（简称“用户请求”）表示由受监视应用提供的特定服务。用现实生活中的语言来说，就是类似下面的服务：</p>
 
 <ul>
 <li>在电子商务应用程序中，就是用户登录、查找商品和将商品添加到购物车中。</li>
@@ -529,13 +532,15 @@
 <li>在股票交易应用程序中，就是一些操作，比如接收股票报价、买入或卖出股票。</li>
 </ul>
 
-<p>在处理一个特定请求时，会有多个 tier 参与处理。利用 Web 事务入口，可以将这些 tier 中的 Web 事务串联起来查看性能数据。Web 事务入口是由用户在您的环境中发起的一种操作，它由入口点和处理路径定义，这些路径可能涉及服务器、数据库，可能还有其它许多基础架构组件。</p>
+<h2>top5 用户请求响应时间及详情查看</h2>
 
-<h2><span id="2">Web 事务入口列表</span></h2>
+<p>在请求模块，显示top5响应时间最长的请求事件查看，包括平均响应时间、调用次数、响应时间最大值、响应时间最小值等指标。点击某个时间段时可钻取入选时间段内所有的web事务入口、该钻取时间段内的top5 web事务入口响应时间图。
+<img src="/images/book/web_trans_entr/app_13.png" alt="App 13" /></p>
 
-<p><img src="/images/book/web_trans_entr/book_web_trans_entr_2.png" alt="Book web trans entr 2" /></p>
+<h2>用户请求列表</h2>
 
-<p>Web 事务入口列表展示了用户选定的时间窗口内所有的 Web 事务入口，在该项列表中可以：</p>
+<p>请求列表展示了用户选定的时间窗口内的所有的请求，用户可以按平均响应时间、响应时间-最大值、响应时间-最小值、调用次数、错误次数、错误率、集群进行排序。
+<img src="/images/book/web_trans_entr/book_web_trans_entr_2.png" alt="Book web trans entr 2" /></p>
 
 <h3>1. 筛选</h3>
 
@@ -579,92 +584,23 @@
 
 <h3>3. 导出</h3>
 
-<p>按照当前 Web 事务入口列表生成 Excel 表格。
+<p>按照当前用户请求列表生成 Excel 表格。
 <img src="/images/book/web_trans_entr/book_web_trans_entr_5.png" alt="Book web trans entr 5" /></p>
 
-<h3>4. 深度钻取</h3>
-
-<p>点击单条 Web 事务入口，钻取查看详情。</p>
-
-<h3>5. 重命名</h3>
+<h3>4. 重命名</h3>
 
 <p>默认 Web 事务入口是 Ai 自动命名的，您可以根据自身的业务情况进行重命名，方便对关键 Web 事务入口的查找以及使用。
 <img src="/images/book/web_trans_entr/book_web_trans_entr_6.png" alt="Book web trans entr 6" /></p>
 
-<h2><span id="3">Web事务入口 - 总览</h2>
+<h2>用户请求详情查看</h2>
 
-<p>Web 事务入口总览页由 Web 事务入口拓扑图、调用次数、响应时间、错误次数、用户体验一览五部分组成。
-<img src="/images/book/web_trans_entr/book_web_trans_entr_7.png" alt="Book web trans entr 7" /></p>
+<p>在请求列表中选择某一条web事务入口（比如健康度颜色为红色的事务入口）查看详情，包括请求调用链详情、该请求发生次数、响应时间、错误次数、用户体验情况等。<br>
+<img src="/images/book/web_trans_entr/book_web_trans_entr_1.png" alt="Book web trans entr 1" /> </p>
 
-<h3>Web事务入口拓扑图</h3>
-
-<p>Web 事务入口拓扑图是对 Web 事务调用关系的最直观展示。拓扑图中每个圆圈代表一个 Tier，每个 Tier 的指标如图所示。
-    <img src="/images/book/web_trans_entr/book_web_trans_entr_8.png" alt="Book web trans entr 8" /></p>
-
-<p>拓扑图中展示的指标包括：</p>
-
-<ul>
-<li>平均响应时间</li>
-<li>每分钟调用次数</li>
-<li>每分钟错误次数</li>
-<li>Apdex</li>
-<li>当前时间段该 Web 事务入口所对应的 Tier 有多少个 Web 事务</li>
-<li>语言标示</li>
-</ul>
-
-<p>用户可以从平均响应时间，错误次数，Tier 的颜色等指标直观的找出存在问题的 Tier，点击这个 Tier 对应的圆圈，在拓扑图上定位问题。</p>
-
-<p><strong>调用次数</strong></p>
-
-<p>选取时间段内 Web 事务入口的调用次数趋势图和平均每分钟调用次数
-<strong>响应时间</strong></p>
-
-<p>选取时间段内 Web 事务入口的响应时间趋势图和平均响应时间
-<strong>错误次数</strong></p>
-
-<p>选取时间段内 Web 事务入口的错误次数趋势图和平均每分钟错误次数
-<strong>用户体验一览</strong></p>
-
-<p>用户体验量化为 Apdex 值，直观展示出 Web 事务入口的用户体验情况</p>
-
-<h3>Web 事务入口-调用链追踪</h3>
-
-<p>Web 事务入口调用链追踪页由响应时间和请求数，调用列表两部分组成
+<p>对于缓慢请求，系统进行了调用链追踪，点击可查看详情，定位问题。调用链追踪页由响应时间和请求数，调用列表（包括开始时间、响应时间、URL、web事务入口、Tier、Agent）两部分组成。点击某一条调用信息，可钻取到该调用链的详情页进一步了解本次调用的情况。
 <img src="/images/book/web_trans_entr/book_web_trans_entr_9.png" alt="Book web trans entr 9" /></p>
 
-<p><strong>响应时间和请求数</strong></p>
-
-<ul>
-<li>选取时间段内响应时间的折线图</li>
-<li>选取时间段内，不同用户满意度的请求次数面积图</li>
-</ul>
-
-<p>面积图的展示方式可以清楚地看到占用时间面积最大的部分，直观的判断用户体验的分布情况，从而做出对此 Web 事务入口相关优化的决策。</p>
-
-<p><strong>调用列表</strong></p>
-
-<ol>
-<li><p>筛选条件<br>
-调用列表有两种筛选条件：</p>
-
-<ul>
-<li>用户体验</li>
-<li>响应时间</li>
-</ul></li>
-<li><p>调用列表<br>
-调用列表有 6 列信息:</p>
-
-<ul>
-<li>开始时间</li>
-<li>响应时间</li>
-<li>URL</li>
-<li>Web 事务入口</li>
-<li>Tier</li>
-<li>Agent</li>
-</ul></li>
-</ol>
-
-<p>在调用列表中点击一条调用信息，将钻取到这个调用链的详情页进一步了解本次调用的情况</p>
+<p>用户可根据自己的需要，进行条件筛选，筛选条件包括用户体验、响应时间，</p>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">

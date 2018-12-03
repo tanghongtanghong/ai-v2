@@ -403,7 +403,7 @@
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a href="/book/Tiers/tiers_index.html" class="collapsed">
-          Tiers
+          集群(Tier)
         </a>
       </h4>
     </div>
@@ -504,50 +504,58 @@
       </div>
     </div>-->
   </div>
+
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Agent/agent_index.html" class="collapsed">
+            探针管理
+        </a>
+      </h4>
+    </div>
+ </div>
+
 </div>
+
+
 
         </div>
         <div class="col-lg-9 page-body">
           <div class="body-box">
             <h1>调用链追踪</h1>
 
-<p>调用链追踪是一次缓慢的 Web 事务入口的详情数据。AI 使用 Web 事务入口数据反映这个应用的性能情况。对于一些缓慢的 Web 事务入口，我们会收集它们一次调用的详情，我们把这条详情数据称之为调用链。<br>
-  我们会在这些情况下 收集调用链追踪数据：<br>
-* 生成 Trace: 在调用链中任意一个节点生成 Trace 时。<br>
-* 随机策略:每分钟每个探针随机从当前 Web 事务入口请求中随机抓取5条。<br>
-* 性能剖析:主动触发性能剖析时。<br>
-  <img src="/images/diaoyonglian1.png" alt="Diaoyonglian1" /></p>
+<p>在用户选定时间内显示该时间段所产生的调用次数与响应时间叠加图，满意次数/可容忍次数/不满意次数饼状图及相应次数。</p>
 
-<h2>1. 响应时间&amp;&amp;请求数图</h2>
+<h2>1. 钻取某个具体时间段内的调用详情</h2>
 
-<p><img src="/images/diaoyonglian2.png" alt="Diaoyonglian2" />  </p>
+<p>可以通过对于图表的阅读，定位到问题时间段，并且钻取如所选时间段。
+<img src="/images/diaoyonglian2.png" alt="Diaoyonglian2" />  </p>
 
-<p>可以通过对于图表的阅读，定位到问题时间段，并且钻取如所选时间段。</p>
+<h2>2. 调用链列表分析</h2>
 
-<h2>2. 调用链列表</h2>
-
-<p><img src="/images/diaoyonglian3.png" alt="Diaoyonglian3" /><br>
- 当定位到问题时间段存在较多的 Trace 时，可以进行如下操作：  </p>
+<p>当定位到问题时间段存在较多的 Trace 时，可以进行如下操作：  </p>
 
 <ul>
 <li>按照响应时间进行排序<br></li>
-<li>根据各条件进行筛选：
-    用户体验
-    响应时间大小
-    Web 事务入口的名称</li>
+<li>根据各条件进行筛选：<br>
+    用户体验<br>
+    响应时间大小<br>
+    Web 事务入口的名称
+<img src="/images/diaoyonglian3.png" alt="Diaoyonglian3" /><br></li>
 </ul>
 
-<h2>3. 调用链路弹出框</h2>
+<h2>3. 查看调用链路情况</h2>
 
-<p><img src="/images/diaoyonglian4.png" alt="Diaoyonglian4" /><br>
-    点击时间戳，进入某一条调用链路，用户可以进行如下操作：<br>
-* 根据弹出框上部分信息，快速回到某一个页面:<br>
-  *  Web 事务入口：确认是否这类 Web 事务入口普遍存在缓慢。<br>
-  *  Tier：确认是否这个集群中普遍存在缓慢，是否是个别探针问题，则跳转探针页面查看性能问题。  </p>
+<p>选中某条数据，点击进入详情，可以查看调用链路情况。用户可以从两方面去判断是哪些地方产生了问题：<br>
+1）web事务入口，确认是否是这类web事务入口普遍存在缓慢；<br>
+2）tier：确认是否该集群中普遍存在缓慢；
+<img src="/images/diaoyonglian4.png" alt="Diaoyonglian4" />   </p>
 
-<ul>
-<li>阅读拓扑图数据，并钻取到某一个 Tier 的具体 Trace 中，查看各个组件耗时，调用堆栈详情,SQL 语句等详细数据。如例图所示，如果某一个 Tier 中存在多条 Trace，则会先弹出弹出框后在进行跳转。</li>
-</ul>
+<h2>4.  钻取节点调用详情</h2>
+
+<p>阅读调用拓扑图，在节点上有“可钻取”图标时，点击钻取，了解详情，排查问题。
+<img src="/images/diaoyonglian5.png" alt="Diaoyonglian5" />
+<img src="/images/diaoyonglian6.png" alt="Diaoyonglian6" /></p>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">

@@ -403,7 +403,7 @@
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a href="/book/Tiers/tiers_index.html" class="collapsed">
-          Tiers
+          集群(Tier)
         </a>
       </h4>
     </div>
@@ -504,44 +504,111 @@
       </div>
     </div>-->
   </div>
+
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Agent/agent_index.html" class="collapsed">
+            探针管理
+        </a>
+      </h4>
+    </div>
+ </div>
+
 </div>
+
+
 
         </div>
         <div class="col-lg-9 page-body">
           <div class="body-box">
-            <h1>开始使用</h1>
+            <p><font color=#333333 face="微软雅黑" size=6>使用向导</font> </p>
 
-<h4>开始使用 Application Insight</h4>
+<h3>如果你是OneAPM Ai 的新用户，可以通过以下内容快速了解Ai及如何使用Ai~</h3>
+
+<p>　　<a href="＃什么是Ai？">什么是Ai?</a>　　<a href="＃如何获取使用账号？">如何获取使用账号?</a>    　　　</p>
+
+<p>　　 <a href="＃初步使用">初步使用</a>　　<a href="＃进阶使用">进阶使用</a>  </p>
+
+<p>　　<a href="＃了解更多">了解更多</a>　　<a href="＃讨论交流">讨论交流</a></p>
+
+<h3>什么是Ai？</h3>
+
+<p>OneAPM Ai，全名为 OneAPM Application Insight，是OneAPM公司为企业用户精心打造的web应用性能管理工具，实现从用户终端到服务器端的全过程监控，它能帮助企业实现应用性能的最优化管理、改善终端用户使用体验、提高各部门工作效率。<br>
+ <img src="/images/ai_indexnew.png" alt="Ai indexnew" /></p>
 
 <ul>
-<li>OneAPM Ai，全名为 OneAPM Application Insight，是 OneAPM 为企业用户精心打造的应用性能管理（Application Performance Management）产品，提供有关 Web 应用程序性能的实时、趋势数据和用户体验的满意度。通过端到端事务跟踪、各种丰富的图表和报告，可视化您的数据，深入到应用的源代码级别。
-您的开发、运维团队（DevOps）不需要猜测程序性能瓶颈是来自应用程序本身，CPU 可用性，数据库加载，还是其它那些完全没有想到的情况。使用 OneAPM，您可以在最终用户受到影响之前快速识别潜在的问题。
-<img src="/images/ai_index.png" alt="Ai index" /></li>
+<li><p><strong>应用性能最优化管理</strong><br>
+对复杂的、分布式的应用系统进行监控，自动将应用、数据库、远程服务与其它应用之间的调用关系可视化拓扑呈现，帮助用户快速了解应用运行健康状况，有针对性的进行优化，实现性能的提高。</p></li>
+<li><p><strong>终端用户使用体验改善</strong><br>
+自动还原业务调用关系，将应用中的众多单个服务节点按照业务执行逻辑进行关联与呈现，从终端用户视角进行了解业务服务质量，从而改善使用体验。</p></li>
+<li><p><strong>各部门工作效率提高</strong><br>
+对缓慢与错误请求进行追踪，故障节点深度钻取，深入查找代码级原因，快速定位问题；智能告警随时处理业务故障，定期报表了解应用运行概况，让研发、运维等IT部门专注于核心工作，提高开发效率。</p></li>
 </ul>
 
-<p><strong>登陆</strong><br></p>
+<h3>如何获取使用账号？</h3>
 
-<ul>
-<li><p>访问 <a href="https://www.oneapm.com">OneAPM 登录页面</a> ，输入已注册的 OneAPM 账号，进入 OneAPM 主页面。<br></p></li>
-<li><p>若尚未注册 OneAPM 账号，请<a href="https://user.oneapm.com/pages/v2/signup?from=ai-docs">注册 OneAPM 账号</a>后，开始使用。<br>
-默认进入控制台页面，点击 Application Insight 进入操作页面。
-<img src="/images/ai_index02.png" alt="Ai index02" /></p></li>
-</ul>
+<p>只要拥有OneAPM旗下任何一款产品的用户就是OneAPM的用户，就可以直接体验AI。  </p>
 
-<p><strong>初次使用</strong><br></p>
+<p><strong>已注册用户</strong>  </p>
 
-<ul>
-<li><p>初次使用 Application Insight 时，由于您尚未在您的AI产品中添加应用，首先会让您选择需要监控的对应平台应用，这里以 Java 应用为例，如图所示：<br>
+<p>访问 <a href="https://www.oneapm.com">OneAPM 登录页面</a> ，输入已注册的 OneAPM 账号，进入 OneAPM 主页面。<br>  </p>
+
+<p><strong>未注册用户</strong></p>
+
+<p>若尚未注册 OneAPM 账号，请<a href="https://user.oneapm.com/pages/v2/signup?from=ai-docs">注册 OneAPM 账号</a>后，开始使用。<br>
+登录后默认进入控制台页面，点击 Application Insight 进入操作页面。
+<img src="/images/ai_index02.png" alt="Ai index02" /></p>
+
+<h3>开始使用</h3>
+
+<p><strong>安装</strong><br>
+初次使用 Application Insight 时，您需要添加相应的监控应用，下面以Java应用为例。  </p>
+
+<ol>
+<li><p>点击“探针下载”，如图所示：
 <img src="/images/ai_index03.png" alt="Ai index03" /></p></li>
 <li><p>当我们选中 Java 的图标后会看到，如图：
 <img src="/images/ai_index04.png" alt="Ai index04" /></p></li>
 <li><p>通过上面图中指示方式，（以 Tomcat 为例）下载 Agent 后放置到并成功部署在应用服务器根目录后如图：
 <img src="/images/ai_index06.png" alt="Ai index06" /></p></li>
-<li><p>注意：以上操作后，必须配置 license_key 到 /OneAPM/oneapm.properties 文件中，然后重启应用服务器；
-2 分钟后，再次登陆 OneAPM 后会看到如图:<br>
+<li><p>配置 license_key 到应用服务器根目录下的 /OneAPM/oneapm.properties 文件中（如上述截图所示的OneAPM文件夹），然后重启应用服务器。</p></li>
+<li><p>两分钟后，出现如下图所示数据，就说明您已经成功监控到应用的性能数据（<a href="#">OneAPM中常用术语解释</a>），可以开始进行性能分析了~
 <img src="/images/ai_index05.png" alt="Ai index05" /></p></li>
-<li><p>看到上图，就说明您已经成功监控到应用的性能数据，接下来开始您的 OneAPM 性能优化之旅吧！！！</p></li>
-</ul>
+<li><p>其它探针安装：<br>
+<a href="http://docs-ai.oneapm.com/agent/php/php_index.html">PHP</a><br>
+<a href="http://docs-ai.oneapm.com/agent/net/dotnet_index.html">.NET</a><br>
+<a href="http://docs-ai.oneapm.com/agent/python/python_index.html">Python</a><br>
+<a href="http://docs-ai.oneapm.com/agent/nodejs/nodejs_index.html">Node.js</a><br>
+<a href="http://docs-ai.oneapm.com/agent/ruby/ruby_index.html">Ruby</a>  </p></li>
+</ol>
+
+<h3>功能说明</h3>
+
+<p>　　<a href="http://docs-ai.oneapm.com/book/Application/app_index.html">应用拓扑查看</a><br>
+　　<a href="http://docs-ai.oneapm.com/book/Web_trans/web_index.html">使用web事务分析问题</a><br>
+　　<a href="http://docs-ai.oneapm.com/book/Trace/trace_index.html">用户缓慢请求详细追踪</a><br>
+　　<a href="http://docs-ai.oneapm.com/book/Tiers/tiers_index.html">业务应用集群监控</a><br>
+　　<a href="http://docs-ai.oneapm.com/book/Database_calls/database_index.html">数据库监控</a><br>
+　　<a href="http://docs-ai.oneapm.com/book/Remote_service/remote_index.html">应用内外部调用追踪</a><br>
+　　<a href="http://docs-ai.oneapm.com/book/Setting/setting_index.html">自定义监控指标数据</a><br>
+　　<a href="http://docs-ai.oneapm.com/book/Alert/alert_index.html">智能报警设置</a><br>
+　　<a href="http://docs-ai.oneapm.com/book/Report/report_index.html">监控报表查看与下载</a>  </p>
+
+<h3>最佳实践</h3>
+
+<p>　　<a href="http://docs-ai.oneapm.com/bestpractice/sj1.html">如何使用AI性能剖析</a><br>
+　　<a href="http://docs-ai.oneapm.com/bestpractice/sj2.html">如何分析由于数据库调用产生的性能问题</a><br>
+　　<a href="http://docs-ai.oneapm.com/bestpractice/sj3.html">如何高效设置报警</a>  </p>
+
+<h3>了解更多</h3>
+
+<p>　　<a href="https://www.oneapm.com/openclass/index.html">OneAPM大学</a>
+　　<a href="http://blog.oneapm.com/">OneAPM博客</a></p>
+
+<h3>讨论与交流</h3>
+
+<p>　　<a href="http://club.oneapm.com/">OneAPM社区</a></p>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">

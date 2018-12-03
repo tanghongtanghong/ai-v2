@@ -403,7 +403,7 @@
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a href="/book/Tiers/tiers_index.html" class="collapsed">
-          Tiers
+          集群(Tier)
         </a>
       </h4>
     </div>
@@ -504,158 +504,102 @@
       </div>
     </div>-->
   </div>
+
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Agent/agent_index.html" class="collapsed">
+            探针管理
+        </a>
+      </h4>
+    </div>
+ </div>
+
 </div>
+
+
 
         </div>
         <div class="col-lg-9 page-body">
           <div class="body-box">
             <h1>设置</h1>
 
-<p>该页面为设置页面，包含以下四部分：</p>
+<p>用户可在设置页面通过自定义参数获取想要的数据，包括自定义参数、自定义事务、自定义远程服务、应用设置、自定义调用栈五部分。</p>
 
-<ul>
-<li><a href="#1">设置－自定义参数</a><br></li>
-<li><a href="#2">设置－自定义事务</a><br></li>
-<li><a href="#3">设置－自定义远程服务</a><br></li>
-<li><a href="#4">设置－应用设置</a><br></li>
-</ul>
+<p><img src="/images/set_10.png" alt="Set 10" /></p>
 
-<p><img src="/images/set_01.png" alt="Set 01" /></p>
+<h2>1. 自定义参数</h2>
 
-<h2><h2 id="1">设置 － 自定义参数</h2></h2>
+<p>自定义参数页面用于定义web事务trace中上传的参数数据，OneAPM AI按照集群进行分类，在每个集群下面，用户可自定义名称、定义不同类型上传规则，下面以java探针为例，它支持http和method类型。 
+<img src="/images/set_11.png" alt="Set 11" />  </p>
 
-<ul>
-<li>此页面为设置自定义参数页面，主要由设置名称、设置 HTTP 请求参数、参数提取规则、适用 Business 四部分组成。如图：</li>
-</ul>
+<p><strong>HTTP类型</strong><br>
+当用户选择类型为http时，用户可设置http请求参数，包括URL、session id、默认用户特征参数、参数提取规则、适用的web事务。
+<img src="/images/set_12.png" alt="Set 12" />    </p>
 
-<p><img src="/images/set_02.png" alt="Set 02" /></p>
+<p>用户可自定义参数提取规则，AI支持的提取范围包括cookie、request header、request parameter、session，key则根据用户自己业务代码进行定义。<br>
+<img src="/images/set_13.png" alt="Set 13" />   </p>
 
-<ul>
-<li><p>设置名称就是根据自己的需求起一个名字。</p></li>
-<li><p>HTTP 参数：可以收集以下信息：</p>
+<p>在设定好参数提取规则后，可选择适用的web事务，对该web事务进行trace追踪。
+<img src="/images/set_14.png" alt="Set 14" />   </p>
 
-<ul>
-<li>URL</li>
-<li>Session Id</li>
-<li>Cookie 中的参数</li>
-<li>Session 的属性</li>
-<li>HTTP 请求参数</li>
-<li>HTTP Header 中的参数</li>
-</ul></li>
-<li><p>参数提取规则由规则名、提取范围、Key 组成，点击添加即可对参数提取规则进行配置。</p></li>
-</ul>
+<p><strong>Method类型</strong><br>
+用户可自定义方法签名，参数过滤条件、指定收集的参数、适用的web事务等。
+<img src="/images/set_15.png" alt="Set 15" />   </p>
 
-<h2><h2 id="2">设置 － 自定义事务</h2></h2>
+<h2>2. 自定义事务</h2>
 
-<ul>
-<li><p>选择要配的 Tiername 点击添加，进入到配自定义事务。如图：
-<img src="/images/set_0301.png" alt="Set 0301" /></p></li>
-<li><p>该页面由设置名称、业务匹配范围和使用请求数据拆分业务 3 部分组成。</p></li>
-<li><p>设置名称就是根据自己的需求起一个名字。</p></li>
-<li><p>优先级是必须写的，当一个 Tiername 配置多个自定义事务的时候，一个 URL 符合多个配置的自定义事务，根据优先级进行查找，优先级高的会展示出来。</p></li>
-</ul>
+<p>自定义事务页面用于灵活设置web事务的数据拆分和聚合规则。选择对应的集群，点击添加，即可进入到自定义事务配置页面，页面由设置名称、业务匹配范围、请求梳理拆分业务共三部分组成，其中优先级是不必须要填写的，当一个集群配置多个自定义事务时，一个URL符合多个配置的自定义事务，系统将按照优先级进行查找与显示。<br>
+OneAPM AI的自定义事务设置视探针而有所不同，以Java探针为例，它支持Servlet、POJO类型事务提取。<br>
+<strong>Servlet类型</strong>
+<img src="/images/set_0301.png" alt="Set 0301" /><br>
+业务匹配范围是对监控的事务进行描述，由请求方法、URL、HTTP 参数、Header 参数、请求主机地址、请求主机端口 6 部分组成，用户可根据自身业务情况进行自定义。
+当在业务匹配范围选择了URL后，在右侧可使用请求数据拆分业务。<br>
+使用请求数据拆分业务是对左半部分（业务匹配范围）匹配出来的 Web 事务进行如何展示。
+   * 使用请求数据拆分业务，由 从开头的第几段来拆分事务、尾部的第几段来拆分、中间的第几段来拆分 3 部分组成。
+   * HTTP 参数拆分事务，是问号之后的参数进行拆分事务，例如一个 URL 是</p>
+<div class="highlight"><pre class="highlight plaintext"><code>``` 
+www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
+```
+当用 ddd 来拆分事务，展示出来的就是
 
-<p><strong>业务匹配范围</strong></p>
 
-<ul>
-<li>业务匹配范围是对监控的事务进行描述，由请求方法、URL、HTTP 参数、Header 参数、请求主机地址、请求主机端口 6 部分组成。
-
-<ul>
-<li>请求方法有 POST 和 GET 两个选项，可以 根据需求来进行选择。</li>
-<li> URL 有包含、存在于、结束等于、开始等于、等于、不为空 6 个 选项。包含是 URL 里包含了那个信息、存在于是多个 URL 里存在某个 URL 、不为空是所有的 URL 、结束等于是 URL 的结束等于某个参数、开始等于是 URL 的开始等于某个参数。取反，就是就是非，是对前面配置的规则进行取反。</li>
-<li> HTTP 参数当勾选上前面的对勾后，点击添加即可设置 HTTP 参数。HTTP 参数就是 URL ？后面为第一个参数 ，&amp; 是后面参数，这里就是对这些参数进行配置，同样也是有包含、存在于、结束等于、开始等于、等于、不为空 6 个 选项。</li>
-<li> Header 参数勾选前面的对勾，点击添加即可对 Header 参数进行配置。同样也是有包含、存在于、结束等于、开始等于、等于、不为空 6 个 选项。</li>
-<li> 请求主机地址，是对访问的主机进行规则配置，有包含、存在于、结束等于、开始等于、等于 5 个 选项。</li>
-<li> 请求主机端口，是对请求主机的端口号进行规则配置，有包含、存在于、结束等于、开始等于、等于 5 个 选项。</li>
-</ul></li>
-</ul>
-
-<p><strong>使用请求数据拆分业务</strong></p>
-
-<ul>
-<li><p>使用请求数据拆分业务是对左半部分（业务匹配范围）匹配出来的 Web 事务进行如何展示。</p>
-
-<ul>
-<li>使用请求数据拆分业务，由 从开头的第几段来拆分事务、尾部的第几段来拆分、中间的第几段来拆分 3 部分组成。</li>
-<li>HTTP 参数拆分事务，是问号之后的参数进行拆分事务，例如一个 URL 是</li>
-</ul>
-<div class="highlight"><pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
-</code></pre></div>
-<p>当用 ddd 来拆分事务，展示出来的就是</p>
-<div class="highlight"><pre class="highlight plaintext"><code>aaa/bbb/ccc/eee
+``` 
+aaa/bbb/ccc/eee
+```
 </code></pre></div>
 <ul>
-<li>使用 Header 参数来拆分事务，例如</li>
-</ul>
-<div class="highlight"><pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
-</code></pre></div>
-<p>Connection 是 Keep-alive，用 Connection 来进行拆分事务，展示出来就是</p>
-<div class="highlight"><pre class="highlight plaintext"><code>aaa/bbb/ccc/keep-alive
-</code></pre></div>
-<ul>
-<li>按照请求方式拆分事务，根据配置规则来进行展示，当配置规则是 POST 就会展示出 POST。</li>
-<li>按照请求主机地址来拆分事务，会根据请求的主机地址来展示。</li>
-<li>请求来源主机地址拆分事务，就是用户访问的主机来展示。</li>
-</ul></li>
-</ul>
-
-<h2><h2 id="3">设置 － 自定义远程服务</h2></h2>
-
-<ul>
-<li><p>选择要配的 Tiername 点击添加，进入到配自定义远程服务。如图
-<img src="/images/set_0401.png" alt="Set 0401" /></p></li>
-<li><p>该添加设置由设置名称、业务匹配范围、使用请求数据拆分业务 3 部分组成。</p></li>
-<li><p>设置名称就是根据自己的需求起一个名字。</p></li>
-<li><p>优先级是必须写的，当一个 Tiername 配置多个自定义远程的时候，一个 URL 符合多个配置的自定义远程，根据优先级进行查找，优先级高的会展示出来。</p></li>
-</ul>
-
-<p><strong>业务匹配范围</strong></p>
-
-<ul>
-<li>业务匹配范围是对远程事务进行描述，由拆分对象、请求方法、URL 3 部分组成。
-
-<ul>
-<li>请求方法有 POST 和 GET 两个选项，可以根据需求来进行选择。</li>
-<li> URL 有包含、存在于、结束等于、开始等于、等于、不为空 6 个 选项。包含是 URL 里包含了那个信息、存在于是多个 URL 里存在某个 URL 、不为空是所有的 URL 、结束等于是 URL 的结束等于某个参数、开始等于是 URL 的开始等于某个参数。取反，就是就是非，是对前面配置的规则进行取反。</li>
-</ul></li>
-</ul>
-
-<p><strong>使用请求数据拆分业务</strong></p>
-
-<ul>
-<li><p>使用请求数据拆分业务是对左半部分（业务匹配范围）匹配出来的 Web 事务进行如何展示。</p>
-
-<ul>
-<li>使用请求数据拆分业务，由从开头的第几段来拆分事务、尾部的第几段来拆分、中间的第几段来拆分 3 部分组成。</li>
-<li>HTTP 参数拆分事务，是问号之后的参数进行拆分事务，例如一个 URL 是</li>
-</ul>
-<div class="highlight"><pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
-</code></pre></div>
-<p>当用 ddd 来拆分事务，展示出来的就是</p>
-<div class="highlight"><pre class="highlight plaintext"><code>aaa/bbb/ccc/eee
-</code></pre></div>
-<ul>
-<li>使用 Header 参数来拆分事务，例如</li>
-</ul>
+<li><p>使用 Header 参数来拆分事务，例如</p>
 <div class="highlight"><pre class="highlight plaintext"><code>www.xxx.com/aaa/bbb/ccc?ddd=eee&amp;fff=ggg
 </code></pre></div>
 <p>Connection 是 Keep-alive，用 Connection 来进行拆分事务，展示出来就是</p>
 <div class="highlight"><pre class="highlight plaintext"><code>aaa/bbb/ccc/keep-alive
 </code></pre></div></li>
+<li><p>按照请求方式拆分事务，根据配置规则来进行展示，当配置规则是 POST 就会展示出 POST。</p></li>
+<li><p>按照请求主机地址来拆分事务，会根据请求的主机地址来展示。</p></li>
+<li><p>请求来源主机地址拆分事务，就是用户访问的主机来展示。</p></li>
 </ul>
 
-<h2><h2 id="4">设置 － 应用设置</h2></h2>
+<p><strong>POJO类型</strong><br>
+<img src="/images/set_21.png" alt="Set 21" /> </p>
 
-<p>在应用设置页面,可以自行配置实例的各个参数。<br>
-应用设置页面分为基本信息、慢事务、浏览器监控、Web 事务、HTTP 请求参数、错误信息、数据库、过滤指定事务这 8 个部分。</p>
+<h2>3. 自定义远程服务</h2>
 
-<p><strong>1.应用设置 - 基本信息</strong>
+<p>用户可在此版块灵活设置远程服务的数据拆分和聚合规则。 选择要配的集群后点击添加，进入到自定义远程服务。使用请求数据拆分业务的使用方法可参见自定义事务模块方法。
+<img src="/images/set_0401.png" alt="Set 0401" /></p>
+
+<h2>4.应用设置</h2>
+
+<p>应用设置板块主要用于设置探针上传数据的相关阈值和参数，One APM AI以整个应用的框架向用户进行呈现，用户可对应用下的每个集群进行设置。
 <img src="/images/set_05.png" alt="Set 05" /></p>
 
-<p>基本信息:修改当前应用的展示名称。
+<p>在应用设置页面,OneAPM AI分为基本信息、慢事务、浏览器监控、Web 事务、HTTP 请求参数、错误信息、数据库、过滤指定事务这 8 个部分。</p>
+
+<p><strong>基本信息</strong><br>
+用于修改当前应用的展示名称。
 <img src="/images/set_051.png" alt="Set 051" /></p>
 
-<p><strong>2.应用设置 - 慢事务</strong></p>
+<p><strong>慢事务</strong></p>
 
 <ul>
 <li>修改慢事务追踪的阈值。当事务的响应时间超过阈值,则开始记录“慢事务追踪”(默认为 4 倍 Apdex T)</li>
@@ -664,12 +608,12 @@
 <img src="/images/set_052.png" alt="Set 052" /></li>
 </ul>
 
-<p><strong>3.应用设置 - 浏览器监控</strong></p>
+<p><strong>浏览器监控</strong></p>
 
 <p>通过勾选或者取消勾选,可以启用或者停用浏览器监控。
 <img src="/images/set_053.png" alt="Set 053" /></p>
 
-<p><strong>4.应用设置 - Web 事务</strong></p>
+<p><strong>Web 事务</strong></p>
 
 <ul>
 <li>勾选“自动命名 Web 事务”,则会根据应用框架和组件来命名 Web 事务;若不勾选,则使用 
@@ -678,7 +622,7 @@ Web 事务的 URI 来命名 Web 事务。</li>
 <img src="/images/set_054.png" alt="Set 054" /></li>
 </ul>
 
-<p><strong>5.应用设置 - HTTP 请求参数</strong></p>
+<p><strong>HTTP 请求参数</strong></p>
 
 <ul>
 <li>勾选“采集 HTTP 请求参数”,则会捕捉 HTTP 参数,并将它展示在慢追踪和错误信息中。</li>
@@ -687,7 +631,7 @@ Web 事务的 URI 来命名 Web 事务。</li>
 <img src="/images/set_055.png" alt="Set 055" /></li>
 </ul>
 
-<p><strong>6.应用设置 - 错误信息</strong></p>
+<p><strong>错误信息</strong></p>
 
 <ul>
 <li>勾选“采集错误信息”,则将采集该应用所有的错误和异常信息。</li>
@@ -695,7 +639,7 @@ Web 事务的 URI 来命名 Web 事务。</li>
 <img src="/images/set_056.png" alt="Set 056" /></li>
 </ul>
 
-<p><strong>7.应用设置 - 数据库</strong></p>
+<p><strong>数据库</strong></p>
 
 <ul>
 <li>勾选“启用慢 SQL 追踪”,则会捕捉运行缓慢的 SQL 语句。<br><br></li>
@@ -706,11 +650,16 @@ Web 事务的 URI 来命名 Web 事务。</li>
 <img src="/images/set_057.png" alt="Set 057" /></li>
 </ul>
 
-<p><strong>8.应用设置 - 过滤指定事务</strong></p>
+<p><strong>过滤指定事务</strong></p>
 
 <p><img src="/images/set_058.png" alt="Set 058" />
 对指定的过滤事务进行修改
 <img src="/images/set_059.png" alt="Set 059" /></p>
+
+<h2>5.自定义调用栈</h2>
+
+<p>在调用栈模块，用户可以将调用栈加入黑名单或白名单，其中黑名单主要是用于过滤掉一些不重要的方法和类，降低调用栈的可读性和系统开销。白名单主要是用于在过滤掉的类中显示一些特殊方法。
+<img src="/images/set_22.png" alt="Set 22" /></p>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">

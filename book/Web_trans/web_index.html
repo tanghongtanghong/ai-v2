@@ -403,7 +403,7 @@
     <div class="panel-heading" role="tab" id="headingTwo">
       <h4 class="panel-title">
         <a href="/book/Tiers/tiers_index.html" class="collapsed">
-          Tiers
+          集群(Tier)
         </a>
       </h4>
     </div>
@@ -504,48 +504,84 @@
       </div>
     </div>-->
   </div>
+
+   <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a href="/book/Agent/agent_index.html" class="collapsed">
+            探针管理
+        </a>
+      </h4>
+    </div>
+ </div>
+
 </div>
+
+
 
         </div>
         <div class="col-lg-9 page-body">
           <div class="body-box">
-            <h1>Web 事务</h1>
+            <h1>web事务</h1>
 
-<p>一个事务，表示一个从“用户请求-&gt; webserver -&gt; DB -&gt; webserver -&gt;用户请求”的完整过程,通常表现为一个 HTTP 请求。</p>
+<p>在用户选定时间内显示该时间段所产生的top5响应时间最长web事务、web事务列表，用户可以按条件进行筛选、选择关注的指标查看、web事务列表导出。
+其中，用户可以按平均响应时间、每分钟调用次数、集群名称、类型（uri、http等）进行筛选
+<img src="/images/webtrans_10.png" alt="Webtrans 10" /></p>
+
+<h2>定位具体web事务问题</h2>
+
+<p>基于各种各样的方式，比如来自于用户的投诉、内部同事的反馈、基于报警规则的邮件通知、直接在web事务列表中筛选响应时间较大或健康度为不健康的web事务等，我们可以感知到web事务的缓慢情况。使用AI可以详细的定位问题。</p>
+
+<h3>1. 慢web事务选择</h3>
+
+<p>在web事务列表中选择按健康度或响应时间、调用次数、缓慢次数等指标进行排序，选择要分析的慢web事务。
+<img src="/images/webtrans_11.png" alt="Webtrans 11" /></p>
+
+<h3>2. 慢响应时间段web事务钻取</h3>
+
+<p>在选定时间段内选择top5web事务响应时间较大的点，进行钻取，获取更详细的该时间段内产生的web事务。
+<img src="/images/webtrans_12.png" alt="Webtrans 12" /></p>
+
+<h3>3. 慢web事务分析</h3>
+
+<p>选中某条慢web事务后，点击进入详情，可以查看总览、trace、性能剖析。  </p>
+
+<p><strong>3.1 总览</strong><br>
+总览页面可以查看由平均响应时间、执行时间、执行次数、调用次数等性能指标组成的web事务曲线图、每分钟调用次数曲线图、错误率曲线图、事务运行过程中的最慢组件。
+<img src="/images/webtrans_13.png" alt="Webtrans 13" /></p>
+
+<p><strong>3.2 trace分析</strong><br>
+在抓取的trace列表中，可以根据用户体验、响应时间、url等搜索条件筛选慢trace，点击某条trace数据，可以查看该trace的详情分析，包括概要、调用栈的执行分析、请求参数与调用参数、sql、调用拓扑。
+<img src="/images/webtrans_14.png" alt="Webtrans 14" /><br>
+调用栈详情中红色部分表示耗用时间较长，用户可就分析结果进行自己的业务代码查看。<br>
+<img src="/images/webtrans_15.png" alt="Webtrans 15" /><br>
+<img src="/images/webtrans_16.png" alt="Webtrans 16" /><br>
+<img src="/images/webtrans_17.png" alt="Webtrans 17" /><br>
+<img src="/images/webtrans_18.png" alt="Webtrans 18" /><br>
+<img src="/images/webtrans_19.png" alt="Webtrans 19" />  </p>
+
+<p><strong>3.3 慢trace列表钻取</strong><br>
+慢trace列表钻取有两个入口，如下所示。在获取响应的trace列表后，选择某条自己关心的trace，进行详细的trace分析。 </p>
+
+<p>入口1：总览页面<br>
+<img src="/images/webtrans_20.png" alt="Webtrans 20" />  </p>
+
+<p>入口2：trace页面
+<img src="/images/webtrans_02.png" alt="Webtrans 02" /></p>
+
+<p><strong>3.4 性能剖析</strong><br>
+性能剖析为关键事务提供更多的细节信息，包括trace响应时间分布、响应时间&amp;吞吐量、服务器宕机曲线图、耗时最长时间统计、线程分析等。 </p>
 
 <ul>
-<li><a href="#1">如何使用 Web 事务分析问题</a><br></li>
-<li><a href="#2">如何使用 Web 事务定位问题</a><br></li>
+<li><p>创建性能剖析
+选择探针，自定义性能剖析名称、采样周期、最大跟踪数、采样持续时间，AI系统会自动进行数据采集，采样时间结束后，自动结束性能剖析任务，状态变更为结束。
+<img src="/images/webtrans_21.png" alt="Webtrans 21" /></p></li>
+<li><p>性能分析详情查看
+<img src="/images/webtrans_22.png" alt="Webtrans 22" /> </p>
+
+<p>cpu消耗、线程与锁等原生调用栈、解析调用栈详情分析
+<img src="/images/webtrans_23.png" alt="Webtrans 23" /></p></li>
 </ul>
-
-<h2><h2 id="1">如何使用 Web 事务分析问题</h2></h2>
-
-<p>当你发现了具体缓慢的 Web 事务，我们应该进行如下分析：<br>
-1. 首先我们根据 Web 事务总览中的叠加图，确认在问题时段最缓慢的组件，并选定时间。
-<img src="/images/webtrans_04.png" alt="Webtrans 04" />
-2. 查看 Trace，并且选取与叠加图中最慢组件相符的 Trace，进行重点分析。
-<img src="/images/webtrans_05.png" alt="Webtrans 05" />
-3. 查看对应 Trace 的详情，结合整个调用栈定位具体请求缓慢的原因问题。
-<img src="/images/webtrans_06.png" alt="Webtrans 06" /></p>
-
-<h2><h2 id="2">如何使用 Web 事务定位问题</h2></h2>
-
-<p>我们可以通过各种各样的方式感知到 Web 事务的缓慢情况。也许你会收到基于报警规则的邮件通知，或者直接通过 Web 事务列表中筛选出响应时间较大即缓慢的 Web 事务。接下来，我们会详细的描述基于各种情况如何进行问题的定位分析。</p>
-
-<ul>
-<li><p>慢 Trace 钻取
-选择某一条用户较为关心的 Web 事务选取其中较慢的几条慢 Trace（慢 Trace 的抓取依赖于用户配置的阈值详情参见设置-应用设置），点击进行详情查看。</p>
-
-<ul>
-<li>钻取进入所选问题时间段。</li>
-<li>查看 Trace，选取最慢组件耗时占比图与总览中面积叠加图最为相似的进行重点研究，找到其中时间占比最大的组件进行问题分析定位。</li>
-<li>查看 Trace 的堆栈详情内容，查找出最为耗时的函数调用。</li>
-<li>查看 Trace 拓扑图，进行问题拓扑节点（数字不为0）的钻取进行相关问题 Trace 查看。</li>
-</ul></li>
-</ul>
-
-<p><img src="/images/webtrans_02.png" alt="Webtrans 02" />
-<img src="/images/webtrans_03.png" alt="Webtrans 03" /></p>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
