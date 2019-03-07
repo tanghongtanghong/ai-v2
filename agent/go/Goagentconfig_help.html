@@ -224,7 +224,7 @@
 
   </head>
 
-  <body class="page-agent agent_ruby agent_ruby_Rubyinstall">
+  <body class="page-agent agent_go agent_go_Goagentconfig_help">
       <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -496,37 +496,406 @@
         </div>
         <div class="col-lg-9 page-body">
           <div class="body-box">
-            <h1>Ruby Agent 安装方法</h1>
+            <h1>Go Agent 安装配置</h1>
 
-<h2>1. 注册登录 OneAPM</h2>
+<p>注意：不同版本探针blueware-agent.ini中配置项不完全相同。以下格式仅供手动配置参考，根据需求按后面各项配置项说明进行配置即可。</p>
 
-<p>点击添加按钮，打开安装页面<br>
- <img src="/images/rb1.png" alt="Rb1" /></p>
+<h2>Agent参数说明</h2>
 
-<h2>2. 下载 oneapm.yml</h2>
+<p><strong>连接服务器配置</strong><br>
+license<em>key = *** REPLACE ME ***<br>
+collector</em>host = 127.0.0.1<br>
+collector_port = 5888<br>
+ssl = false  </p>
 
-<p>将文件放入应用的配置目录下，替换已有文件</p>
-<div class="highlight"><pre class="highlight plaintext"><code>oneapm.yml
-</code></pre></div>
-<h2>3. 配置 license</h2>
+<p><strong>collector_host</strong></p>
 
-<p>将「License Key」写入配置文件「oneapm.yml」，并修改应用名称</p>
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">127.0.0.1</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">IP地址和域名</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">指定 OneAPM Go-agent 与 Go-collector的通信地址，默认为本机地址。如Go-collector部署在其他机器请修改该地址为对应服务器地址。</td>
+</tr>
+</tbody></table>
 
-<h2>4. 以 gem 形式安装 OneAPM Ruby Agent</h2>
+<p><strong>collector_port</strong>  </p>
 
-<p>在 Gemfile 中添加以下 gem:</p>
-<div class="highlight"><pre class="highlight plaintext"><code>gem 'oneapm_rpm'
-</code></pre></div>
-<p>在应用所属目录中执行 bundle 命令：</p>
-<div class="highlight"><pre class="highlight plaintext"><code>$ bundle install
-</code></pre></div>
-<p>结果如下：</p>
-<div class="highlight"><pre class="highlight plaintext"><code>Your bundle is complete!
-Use 'bundle show [gemname]' to see where a bundled gem is installed.
-</code></pre></div>
-<h2>5. 运行应用程序</h2>
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">5888</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">TCP端口</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">指定OneAPM Go-agent与Go-collector的通信端口。注意与blueware-collector.ini文件中对应参数保持一致。</td>
+</tr>
+</tbody></table>
 
-<p>静候5分钟后，若无应用程序相关性能数据展现，或安装过程中出现问题请联系 OneAPM 获取技术支持：support@oneapm.com 或<a href="https://oneapm.kf5.com/request/new/">提交工单</a>。</p>
+<p><strong>license_key</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">生效方式</th>
+<th style="text-align: left">重启应用</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">OneAPM 提供的 license 许可</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">配置正确的 License 许可后，OneAPM Go-collector 将与 OneAPM server 通信，使得 OneAPM 探针正常工作</td>
+</tr>
+</tbody></table>
+
+<p><strong>ssl</strong> </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">false</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true或false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置为 true，指定 OneAPM Go-collector使用 HTTPS 与OneAPM Server加密通信，另需要将collector_port设为443 。设置为 false 则采用 HTTP 方式通信。</td>
+</tr>
+</tbody></table>
+
+<h2>应用名称配置</h2>
+
+<p>app<em>name = Example App<br>
+tier</em>name = Example Tier</p>
+
+<p><strong>app_name</strong>  </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">Example App</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">可以根据自己的需要对应用程序进行命名。描述一整套应用运行环境的逻辑概念，包括多个服务端，多个存储，组件等，例如OneAPM SaaS 环境，包含用户系统，AI，BI，MI，Redis，Kafka等。</td>
+</tr>
+</tbody></table>
+
+<p><strong>tier_name</strong>  </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">Example Tier</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">可以根据自己的需要对应用程序进行命名。处理相同业务的一个集群</td>
+</tr>
+</tbody></table>
+
+<h3>日志状态及位置配置</h3>
+
+<p>log<em>file = /tmp/go</em>agent.log<br>
+log_level = debug</p>
+
+<p><strong>log_level</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">debug</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">［off｜error｜warn｜info｜debug］</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置非 off 值将记录 OneAPM Agent 的工作日志，当您需要进行故障分析时，参数级别决定日志的细度。开启该开关同时需要开启log_file配置</td>
+</tr>
+</tbody></table>
+
+<p><strong>日志输出级别</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">off</th>
+<th style="text-align: left">关闭</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">error</td>
+<td style="text-align: left">错误</td>
+</tr>
+<tr>
+<td style="text-align: left">warm</td>
+<td style="text-align: left">警告</td>
+</tr>
+<tr>
+<td style="text-align: left">info</td>
+<td style="text-align: left">信息</td>
+</tr>
+<tr>
+<td style="text-align: left">debug</td>
+<td style="text-align: left">调试</td>
+</tr>
+</tbody></table>
+
+<h3>探针生效配置</h3>
+
+<p>enabled=true<br>
+apdex_t=0.5</p>
+
+<p><strong>enabled</strong>  </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">true和false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置为 true 将启用 OneAPM Agent，设置为 false 将停用 OneAPM Agent</td>
+</tr>
+</tbody></table>
+
+<p><strong>apdex_t</strong>  </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">0.5</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">用户体验满意度。apdex<em>f（即4倍apdex</em>t）以上时间为不可容忍时间。如默认0.5即请求响应时间小于0.5s时为满意，0.5s~2s为可容忍，2s以上为不可容忍</td>
+</tr>
+</tbody></table>
+
+<h3>追踪阈值配置</h3>
+
+<p>transaction<em>tracer.enabled = true<br>
+transaction</em>tracer.transaction<em>threshold = apdex</em>f<br>
+transaction<em>tracer.explain</em>threshold = 0.5<br>
+transaction<em>tracer.stack</em>trace_threshold = 0.5  </p>
+
+<p><strong>transaction_tracer.enabled</strong>  </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">参数类型</td>
+<td style="text-align: left">true和false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">参数为 transaction tracer 的子参数，用于控制是否启用 transaction tracer 功能</td>
+</tr>
+</tbody></table>
+
+<p><strong>transaction<em>tracer.transaction</em>threshold</strong>  </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">apdex_f</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">当事务执行时间超过该值时，事务将生成 Trace。该参数以秒为单位可以设置整数或浮点数</td>
+</tr>
+<tr>
+<td style="text-align: left">注意</td>
+<td style="text-align: left">参数为 apdex<em>f 时，OneAPM 将使用 apdex</em>t 的 4 倍参数值。</td>
+</tr>
+</tbody></table>
+
+<p><strong>transaction<em>tracer.explain</em>threshold</strong>  </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">0.5</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">参数以秒为单位，当 explain_enabled 为 true 时，OneAPM agent 捕捉 SQL 执行时间超过该值的 SQL 并生成执行计划</td>
+</tr>
+</tbody></table>
+
+<p><strong>transaction<em>tracer.stack</em>trace_threshold</strong>  </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">0.5</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">参数以秒为单位，当 Web 事务或 SQL 响应时间超过该值时，OneAPM 将收集并展示相应 stackTrace</td>
+</tr>
+</tbody></table>
+
+<h3>错误收集功能配置</h3>
+
+<p>error<em>collector.enabled = true<br>
+error</em>collector.ignore<em>status</em>codes = 404</p>
+
+<p><strong>error_collector.enabled</strong>  </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">true</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true或false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">参数为用于控制是否启用 error 收集功能</td>
+</tr>
+</tbody></table>
+
+<p><strong>error<em>collector.ignore</em>status_codes</strong>  </p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">默认值</th>
+<th style="text-align: left">404</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">错误代码</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">该参数用于忽略指定业务 HTTP 的错误代码，多个代码以逗号分隔，例如 404，505</td>
+</tr>
+</tbody></table>
+
+<h3>跨应用调用配置（该功能暂不支持）</h3>
+
+<p>cross<em>application</em>tracer.enabled = true</p>
+
+<p><strong>cross<em>application</em>tracer.enabled</strong></p>
+
+<table><thead>
+<tr>
+<th style="text-align: left">功能说明</th>
+<th style="text-align: left">跨越应用程序记录外部调用次数与响应时间</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">默认值</td>
+<td style="text-align: left">true</td>
+</tr>
+<tr>
+<td style="text-align: left">生效方式</td>
+<td style="text-align: left">重启应用</td>
+</tr>
+<tr>
+<td style="text-align: left">可选参数</td>
+<td style="text-align: left">true或false</td>
+</tr>
+<tr>
+<td style="text-align: left">参数说明</td>
+<td style="text-align: left">设置为 true，将记录跨越应用程序记录外部调用次数与响应时间</td>
+</tr>
+</tbody></table>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
