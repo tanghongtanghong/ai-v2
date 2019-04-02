@@ -457,14 +457,15 @@
 <ul>
 <li>在 jar 的启动命令中执行如下命令，即可完成对指定 jar 的监控：</li>
 </ul>
-<div class="highlight"><pre class="highlight plaintext"><code> java -javaagent:/path/to/oneapm.jar -jar *.jar
+<div class="highlight"><pre class="highlight plaintext"><code> java -javaagent:/path/to/oneapm.jar -Doneapm.license_key=请输入您的licensekey -Doneapm.app_name=exampleApp -Doneapm.tier_name=exampleTier -jar *.jar
 </code></pre></div>
 <p><strong>注意：</strong></p>
 
 <ul>
 <li><p>-javaagent: 后面跟 oneapm.jar 的绝对路径，不能有空格</p></li>
 <li><p>jar 后面跟要监控的 jar 的路径</p></li>
-<li><p>这种方式同时支持，使用 spring boot 内嵌 Web 容器，并将整个应用打包成 jar 包的监控</p></li>
+<li><p>这种方式同时支持，使用 spring boot 内嵌 Web 容器，并将整个应用打包成 jar 包的监控    </p></li>
+<li><p>-Doneapm.licnese<em>key=licenseKey,在此处输入您的licensekey，-Doneapm.app</em>name输入您的应用名称，-Doneapm.tier_name输入您的tier名称，如果您没有输入，系统将使用配置文件的参数名称。</p></li>
 </ul>
 
 <hr>
