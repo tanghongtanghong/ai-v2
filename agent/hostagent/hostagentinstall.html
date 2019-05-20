@@ -224,7 +224,7 @@
 
   </head>
 
-  <body class="page-agent agent_net agent_net_netuninstall">
+  <body class="page-agent agent_hostagent agent_hostagent_hostagentinstall">
       <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -533,14 +533,55 @@
         </div>
         <div class="col-lg-9 page-body">
           <div class="body-box">
-            <h1>.NET Agent 卸载/停用</h1>
+            <h1>Host Agent 安装</h1>
 
-<p><strong>1、使用开始菜单卸载</strong><br>
-点击【开始】菜单—&gt;【所有程序】—&gt;OneAPM—&gt;Uninstall .Net.Agent
-<img src="/images/netuninstall.png" alt="Netuninstall" />
-按提示即可成功卸载<br>
-<strong>2、使用 .NET 探针 msi 文件卸载</strong><br>
-双击下载的 .NET Agent 的 msi 文件，按提示进行卸载。</p>
+<p>该探针仅支持java探针V3.4.1及以上版本</p>
+
+<p>1.安装环境检查  </p>
+
+<p>检查HostAgent,JavaAgent端所在系统、AI server数据库、AI server所在系统、浏览器端四者时间是否一致，不一致时建议修改，可接受最大差异20s。  </p>
+
+<p>2.安装包检查<br>
+Host Agent安装包包含以下内容：</p>
+
+<p><img src="/images/ha1.png" alt="Ha1" /></p>
+
+<p>3.安装配置Host Agent</p>
+
+<p>1）下载安装包后，将其放置java Agent所在目录，并进行解压。如在/opt/oneapm目录  </p>
+<div class="highlight"><pre class="highlight plaintext"><code> cd /opt/oneapm    
+</code></pre></div><div class="highlight"><pre class="highlight plaintext"><code> unzip OneAPM_host_Agent_linux-x64_lastversion.zip
+</code></pre></div>
+<p>2）配置  </p>
+
+<h5>监控主机</h5>
+
+<p>首次启动探针后会生成host<em>id，您可以在hostagent/data/meta.json文件中获取对应的host</em>id，然后在java探针的oneapm.properties中新增一行，增加host_id</p>
+
+<h5>监控docker容器</h5>
+
+<p>探针会自动采集所在容器的container_id，并将其与其它探针配置信息一起上传。</p>
+
+<h5>修改hostagent.yml文件</h5>
+
+<p>您可以根据自己的业务需要配置hostagent.yml文件：<br>
+1、对于SaaS用户，系统默认output.oneapm下的hosts为appcollector.oneapm.com:80
+如果您想要更换Ai DC主机信息，根据您的实际业务情况修改对应的ip和端口。 </p>
+
+<p>2、配置output.oneapm下的license<em>key为系统给出的license</em>key信息。</p>
+
+<p>3）启动<br>
+执行sh startup.sh或./hostagent -c hostagent.yml命令即可启动探针。  </p>
+
+<p>4.数据查看<br>
+稍等片刻，您可以在平台中进行数据的查看。</p>
+
+<p>5、常见问题及排查解决<br>
+Q1：Ai的DV未显示数据？<br>
+A1：排查相关服务器的时间是否一致</p>
+
+<p>Q2：开启了docker配置，环境未安装docker时，日志报错<br>
+A2：注释hostagent.yml中docker的相关配置</p>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
