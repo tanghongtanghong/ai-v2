@@ -1,0 +1,22 @@
+!doctype html>
+<html>
+  <head>
+    <%= partial "shared/html-head" %>
+  </head>
+
+  <body class="page-<%= page_classes %>">
+    <%= partial "shared/navbar" %>
+    <div class="page-container">
+      <div class="row">
+
+      </div>
+    </div>
+    <%= partial "shared/footer" %>
+
+    <script type="text/javascript">
+      $(function() {
+        $(".navbar-default .navbar-nav a[href='/doc/']").parent().addClass("active");
+      });
+    </script>
+  </body>
+</html>

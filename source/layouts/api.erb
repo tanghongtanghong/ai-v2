@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <%= partial "shared/html-head" %>
+  </head>
+
+  <body class="home">
+    <%= partial "shared/navbar" %>
+    <div class="page-container">
+      <div class="row">
+        <div class="col-xs-3 page-sidebar hidden-sm hidden-xs">
+          <%= partial "Api/summary" %>
+        </div>
+        <div class="col-xs-9 page-body">
+          <div class="body-box">
+            <%= yield %>
+            <%= partial "shared/duoshuo" %>
+            <div class="return"></div>
+          </div>
+          <div class="footer-in">
+            <%= partial "shared/footer-in" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $(function() {
+//        $(".navbar-default .navbar-nav a[href='/best-practise/']").parent().addClass("active");
+        (function () {
+          var key=window.location.pathname;
+          var lastindex=key.indexOf('/',1);
+          var keyInfo="'"+key.substring(0,lastindex+1)+"'";
+          var panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+          panelHead.siblings().addClass('in');
+          panelHead.parent().siblings('div').map(function () {
+            $(this).removeClass('active');
+          });
+          panelHead.parent().addClass('active');
+        })();
+      });
+    </script>
+  </body>
+</html>

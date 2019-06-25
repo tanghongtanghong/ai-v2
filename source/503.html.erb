@@ -1,0 +1,53 @@
+---
+layout: "home"
+---
+
+<script type="text/javascript">
+  var pathname = window.location.pathname;
+  var target = '';
+
+  switch (pathname) {
+    case '/jmx.html':
+      target = '/services/jmx.html';
+      break;
+    case '/metric.html':
+      target = '/alert/metric.html';
+      break;
+    case '/started/instrument.html':
+      target = '/quick-start/instrument.html';
+      break;
+    case '/started/install.html':
+      target = '/quick-start/install.html';
+      break;
+    case '/event.html':
+      target = '/event/index.html';
+      break;
+    default:
+      break;
+  }
+
+  if (target.length > 0) {
+    window.location.href = 'http://101.200.76.159:4567' + target;
+  }
+</script>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 style="text-align:center;">503</h1>
+    </div>
+    <p style="text-align:center;">
+       发现一点小问题，我们正在处理中，请稍后再回来。
+    </p>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <p>
+      <div class="col-xs-offset-4 col-xs-4" style="text-align:center;">
+        <img src="/images/503.png" alt="503" class="img-responsive" />
+      </div>
+    </p>
+  </div>
+</div>

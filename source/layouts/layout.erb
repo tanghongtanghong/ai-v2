@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+  <head>
+    <%= partial "shared/html-head" %>
+  </head>
+
+  <body class="page-<%= page_classes %>">
+    <%= partial "shared/navbar" %>
+    <div class="page-container">
+      <div class="row">
+        <div class="col-lg-2 page-sidebar hidden-sm hidden-xs">
+          <%= partial "summary" %>
+        </div>
+        <div class="col-lg-10 page-body">
+          <div class="body-box">
+            <%= yield %>
+            <%= partial "shared/duoshuo" %>
+            <div class="return"></div>
+          </div>
+          <div class="footer-in">
+            <%= partial "shared/footer-in" %>
+          </div> 
+        </div>
+      </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+      $(function() {
+        $(".navbar-default .navbar-nav .guide").addClass("active");
+        (function () {
+          $('.panel-default').click(function () {
+            if(!$(this).hasClass('active')){
+              $(this).children().addClass('in');
+            }
+            else{
+              $(this).children().removeClass('in');
+            }
+          })
+          // $('.panel-default').mouseleave(function () {
+          //     if(!$(this).hasClass('active')) {
+                
+          //     }
+          //   })
+          var key=window.location.pathname;
+          var lastindex;
+          var keyInfo;
+          if(key.indexOf('quick-start') !== -1){
+            keyInfo="'"+key+"'";
+            $('ol').eq(0).children().map(function () {
+              $(this).css({
+                'cursor':'pointer',
+                'color':'#005FA8'
+              })
+            })
+            $('ol').eq(0).children().eq(0).click(function () {
+              $('.page-body').animate({ scrollTop: 300 }, 500)
+            })
+            $('ol').eq(0).children().eq(1).click(function () {
+              $('.page-body').animate({ scrollTop: 1830 }, 500)
+            })
+            $('ol').eq(0).children().eq(2).click(function () {
+              $('.page-body').animate({ scrollTop: 4202 }, 500)
+            })
+            $('ol').eq(0).children().eq(3).click(function () {
+              $('.page-body').animate({ scrollTop: 5942 }, 500)
+            })
+            $('ol').eq(0).children().eq(4).click(function () {
+              $('.page-body').animate({ scrollTop: 10066 }, 500)
+            })
+          }else if(key.indexOf('/',1) !== -1){
+            lastindex=key.indexOf('/',1);
+            keyInfo="'"+key.substring(0,lastindex+1)+"'";
+          }else {
+            lastindex=key.indexOf('.',1);
+            keyInfo="'"+key.substring(0,lastindex+1)+"html'";
+          }
+          var panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+          panelHead.siblings().addClass('in');
+          panelHead.parent().siblings('div').map(function () {
+            $(this).removeClass('active');
+          });
+          panelHead.parent().addClass('active');
+        })();
+      });
+    </script>
+  </body>
+</html>

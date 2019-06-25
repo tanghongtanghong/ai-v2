@@ -1,0 +1,62 @@
+section.contact{
+	padding-top:80px;
+	.message-wrapper{
+		.left{
+			display:inline-block;
+			margin-right: 15px;
+			.iconfont{
+				font-size: 40px;
+				color: #2fa54a;
+				position: relative;
+				top: -8px;
+			}
+		}
+		.right{
+			display: inline-block;
+			position: relative;
+			h4{
+				margin-top:0px!important;
+				margin-bottom: 5px!important;
+				padding-bottom:0px;
+				font-size: 18px;
+				font-weight: 400;
+				line-height: 1.4;
+				color: rgba(43, 43, 43, 0.5);
+			}
+			p{
+				font-size: 14px;
+				margin-bottom: 0px;
+			}
+			img{
+				margin: 0;
+				position: absolute;
+				top: 0;
+				right: -50px;
+				width: 50px;
+				cursor: pointer;
+			}
+		}
+		.qrcode {
+		    display: none;
+		    position: absolute;
+		    top: 0;
+    		right: -250px;
+    		z-index: 2;
+		    img{
+		    	position: relative;
+		    	opacity: 1;
+		    	width: 200px;
+		    	height: 200px;
+		    	right: 0;
+		    }
+		}
+		#qrcode:hover{
+			+ .qrcode {
+		    	display: block;
+		    	img{
+		    		opacity: 1;
+		    	}
+		    }
+		}
+	}
+}
