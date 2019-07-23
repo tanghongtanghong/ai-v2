@@ -61,7 +61,7 @@
   color: #a8e1fe;
   font-weight: bold;
 }
-.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
 }
@@ -166,7 +166,7 @@
   color: #ffb000;
   font-weight: bold;
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
   color: #f696db;
   font-weight: bold;
 }
@@ -178,7 +178,7 @@
   color: #f696db;
   font-weight: bold;
 }
-.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
   color: #fff0a6;
   font-weight: bold;
 }
@@ -207,7 +207,7 @@
 .highlight .go {
   color: #BBBBBB;
 }
-.highlight .nf {
+.highlight .nf, .highlight .fm {
   color: #a8e1fe;
 }
 .highlight .py {
@@ -216,7 +216,7 @@
 .highlight .na {
   color: #a8e1fe;
 }
-.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm {
   color: #a8e1fe;
   font-weight: bold;
 }
@@ -542,16 +542,19 @@
 
 <h3>1.总览</h3>
 
-<p>集群总览页面包括该集群内所有被调用组件/服务的响应时间叠加图、集群Apdex值、该集群内web事务的每分钟调用次数、慢web事务总览及该慢web事务下最大响应时间数据追踪、该集群内发生的事务错误率曲线图、服务器列表详情。
+<p>集群总览页面包括该集群内所有被调用组件/服务的响应时间叠加图、集群Apdex值、该集群内web事务的每分钟调用次数、慢web事务总览及该慢web事务下最大响应时间数据追踪、该集群内发生的事务错误率曲线图、服务器列表详情。<br>
 <img src="/images/tier_01.png" alt="Tier 01" /><br>
-点击某个响应时间较长的点，钻取该时间段内的trace列表，进行详情查看
+点击某个响应时间较长的点，钻取该时间段内的trace列表，进行详情查看<br>
 <img src="/images/tier_02.png" alt="Tier 02" /><br>
-点击web事务中追溯的较长响应时间数据，可以查看该慢web事务的详情，包括trace和性能剖析
-<img src="/images/tier_03.png" alt="Tier 03" />  </p>
+点击web事务中追溯的较长响应时间数据，可以查看该慢web事务的详情，包括trace和性能剖析<br>
+<img src="/images/tier_03.png" alt="Tier 03" /><br>
+当设置了基线后，还可以在响应时间图中查看基线数据，进行基线与平均响应时间的对比<br>
+<img src="/images/tier_031.png" alt="Tier 031" />  </p>
 
 <h3>2.拓扑</h3>
 
-<p>拓扑页面显示以该集群为起点所产生的调用拓扑，用户可点击右上角的图标，按拓扑图或列表进行显示。同时tier模块的拓扑图支持按域名、按网段来进行汇聚。其中对于域名的汇聚，如发生了jira.oneapm.me：8080的外部调用，系统会处理成<em>.oneapm.me；对于网段的汇聚，如发生了10.128.5.165::8080的外部调用，系统会处理成10.128.5.</em>。用户可以直接定位由网络或者某类外部服务而引起的应用问题。</p>
+<p>拓扑页面显示以该集群为起点所产生的调用拓扑，用户可点击右上角的图标，按拓扑图或列表进行显示。同时tier模块的拓扑图支持按域名、按网段来进行汇聚。其中对于域名的汇聚，如发生了jira.oneapm.me：8080的外部调用，系统会处理成<em>.oneapm.me；对于网段的汇聚，如发生了10.128.5.165::8080的外部调用，系统会处理成10.128.5.</em>。用户可以直接定位由网络或者某类外部服务而引起的应用问题。
+同时在该拓扑中还增加了数据库的展开与合并，数据库默认展开，点击右上角的按钮可以进行合并，关系型数据库按Database类型合并，非关系型数据库按各自类型合并，nosql类型包括mongodb、redis、memcached等。</p>
 
 <p><img src="/images/tier_04.png" alt="Tier 04" />  </p>
 
@@ -596,12 +599,72 @@ OneAPM AI按平均响应时间最长/apdex值/每分钟最大调用次数/响应
 <p>在性能分析板块，用户可以自定义持续时间、采样周期、是否仅包含http请求、服务器名称等参数，进行性能剖析，剖析产生结果后，点击查看即可。
 <img src="/images/tier_13.png" alt="Tier 13" /></p>
 
-<h3>8. JVM</h3>
+<h3>8.主机</h3>
+
+<p>总览页面右上角默认为全部实例，显示内容包括 cpu使用率最高的top5主机、内存使用率的top5主机、磁盘空间使用率最高的top5主机分区、磁盘IO使用率最高的top5主机分区。Cpu使用率、内存使用率。用户点击右上角的全部实例切换成单个实例，在页面中显示该探针实例对应的主机相关信息。
+磁盘空间使用率、磁盘IO使用率选定的五个主机指标为选定时间窗口内平均值最高的top5。<br>
+<img src="/images/tier_host1.png" alt="Tier host1" /><br>
+在筛选页面，用户可以选择主机相关性能指标、其它指标进行筛选过滤<br>
+<img src="/images/tier_host2.png" alt="Tier host2" /><br>
+点击主机名称可以进行具体主机的详情查看，包括总览、磁盘、网络三部分。在一个主机上，用户可能部署一个集群的多个探针，也可能只部署一个探针，应用可能部署在主机上，也部署在容器上，但在主机模块均进行了处理。
+主机总览页面为七图联动：  </p>
+
+<p>1）web事务图，web事务图以折线图加柱状图的方式进行呈现，左侧会显示用户选定时间窗口内的最后一个时间颗粒度的平均响应时间（即当前平均响应时间）和每分钟调用次数（当前平均调用次数）。web事务根据右上角的探针实例情况、应用部署情况而定。当右上角为全部实例时，web事务进行主机维度的聚合，比如主机或该主机的容器上部署了A探针和B探针，调用次数为A探针的调用次数+B探针的调用次数，平均响应时间为A探针的响应时间+B探针的响应时间/A探针调用次数+B探针调用次数；当右上角为单个实例时，web事务图显示该探针实例对应的web事务平均响应时间和调用次数。  </p>
+
+<p>2）CPU图，cpu图以面积图方式呈现，由cpu使用率、system、user三部分构成，cpu使用率为system和user的求和，左侧显示主机当前的cpu使用率、当前system使用率、当前user使用率。  </p>
+
+<p>3）Load Average图，load average有load average1/5/15min，由曲线图构成，Windows系统则不显示load average相关数据。  </p>
+
+<p>4）内存，内存图由内存使用率、swap使用率构成，以面积图形式表现，不同颜色表示内存、swap使用率。同时左侧显示当前内存使用率、当前swap使用率、当前内存已使用量、当前swap已使用量，内存/swap使用量默认单位为B，当内存使用量或swap使用量过大时，按1024B=1KB，1024KB=1MB进行换算。  </p>
+
+<p>5）磁盘，磁盘由磁盘空间使用率、磁盘IO使用率组成，以面积图形式表现，不同颜色表示磁盘空间、磁盘IO使用率，默认显示该主机磁盘空间使用率最高的磁盘信息，点击可以进行磁盘的切换。同时左侧显示当前磁盘空间/IO使用率、磁盘当前占用/空闲大小。  </p>
+
+<p>6）文件，文件由曲线图表示。同时左侧显示当前文件打开数、平均文件打开数、最大文件打开数。  </p>
+
+<p>7）TCP连接，TCP连接数由曲线图表示，tcp连接数为所有状态（listen、syn-sent、syn-received、establish、fin-wait-1、fin-wait-2、close-wait、closing、last-ack、time-wait）值的求和。同时左侧显示当前/平均/最大tcp连接数。<br>
+<img src="/images/tier_host3.png" alt="Tier host3" />   </p>
+
+<p><strong>具体主机-磁盘</strong><br>
+磁盘页面显示该主机上不同磁盘分区的相关数据，默认显示平均磁盘占用率最高的分区，显示内容包括磁盘空间使用率、磁盘IO使用率、磁盘IO读写次数、磁盘IO吞吐量。<br>
+1）磁盘空间使用率，以面积图形式展现，同时显示当前磁盘空间使用率、当前磁盘分区占用大小、该磁盘分区的总容量数据；  </p>
+
+<p>2）磁盘IO使用率，面积图形式展现。其中磁盘IO平均使用率为选定时间窗口内的所有磁盘IO使用率求和/总个数，同时图形上侧显示当前磁盘io使用率、磁盘IO平均使用率。 </p>
+
+<p>3）磁盘IO读写次数，以曲线图表示，不同颜色代表读与写，鼠标悬停某个点时，同时显示当前读与写的次数，并且读/写次数一行加深（悬停读/写线时）。同时图形上侧显示当前磁盘IO读写次数。  </p>
+
+<p>4）磁盘IO吞吐量，以曲线图表示，不同颜色代表读与写，鼠标悬停某个点时，同时显示当前读与写的速度，并且读/写次数一行变亮（悬停读/写线时）。同时图形上侧显示当前磁盘IO读写速度。</p>
+
+<p><img src="/images/tier_host4.png" alt="Tier host4" /></p>
+
+<p><strong>具体主机-网络</strong><br>
+网络页面显示该主机不同网卡上的相关数据，默认显示当前发送包数较大的网卡，显示内容包括网络发送接收包数、网络吞吐量。<br>
+1）网络发送接收包数，以曲线图表示，不同曲线分别代表发送与接收。同时在上方显示当前发送/接收包数、平均发送/接收包数。鼠标悬停时，同时显示发送与接收包个数，悬停线代表的指标（如网络发送曲线）加深。<br>
+2）网络发送接收速度，以曲线图表示，不同曲线分别代表发送与接收。同时在上方显示当前发送/接收速度、平均发送/接收速度。鼠标悬停时，同时显示发送与接收包速度，悬停线代表的指标（如网络发送速度）加深。</p>
+
+<p><img src="/images/tier_host5.png" alt="Tier host5" /></p>
+
+<h3>9.容器</h3>
+
+<p>在容器页面包括按cpu使用率、内存使用率、磁盘读（写）速度、网络发送（接收）速度的top5容器，该tier下的所有容器列表。容器默认展示信息为容器名称、宿主机名称、探针实例、容器ID、镜像名称、镜像ID、容器创建时间、镜像创建时间、cpu使用率、内存使用率。
+点击容器名称弹框显示容器相关详情，点击宿主机名称跳转该探针实例对应的主机总览页面，点击探针实例名称跳转该探针实例对应的总览页面。
+当应用没有部署在容器时，页面显示暂无数据。<br>
+<img src="/images/tier_container.png" alt="Tier container" /></p>
+
+<p>容器总览页面七图联动，鼠标悬停某时间点时便可知道在该时间点时对应的容器相关数据。
+1）web事务图，web事务显示该容器上探针实例对应的web事务的平均响应时间和调用次数
+2）cpu图，面积图形式展现，显示该容器耗费的cpu率图及当前cpu使用率。
+3）内存，面积图形式展现，显示该容器的内存使用率图及当前内存使用率、当前内存使用量/限制量。
+4）磁盘读写速度和磁盘读写次数。以曲线图和柱状图展现磁盘读写速度与读写次数，同时显示当前的磁盘读写次数与读写速度。
+5）网络发送接收速度与发送接收量。以曲线图和柱状图展现网络发送速度与发送接收量，同时显示选定时间窗口内当前的发送与接收速度、发送与接收量。<br>
+<img src="/images/tier_container2.png" alt="Tier container2" /><br>
+<img src="/images/tier_container3.png" alt="Tier container3" /></p>
+
+<h3>10. JVM</h3>
 
 <p>对于java语言的应用，OneAPM AI提供了JVM功能，可供用户了解JVM的内存、线程、会话的相关情况。
 <img src="/images/tier_14.png" alt="Tier 14" /></p>
 
-<h3>9.错误信息</h3>
+<h3>11.错误信息</h3>
 
 <p>OneAPM AI将错误信息分为两大类，web事务和后台任务错误信息。点击“错误信息”，可以看到每个分类下的相应错误，包括错误出现的第一次时间、最后一次时间、请求地址、错误消息、出现次数。
 <img src="/images/tier_15.png" alt="Tier 15" />  </p>
@@ -609,7 +672,7 @@ OneAPM AI按平均响应时间最长/apdex值/每分钟最大调用次数/响应
 <p>点击相应的请求地址，可以查看错误详情<br>
 <img src="/images/tier_16.png" alt="Tier 16" />  </p>
 
-<h3>10.运行环境</h3>
+<h3>12.运行环境</h3>
 
 <p>在运行环境模块，AI列出了整个集群的运行环境，包括每个参数的值、包文件的版本号等，用户可详细了解自己应用集群的相关情况。
 <img src="/images/tier_17.png" alt="Tier 17" />  </p>

@@ -61,7 +61,7 @@
   color: #a8e1fe;
   font-weight: bold;
 }
-.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
 }
@@ -166,7 +166,7 @@
   color: #ffb000;
   font-weight: bold;
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
   color: #f696db;
   font-weight: bold;
 }
@@ -178,7 +178,7 @@
   color: #f696db;
   font-weight: bold;
 }
-.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
   color: #fff0a6;
   font-weight: bold;
 }
@@ -207,7 +207,7 @@
 .highlight .go {
   color: #BBBBBB;
 }
-.highlight .nf {
+.highlight .nf, .highlight .fm {
   color: #a8e1fe;
 }
 .highlight .py {
@@ -216,7 +216,7 @@
 .highlight .na {
   color: #a8e1fe;
 }
-.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm {
   color: #a8e1fe;
   font-weight: bold;
 }
@@ -340,112 +340,165 @@
        </h4>
      </div>
    </div>
-   <div class="panel panel-default">
+   
+      <div class="panel panel-default">
      <div class="panel-heading" role="tab" id="headingTwo">
        <h4 class="panel-title">
          <a href="/bestpractice/sj2.html" class="collapsed">
+           使用 Ai 发现和诊断由于代码产生的性能问题
+         </a>
+       </h4>
+     </div>
+   </div>
+   
+   
+   <div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="headingTwo">
+       <h4 class="panel-title">
+         <a href="/bestpractice/sj3.html" class="collapsed">
            使用 Ai 发现和诊断由于数据库调用产生的性能问题
          </a>
        </h4>
      </div>
    </div>
+   
+   
    <div class="panel panel-default">
      <div class="panel-heading" role="tab" id="headingTwo">
        <h4 class="panel-title">
-         <a href="/bestpractice/sj3.html" class="collapsed">
+         <a href="/bestpractice/sj5.html" class="collapsed">
+           使用 Ai 发现和诊断由于主机或容器资源瓶颈产生的性能问题
+         </a>
+       </h4>
+     </div>
+   </div>
+   
+   <div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="headingTwo">
+       <h4 class="panel-title">
+         <a href="/bestpractice/sj6.html" class="collapsed">
           使用报警功能进行高效监控
          </a>
        </h4>
      </div>
    </div>
+   
+   
+   
 </div>
 
         </div>
         <div class="col-lg-10 page-body">
           <div class="body-box">
-            <h1>最佳实践之报警</h1>
+            <h1>如何使用 Ai 发现和诊断由于数据库调用产生的性能问题</h1>
 
-<h2>利用报警进行主动式监控</h2>
+<h3>引言</h3>
 
-<p>运维专业人员监控 OneAPM 仪表盘，可以很容易看到在各种系统状态诊断信息，但我们并不能保证有人总是盯着仪表盘。除了依靠仪表盘，还可以依靠报警系统，当一个问题需要注意时直接通知操作人员，让您知道什么时候发生的问题。<br><br>
- 通过有效利用报警系统，您可以在问题足够严重到您的客户之前找到并解决。例如，不是在系统产生宕机的时候进行报警，而是在系统接近宕机状态时进行提醒。举个例子来说，CPU 的使用率过高或当内存接近其极限。这种类型的警报让您有时间来诊断和解决问题，并防止宕机的发生。<br><br>
- 有效的报警可以帮您从纯粹的反应式运维——也就是只有当问题产生客户或者内部投诉时来进行修复支持，变为主动式运维——也就是在问题发生前进行处理。<br><br>
- 采用主动监控的做法有很多好处，其中包括：<br></p>
+<p>我们在不少项目中都会和客户的开发者或架构师一起尝试使用 OneAPM 一起分析和优化 Java 应用程序的性能问题，发现大部分的性能问题，往往并不是因为在某一个具体方法上缓慢的一两毫秒，更多的是因为糟糕的架构设计，不合适的框架配置，错误的数据库访问模式，乱打日志以及内存过度消耗导致的 GC 异常。下面我将重点介绍如何使用 Ai 发现和诊断由于数据库调用产生的性能问题。</p>
 
-<ul>
-<li>减少支持电话</li>
-<li>提高客户满意度</li>
-<li>增加由于响应时间过长等问题而造成的收入</li>
-<li>延长运维人员的休息时间</li>
-</ul>
-
-<p>采用主动监控的做法时，制定完整的预警是非常重要的。步骤如下所示：</p>
+<h3>一.常见的数据库问题大概有以下几种可能：</h3>
 
 <ul>
-<li>确定什么情况应该触发警报</li>
-<li>集成到报警的工作流程</li>
-<li>创建，测试报警系统</li>
-</ul>
-
-<h2>确定什么情况应该触发报警</h2>
-
-<p>一个有效的主动式报警应该集中在关键任务的问题。太少的警报可能会导致重要的问题没有被报到。但是如果人们接收到太多的警告，他们可能会开始忽视告警。一个对企业没有影响的潜在的生产问题不应该被列入到报警的候选对象当中，因为它会产生噪音从而导致我们看不到真正需要关心的报警问题。只对那些需要产生警惕的问题进行报警。<br><br>
- 确定什么样的情况发出报警过程涉及相关部门确定其应用的 KPI（关键绩效指标）。基于 KPI 界定生产中的应用什么条件应该触发报警，需要立即引起注意的关键问题，并确定指标，如内存使用。您还可以查看应用程序生命周期中的历史事件，并向所有应用程序所有者咨询他们认为他们的成功的关键。<br><br>
- 举个例子来说，假设您有一个“check out”的业务平均响应时间为 1000ms（ART）基于历史信息，您知道如果 ART 超过 3000ms，客户开始放弃他们的购物车当中的商品，如果超过 9000ms，客户开始联系客服或在一些社交媒体上进行抱怨。在这个例子中，如果 ART 超过 3000ms 您可能会想要一些人得到通知，也可能会需要更多的不同的人员群组得到通知。通过通知那些可以利用 OneAPM 进行性能诊断并使 ART 恢复到正常水平的人员，问题的严重性就不会增加到一定程度，进而会影响到您的客户，这样业务营收增长的可能性就会提升。</p>
-
-<p>考虑创建下列条件的警报：</p>
+<li>一次请求 SQL 大量执行：
 
 <ul>
-<li>一个网站关键业务运行的响应（购买，搜索）太慢。
-*可用性低于您的 SLA 阈值。</li>
-<li>一个关键操作的错误率，如业务交易错误率超过10%。</li>
-<li>一个数据库或远程服务已停止响应或响应太慢，例如：当一个旅游网站需要从酒店获取定价信息，但是此时信息调用变得非常缓慢，或当一个 LDAP 服务器没有响应。</li>
-<li>JVM 宕机。
-您可以发送报警邮件给任何需要解决问题的人或团队。例如，您可能想让警报借道集中报警系统到您的网络运维中心和票务系统。<br><br>
-您也可以使用警报技术来发送您可能会称之为“警告”的特定的人或团队。例如，一个堆内存正在接近它的最大容量时，开发团队可能想知道。这个问题没有严重到来进行一些处理行为，但有信息会给团队一个提醒，告诉他们可能需要在他们的环境中审查的东西。<br><br>
-您也可以创建更多的报警。有关更多信息，见性能指标警报。</li>
-</ul>
-
-<h2>集成到报警的工作流程</h2>
-
-<p>许多组织已经使用 OneAPM 集成到报警流程，通知相关人员对需要立即关注的问题。例如，假设您当前的警告程序看起来像这样的图表</p>
-
-<p><img src="/images/sj31.png" alt="Sj31" /></p>
-
-<p>整合后的 OneAPM 提醒到您的工作流程，流程的 OneAPM 流程如下所示：</p>
-
-<p><img src="/images/sj32.png" alt="Sj32" /></p>
-
-<p>当您确定了什么提醒是必要的，培训团队成员使用 OneAPM 发现并解决问题。<br><br>
-根据警报，一个通知电子邮件可能包含一个节点名称、一个 Tier 名称、一个 Web 事务名称和一个应用程序名称。通知也包含了问题的深度链接以方便用户向下钻取寻找问题的根因。</p>
-
-<h2>创建，测试报警系统</h2>
-
-<p>在您的团队知道如何响应报警，您就可以开始建立报警。<br><br>
- 创建报警，需要进行以下的步骤：</p>
-
-<ul>
-<li>定义报警规则阈值。</li>
-<li>定义报警策略，当数据显示问题正在产生的时候报警触发。</li>
-<li>配置对应策略触发的行为动作。</li>
-</ul>
-
-<p>用户经常使用“电子邮件”选项作为行动。一个电子邮件通知包含一个事件的详细信息，触发它的深层链接。点击这个链接直接将您直接带到这个地方来解决这个问题。<br><br>
-建议您使用分期的方法，分多次来进行报警的配置。当您第一次使用报警，验证您所发送的最佳类型和数量的警报。创建警报，操作人员将响应，因为他们知道报警反映了一个严重的问题。<br><br>
-这里有一些建议，用于设置和验证临时系统上的报警：</p>
-
-<ul>
-<li>对于每一个策略，设置一个发送电子邮件的行为，只有自己或几个核心团队成员。</li>
-<li>调整警报：
-
-<ul>
-<li>如果您收到了很多误报，请调整您的规则条件，触发更少的警报。某些情况下您可能想看包括：设置不同的阈值或基线值，使用不同的评估时间窗口，包括在健康规则多个条件来缩小时将触发警报，警报在一个不同的度量（如“最大”而不是“平均值”）。</li>
-<li>比较系统的健康信息。如果他们在应该触发报警的时候而没有触发报警，调整您的策略条件，以发送更多的警报。</li>
+<li>N+1 查询问题（N+1 Query）：多次（30次或者更多）执行相同 SQL。</li>
+<li>过多的 SQL 执行（Excessive SQLs）：执行大量（大于 500）不同的 SQL 语句</li>
 </ul></li>
-<li>当您确认可从 OneAPM 发送正确的警报，可以尝试除电子邮件以外的其它通知方式。</li>
+<li>单一 SQL 执行缓慢：
+
+<ul>
+<li>单一 SQL 执行缓慢（Slow Single SQL）：某个单一的 SQL 语句执行时间占据了请求的响应时间的 80% 以上。</li>
+</ul></li>
+<li>数据库负载较大：
+
+<ul>
+<li>数据库繁忙（Database Heavy）：数据库执行的总体时间占据总体响应时间的 80% 以上</li>
+<li>数据库服务服务器超负荷（Overloaded Database Server）：来自各个应用的请求过多，造成了数据库服务器超负荷</li>
+</ul></li>
+<li>数据库连接池相关问题：
+
+<ul>
+<li>连接池资源用尽（Pool Exhaustion）：由于连接获取时间过长所导致（getConnection 的时间超过了  executeStatement）
+*低效的连接池访问（Inefficient Pool Access）：对连接池的访问次数过多（对 getConnection 的调用超过了 executeStatement 调用次数的 50%）</li>
+</ul></li>
 </ul>
 
-<p>创建与诊断有关的操作，性能剖析、运行修复脚本等。</p>
+<h3>我遇到过的用户案例分析：</h3>
+
+<ol>
+<li>问题类型：一次请求 SQL 大量执行（现象）&ndash;数据库繁忙（现象）-N+1 Query （原因）</li>
+</ol>
+
+<p><strong>问题发现：</strong>
+ 由总览分析发现，用户主要耗时集中在数据库：
+<img src="/images/sj21.png" alt="Sj21" />
+在现场分析用户最缓慢的几个 Web 事务，观察他们这几个 Web 事务对应的 breakdown，统计发现一次请求平均调用数据库的次数多达 1000 次占据了请求的响应时间占比到 90% 以上，其中最慢的请求调用数据库达上万次。
+<img src="/images/sj22.png" alt="Sj22" /></p>
+
+<p><strong>问题调查和分析：</strong> 这是一个给 BD 使用的内部应用，这类 Web事务都是在查询和统计当前时间段内该区域所有的外卖订单的相关信息，开发在做这个查询的时候，先查询了所有该区域内的商户对象，然后根据商户一个一个的查询出来他们当前的订单详情，是一个典型的 N+1 问题。</p>
+
+<ul>
+<li>针对这个问题可能给出的建议：
+对于N+1次查询问题本身来说，使用连接查询就可以轻易地避免这一问题。在这个商户与属性的示例中，可以使用以下连接查询：<br>
+&gt;select r.<em>, p.</em> <br>
+from shanghu_names as r <br>
+inner join shanghu_properties as p on p.shanghu_id = r.shanghu_id</li>
+</ul>
+
+<p>结果就是整个执行过程只产生了 1 次查询执行，不再是 1000 多次了！ </p>
+
+<p>2、问题类型：一次请求 SQL 大量执行（现象）&ndash;低效的连接池访问（原因）&ndash;ORM 框架配置（解决方案）</p>
+
+<ul>
+<li><p>问题发现：同样是在用户现场发现几个 Web 事务有大量的数据库调用，虽然数据库调用数量比较多，但是每次请求的 1000+ 次数据库调用的总执行时间并不是很长（大概 300ms 左右），但是请求总体比较缓慢（平均响应时间在 4s，break down table 中的 database 占比在 10% 上）。
+<img src="/images/sj23.png" alt="Sj23" />
+(大量的相同 SQL 被执行)  </p></li>
+<li><p>问题调查： 这次直接交流的是对应的开发部门，开发部门表示他们使用的 ORM 去调用数据库，业务与上一个案例类似。</p></li>
+<li><p>问题分析： 经过分析 trace，发现虽然每一次 sql 执行都不慢（5ms左右），但是由于每次SQL查询都要向连接池获取一个新的连接，查询后再释放，导致对于连接词访问次数过多，从而引起访问缓慢。</p></li>
+<li><p>针对这个问题可能给出的建议：
+应用的逻辑需要对某个对象列表进行迭代，但它并没有选择使用“即时加载”（Eager Loading）方式，则是使用了“延迟加载”（Lazy Loading）方式。考虑到我们总是需要获取所有对象，那么更好的方式是“即时加载”（Eager Loading）这些对象，然后考虑对他们进行缓存，前提是这些对象不会变更得十分频繁：（Hibernate 之加载策略(延迟加载与即时加载)，来进行这种类型的查询。该用户使用了“延迟加载”（Lazy Loading）方式，它会加载每个对象，并通过独立的 SQL 查询语句获取每个对象的全部属性。每个 SQL 查询都是在一个向连接池获取的JDBC连接中执行的，然后在每个查询完成之后都会返回。查看一下调用 trace 中 getConnection 的出现次数，直接反映出了这个问题。  </p></li>
+</ul>
+
+<p>3、问题类型：连接池资源用尽（原因）</p>
+
+<ul>
+<li>问题发现： 某一时间应用整体响应时间飙升，OneAPM 发出报警。</li>
+<li>问题调查和分析：
+
+<ul>
+<li>从web事务角度分析，发现所有缓慢 trace 中的 getconnection 时间的占比较高。
+<img src="/images/sj24.png" alt="Sj24" /></li>
+<li>从数据库角度分析，发现当时 update 类型操作有一个明显的突起
+<img src="/images/sj25.png" alt="Sj25" /></li>
+<li>查看当时候比较缓慢的 upadate 操作，发现都是由于 当时突然开始运行的 一个后台任务发起的。
+<img src="/images/sj26.png" alt="Sj26" /></li>
+<li>最后定位问题： 由于定时的后台任务突然发起的 upadate 操作，导致数据库连接池用尽，导致其他请求无法正常获取数据库连接导致的。</li>
+</ul></li>
+<li>类似的场景：
+
+<ul>
+<li>某票务网站的硬件设备会定期请求后台，大约每分钟固定请求 1000 次，正常阶段 select 和 update 操作的 SQL 运行都正常，放票阶段由于大量 update 操作导致数据库锁表，导致用户无法正常打开购票页面。</li>
+<li>某运营商网站，有一个非常缓慢的报表查询类接口，由于不明原因，短时间内对这个接口有大量访问，导致数据库连接资源用尽，用户其他请求无法得到响应。</li>
+</ul></li>
+<li>针对这类问题可能给出的建议：
+
+<ul>
+<li>将这些请求发送至独立的服务器上，避免影响其他使用者。</li>
+<li>重新设定其执行时间，只在不会影响到其他人的时间段才执行,比如凌晨。</li>
+<li>增加连接池大小，确保在正常的访问量下有足够的连接可用。<br></li>
+</ul></li>
+</ul>
+
+<p>4、问题类型：单一 SQL 执行缓慢</p>
+
+<ul>
+<li>问题发现：通过分析 Web 事务的 breakdown table，发现请求中最耗时的是对某一个表的 select.
+<img src="/images/sj27.png" alt="Sj27" /></li>
+<li>针对这类问题可能给出的建议：
+<img src="/images/sj28.png" alt="Sj28" />
+通过分析 SQL 查询执行计划，可以帮组 DBA 优化那些耗时较长的 SQL。</li>
+</ul>
 
             <!--<hr style="margin-top: 50px;" />
 <div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">

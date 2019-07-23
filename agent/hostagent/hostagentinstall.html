@@ -61,7 +61,7 @@
   color: #a8e1fe;
   font-weight: bold;
 }
-.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
 }
@@ -166,7 +166,7 @@
   color: #ffb000;
   font-weight: bold;
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
   color: #f696db;
   font-weight: bold;
 }
@@ -178,7 +178,7 @@
   color: #f696db;
   font-weight: bold;
 }
-.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
   color: #fff0a6;
   font-weight: bold;
 }
@@ -207,7 +207,7 @@
 .highlight .go {
   color: #BBBBBB;
 }
-.highlight .nf {
+.highlight .nf, .highlight .fm {
   color: #a8e1fe;
 }
 .highlight .py {
@@ -216,7 +216,7 @@
 .highlight .na {
   color: #a8e1fe;
 }
-.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm {
   color: #a8e1fe;
   font-weight: bold;
 }
@@ -565,7 +565,10 @@ Host Agent安装包包含以下内容：</p>
 <h5>修改hostagent.yml文件</h5>
 
 <p>您可以根据自己的业务需要配置hostagent.yml文件：<br>
-1、对于SaaS用户，系统默认output.oneapm下的hosts为appcollector.oneapm.com:80
+ 截图中注释掉的内容需要去掉注释
+！<a href="/images/ha2.png"></a>  </p>
+
+<p>1、对于SaaS用户，系统默认output.oneapm下的hosts为appcollector.oneapm.com:80
 如果您想要更换Ai DC主机信息，根据您的实际业务情况修改对应的ip和端口。 </p>
 
 <p>2、配置output.oneapm下的license<em>key为系统给出的license</em>key信息。</p>

@@ -61,7 +61,7 @@
   color: #a8e1fe;
   font-weight: bold;
 }
-.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
 }
@@ -166,7 +166,7 @@
   color: #ffb000;
   font-weight: bold;
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
   color: #f696db;
   font-weight: bold;
 }
@@ -178,7 +178,7 @@
   color: #f696db;
   font-weight: bold;
 }
-.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
   color: #fff0a6;
   font-weight: bold;
 }
@@ -207,7 +207,7 @@
 .highlight .go {
   color: #BBBBBB;
 }
-.highlight .nf {
+.highlight .nf, .highlight .fm {
   color: #a8e1fe;
 }
 .highlight .py {
@@ -216,7 +216,7 @@
 .highlight .na {
   color: #a8e1fe;
 }
-.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm {
   color: #a8e1fe;
   font-weight: bold;
 }
@@ -543,6 +543,7 @@
 3. 点击右上角的散点图或列表图标志可以切换展现模式。<br>
 4. 通过使用鼠标滚轮来放大或缩小拓扑图的大小。<br>
 5. 通过点击右上角的展开来查看含全部外部服务的拓扑图。<br>
+6. 通过点击右上角的数据库展开可以查看含全部外部服务的问题（关系型数据库按Database合并，非关系型数据库按各自类型合并，包括redis、mongodb、memcached等）<br>
 <img src="/images/app_00.png" alt="App 00" /></p>
 
 <h2>定位拓扑节点产生的问题</h2>

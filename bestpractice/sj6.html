@@ -1,0 +1,595 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="keywords" content="端到端应用性能管理,Application Insight,OneAPM Ai">
+<meta name="description" content="OneAPM Application Insight是一个真实可见的应用性能监控系统，从用户体验到网络服务，直至应用代码, 帮助您完成端到端的应用性能管理，OneAPM Ai通过 Apdex、报警、错误率让您了解应用性能对用户使用体验的影响，从而挖掘应用可优化的范围">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta charset="utf-8">
+<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<!-- Use title if it's in the page YAML frontmatter -->
+<title>Application Insight 文档</title>
+
+  <script type="text/javascript">
+    // if (window.location.hostname === 'www.oneapm.com') {
+    //   var pathnameSegs = window.location.pathname.split("/docs/ci");
+    //   var realPathname = pathnameSegs[pathnameSegs.length - 1];
+    //   window.location.href = 'http://101.200.76.159:4567' + realPathname;
+    // } else if (window.location.hostname !== 'docs-ci.oneapm.com') {
+    //   window.location.href = 'http://101.200.76.159:4567' + window.location.pathname;
+    // }
+  </script>
+
+<script>var _hmt = _hmt || []; (function(){var hm = document.createElement("script");hm.src="https://hm.baidu.com/hm.js?eb7c5a354730562c0be3470554f756e7";var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(hm, s);})();</script> 
+
+<!-- growingio -->
+<script type='text/javascript'>
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', 'a78f5e02538f4b2b88cd4fee708bc11b']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+  </script>
+
+
+<link href="/stylesheets/site.css" rel="stylesheet" />
+<script src="/javascripts/jquery-2.2.1.js"></script>
+<script src="/javascripts/bootstrap.min.js"></script>
+<script src="/javascripts/all.js"></script>
+<style media="screen">
+  .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight {
+  color: #faf6e4;
+  background-color: #122b3b;
+}
+.highlight .gl {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .gp {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #6c8b9f;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #b2fd6d;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .err {
+  color: #fefeec;
+  background-color: #cc0000;
+}
+.highlight .gr {
+  color: #cc0000;
+  font-weight: bold;
+  font-style: italic;
+}
+.highlight .k, .highlight .kd, .highlight .kv {
+  color: #f6dd62;
+  font-weight: bold;
+}
+.highlight .o, .highlight .ow {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .p, .highlight .pi {
+  color: #4df4ff;
+}
+.highlight .gd {
+  color: #cc0000;
+}
+.highlight .gi {
+  color: #b2fd6d;
+}
+.highlight .ge {
+  font-style: italic;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gt {
+  color: #dee5e7;
+  background-color: #4e5d62;
+}
+.highlight .kc {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .kn {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kp {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kr {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gh {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .kt {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .no {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nc {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nd {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nn {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .bp {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .ne {
+  color: #b2fd6d;
+  font-weight: bold;
+}
+.highlight .nl {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .nt {
+  color: #ffb000;
+  font-weight: bold;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ld {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .ss {
+  color: #f696db;
+  font-weight: bold;
+}
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+  color: #fff0a6;
+  font-weight: bold;
+}
+.highlight .se {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .sc {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .si {
+  color: #4df4ff;
+  font-weight: bold;
+}
+.highlight .nb {
+  font-weight: bold;
+}
+.highlight .ni {
+  color: #999999;
+  font-weight: bold;
+}
+.highlight .w {
+  color: #BBBBBB;
+}
+.highlight .go {
+  color: #BBBBBB;
+}
+.highlight .nf, .highlight .fm {
+  color: #a8e1fe;
+}
+.highlight .py {
+  color: #a8e1fe;
+}
+.highlight .na {
+  color: #a8e1fe;
+}
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm {
+  color: #a8e1fe;
+  font-weight: bold;
+}
+</style>
+
+  </head>
+
+  <body class="page-bestpractice bestpractice_sj6">
+      <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-56334895-2', 'auto');
+    ga('send', 'pageview');
+
+  </script>
+
+<header class="main-header clearfix">
+	<div class="main-navblock col-lg-12 col-md-12 col-sm-12 col-xs-12"><div>
+		<a href="../index.html" class="logo-container">
+			<div class="oneapm-logo"></div>
+		</a>
+	</div>
+	<a href="#" class="burger-wrapper">
+		<div class="burger"></div>
+	</a>
+	<div class="nav-container">
+		<ul class="nav-list">
+			<li>
+				<a href="/quick-start/">快速入门</a>
+			</li>
+			<li>
+				<a href="/releasenote/">更新日志</a>
+			</li>
+			<li>
+				<a href="/agent/">安装配置</a>
+			</li>
+			<li>
+				<a href="/book/">功能说明</a>
+			</li>
+			<li>
+				<a href="/bestpractice/">最佳实践</a>
+			</li>
+			<li>
+				<a href="/qa/">常见问题</a>
+			</li>
+			<li>
+				<a href="/contact/contact.html">联系我们</a>
+			</li>
+		</ul>
+		<ul class="login-list">
+			<li>
+				<a href="http://user.oneapm.com/pages/v2/login?from=ai-docs" class="btn outline-dark" id="loginIn">登录</a>
+			</li>
+			<li>
+				<a href="https://user.oneapm.com/pages/v2/signup?from=ai-docs" class="btn inside-yellow" id="signUp">注册</a>
+			</li>
+		</ul>
+	</div>
+</div>
+</header>
+
+<script type="text/javascript">
+	$(function () {
+		var key=window.location.pathname;
+		var arr5=['agent','api','cloud-integration','services','services_example'];
+		var arr1=['quick-start'];
+		var arr3=['release-note','platform','dashboard','metric','alert','event'];
+		var arr4=['use-case','best-practise','bestpractice'];
+		var arr2=['qa'];
+		var arr6=['book']
+		var arr7=['releasenote']
+		var Arr=[arr1,arr2,arr3,arr4,arr5,arr6,arr7];
+		for(var i=0;i<7;i++) {
+			$.each(Arr[i], function (e, a) {
+				if (key.indexOf(a) !== -1) {
+					switch (i + 1) {
+						case 1:
+						key = '/quick-start/';
+						break;
+						case 5:
+						key = '/agent/';
+						break;
+						case 3:
+						key = '/platform/';
+						break;
+						case 4:
+						key = '/bestpractice/';
+						break;
+						case 2:
+						key = '/qa/';
+						break;
+						case 6:
+						key = '/book/';
+						break;
+						case 7:
+						key = '/releasenote/';
+					}
+				}
+			});
+		}
+		var keyInfo="'"+key+"'";
+		var panelHead;
+		panelHead= $(".nav-container  a[href="+keyInfo+"]");
+		panelHead.addClass('show');
+	});
+</script>
+
+    <div class="page-container">
+      <div class="row">
+        <div class="col-lg-2 page-sidebar hidden-sm hidden-xs">
+           <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+   <div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="headingOne">
+       <h4 class="panel-title">
+         <a href="/bestpractice/sj1.html" role="button">
+           使用 Ai 性能剖析功能分析性能问题
+         </a>
+       </h4>
+     </div>
+   </div>
+   
+      <div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="headingTwo">
+       <h4 class="panel-title">
+         <a href="/bestpractice/sj2.html" class="collapsed">
+           使用 Ai 发现和诊断由于代码产生的性能问题
+         </a>
+       </h4>
+     </div>
+   </div>
+   
+   
+   <div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="headingTwo">
+       <h4 class="panel-title">
+         <a href="/bestpractice/sj3.html" class="collapsed">
+           使用 Ai 发现和诊断由于数据库调用产生的性能问题
+         </a>
+       </h4>
+     </div>
+   </div>
+   
+   
+   <div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="headingTwo">
+       <h4 class="panel-title">
+         <a href="/bestpractice/sj5.html" class="collapsed">
+           使用 Ai 发现和诊断由于主机或容器资源瓶颈产生的性能问题
+         </a>
+       </h4>
+     </div>
+   </div>
+   
+   <div class="panel panel-default">
+     <div class="panel-heading" role="tab" id="headingTwo">
+       <h4 class="panel-title">
+         <a href="/bestpractice/sj6.html" class="collapsed">
+          使用报警功能进行高效监控
+         </a>
+       </h4>
+     </div>
+   </div>
+   
+   
+   
+</div>
+
+        </div>
+        <div class="col-lg-10 page-body">
+          <div class="body-box">
+            <h1>最佳实践之报警</h1>
+
+<h2>利用报警进行主动式监控</h2>
+
+<p>运维专业人员监控 OneAPM 仪表盘，可以很容易看到在各种系统状态诊断信息，但我们并不能保证有人总是盯着仪表盘。除了依靠仪表盘，还可以依靠报警系统，当一个问题需要注意时直接通知操作人员，让您知道什么时候发生的问题。<br><br>
+ 通过有效利用报警系统，您可以在问题足够严重到您的客户之前找到并解决。例如，不是在系统产生宕机的时候进行报警，而是在系统接近宕机状态时进行提醒。举个例子来说，CPU 的使用率过高或当内存接近其极限。这种类型的警报让您有时间来诊断和解决问题，并防止宕机的发生。<br><br>
+ 有效的报警可以帮您从纯粹的反应式运维——也就是只有当问题产生客户或者内部投诉时来进行修复支持，变为主动式运维——也就是在问题发生前进行处理。<br><br>
+ 采用主动监控的做法有很多好处，其中包括：<br></p>
+
+<ul>
+<li>减少支持电话</li>
+<li>提高客户满意度</li>
+<li>增加由于响应时间过长等问题而造成的收入</li>
+<li>延长运维人员的休息时间</li>
+</ul>
+
+<p>采用主动监控的做法时，制定完整的预警是非常重要的。步骤如下所示：</p>
+
+<ul>
+<li>确定什么情况应该触发警报</li>
+<li>集成到报警的工作流程</li>
+<li>创建，测试报警系统</li>
+</ul>
+
+<h2>确定什么情况应该触发报警</h2>
+
+<p>一个有效的主动式报警应该集中在关键任务的问题。太少的警报可能会导致重要的问题没有被报到。但是如果人们接收到太多的警告，他们可能会开始忽视告警。一个对企业没有影响的潜在的生产问题不应该被列入到报警的候选对象当中，因为它会产生噪音从而导致我们看不到真正需要关心的报警问题。只对那些需要产生警惕的问题进行报警。<br><br>
+ 确定什么样的情况发出报警过程涉及相关部门确定其应用的 KPI（关键绩效指标）。基于 KPI 界定生产中的应用什么条件应该触发报警，需要立即引起注意的关键问题，并确定指标，如内存使用。您还可以查看应用程序生命周期中的历史事件，并向所有应用程序所有者咨询他们认为他们的成功的关键。<br><br>
+ 举个例子来说，假设您有一个“check out”的业务平均响应时间为 1000ms（ART）基于历史信息，您知道如果 ART 超过 3000ms，客户开始放弃他们的购物车当中的商品，如果超过 9000ms，客户开始联系客服或在一些社交媒体上进行抱怨。在这个例子中，如果 ART 超过 3000ms 您可能会想要一些人得到通知，也可能会需要更多的不同的人员群组得到通知。通过通知那些可以利用 OneAPM 进行性能诊断并使 ART 恢复到正常水平的人员，问题的严重性就不会增加到一定程度，进而会影响到您的客户，这样业务营收增长的可能性就会提升。</p>
+
+<p>考虑创建下列条件的警报：</p>
+
+<ul>
+<li>一个网站关键业务运行的响应（购买，搜索）太慢。
+*可用性低于您的 SLA 阈值。</li>
+<li>一个关键操作的错误率，如业务交易错误率超过10%。</li>
+<li>一个数据库或远程服务已停止响应或响应太慢，例如：当一个旅游网站需要从酒店获取定价信息，但是此时信息调用变得非常缓慢，或当一个 LDAP 服务器没有响应。</li>
+<li>JVM 宕机。
+您可以发送报警邮件给任何需要解决问题的人或团队。例如，您可能想让警报借道集中报警系统到您的网络运维中心和票务系统。<br><br>
+您也可以使用警报技术来发送您可能会称之为“警告”的特定的人或团队。例如，一个堆内存正在接近它的最大容量时，开发团队可能想知道。这个问题没有严重到来进行一些处理行为，但有信息会给团队一个提醒，告诉他们可能需要在他们的环境中审查的东西。<br><br>
+您也可以创建更多的报警。有关更多信息，见性能指标警报。</li>
+</ul>
+
+<h2>集成到报警的工作流程</h2>
+
+<p>许多组织已经使用 OneAPM 集成到报警流程，通知相关人员对需要立即关注的问题。例如，假设您当前的警告程序看起来像这样的图表</p>
+
+<p><img src="/images/sj31.png" alt="Sj31" /></p>
+
+<p>整合后的 OneAPM 提醒到您的工作流程，流程的 OneAPM 流程如下所示：</p>
+
+<p><img src="/images/sj32.png" alt="Sj32" /></p>
+
+<p>当您确定了什么提醒是必要的，培训团队成员使用 OneAPM 发现并解决问题。<br><br>
+根据警报，一个通知电子邮件可能包含一个节点名称、一个 Tier 名称、一个 Web 事务名称和一个应用程序名称。通知也包含了问题的深度链接以方便用户向下钻取寻找问题的根因。</p>
+
+<h2>创建，测试报警系统</h2>
+
+<p>在您的团队知道如何响应报警，您就可以开始建立报警。<br><br>
+ 创建报警，需要进行以下的步骤：</p>
+
+<ul>
+<li>定义报警规则阈值。</li>
+<li>定义报警策略，当数据显示问题正在产生的时候报警触发。</li>
+<li>配置对应策略触发的行为动作。</li>
+</ul>
+
+<p>用户经常使用“电子邮件”选项作为行动。一个电子邮件通知包含一个事件的详细信息，触发它的深层链接。点击这个链接直接将您直接带到这个地方来解决这个问题。<br><br>
+建议您使用分期的方法，分多次来进行报警的配置。当您第一次使用报警，验证您所发送的最佳类型和数量的警报。创建警报，操作人员将响应，因为他们知道报警反映了一个严重的问题。<br><br>
+这里有一些建议，用于设置和验证临时系统上的报警：</p>
+
+<ul>
+<li>对于每一个策略，设置一个发送电子邮件的行为，只有自己或几个核心团队成员。</li>
+<li>调整警报：
+
+<ul>
+<li>如果您收到了很多误报，请调整您的规则条件，触发更少的警报。某些情况下您可能想看包括：设置不同的阈值或基线值，使用不同的评估时间窗口，包括在健康规则多个条件来缩小时将触发警报，警报在一个不同的度量（如“最大”而不是“平均值”）。</li>
+<li>比较系统的健康信息。如果他们在应该触发报警的时候而没有触发报警，调整您的策略条件，以发送更多的警报。</li>
+</ul></li>
+<li>当您确认可从 OneAPM 发送正确的警报，可以尝试除电子邮件以外的其它通知方式。</li>
+</ul>
+
+<p>创建与诊断有关的操作，性能剖析、运行修复脚本等。</p>
+
+            <!--<hr style="margin-top: 50px;" />
+<div class="alert alert-warning" style="text-align:center; margin: 40px 0px;">
+  <p style="font-size: 16px;">
+    如果您对 AI 感兴趣，可以选择试用我们的产品，只需要点击下面的按钮免费注册即可。
+  </p>
+  <br />
+  <p>
+    <a href="https://user.oneapm.com/account/register.do?ref=https://cloud.oneapm.com&from=ci-docs" class="btn btn-info btn-lg" target="_blank">
+      立即注册 AI
+    </a>
+  </p>
+</div>
+<hr />
+<!-多说评论框 start -->
+<!--<div class="ds-thread"
+     id="ds-thread"
+     data-thread-key=""
+     data-title=""
+   data-url=""></div>
+<!-多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!--<script type="text/javascript">
+  var titleTag = document.getElementsByTagName("h1")[0];
+
+  if (titleTag) {
+    title = document.getElementsByTagName("h1")[0].innerText;
+  } else {
+    title = "";
+  }
+
+  var duoshuoTag = document.getElementById('ds-thread');
+  duoshuoTag.setAttribute('data-thread-key', title.replace(/\s/g, ''));
+  duoshuoTag.setAttribute('data-title', title);
+
+  var duoshuoQuery = {short_name:"docs-ci"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>-->
+<!-- 多说公共JS代码 end -->
+
+
+            <div class="return"></div>
+          </div>
+          <div class="footer-in">
+            
+          </div> 
+        </div>
+      </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+      $(function() {
+        $(".navbar-default .navbar-nav .guide").addClass("active");
+        (function () {
+          $('.panel-default').click(function () {
+            if(!$(this).hasClass('active')){
+              $(this).children().addClass('in');
+            }
+            else{
+              $(this).children().removeClass('in');
+            }
+          })
+          // $('.panel-default').mouseleave(function () {
+          //     if(!$(this).hasClass('active')) {
+                
+          //     }
+          //   })
+          var key=window.location.pathname;
+          var lastindex;
+          var keyInfo;
+          if(key.indexOf('quick-start') !== -1){
+            keyInfo="'"+key+"'";
+            $('ol').eq(0).children().map(function () {
+              $(this).css({
+                'cursor':'pointer',
+                'color':'#005FA8'
+              })
+            })
+            $('ol').eq(0).children().eq(0).click(function () {
+              $('.page-body').animate({ scrollTop: 300 }, 500)
+            })
+            $('ol').eq(0).children().eq(1).click(function () {
+              $('.page-body').animate({ scrollTop: 1830 }, 500)
+            })
+            $('ol').eq(0).children().eq(2).click(function () {
+              $('.page-body').animate({ scrollTop: 4202 }, 500)
+            })
+            $('ol').eq(0).children().eq(3).click(function () {
+              $('.page-body').animate({ scrollTop: 5942 }, 500)
+            })
+            $('ol').eq(0).children().eq(4).click(function () {
+              $('.page-body').animate({ scrollTop: 10066 }, 500)
+            })
+          }else if(key.indexOf('/',1) !== -1){
+            lastindex=key.indexOf('/',1);
+            keyInfo="'"+key.substring(0,lastindex+1)+"'";
+          }else {
+            lastindex=key.indexOf('.',1);
+            keyInfo="'"+key.substring(0,lastindex+1)+"html'";
+          }
+          var panelHead= $(".panel-default  a[href="+keyInfo+"]").parent().parent();
+          panelHead.siblings().addClass('in');
+          panelHead.parent().siblings('div').map(function () {
+            $(this).removeClass('active');
+          });
+          panelHead.parent().addClass('active');
+        })();
+      });
+    </script>
+  </body>
+</html>

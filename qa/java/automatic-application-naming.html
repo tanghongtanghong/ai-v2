@@ -61,7 +61,7 @@
   color: #a8e1fe;
   font-weight: bold;
 }
-.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
   color: #6c8b9f;
   font-style: italic;
 }
@@ -166,7 +166,7 @@
   color: #ffb000;
   font-weight: bold;
 }
-.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
   color: #f696db;
   font-weight: bold;
 }
@@ -178,7 +178,7 @@
   color: #f696db;
   font-weight: bold;
 }
-.highlight .s, .highlight .sb, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .sr, .highlight .s1 {
   color: #fff0a6;
   font-weight: bold;
 }
@@ -207,7 +207,7 @@
 .highlight .go {
   color: #BBBBBB;
 }
-.highlight .nf {
+.highlight .nf, .highlight .fm {
   color: #a8e1fe;
 }
 .highlight .py {
@@ -216,7 +216,7 @@
 .highlight .na {
   color: #a8e1fe;
 }
-.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi {
+.highlight .nv, .highlight .vc, .highlight .vg, .highlight .vi, .highlight .vm {
   color: #a8e1fe;
   font-weight: bold;
 }
@@ -469,9 +469,9 @@
 
 <p>优先级最高的配置方式，应该尽量在 <code>transaction</code> 最早的时间配置 <code>app_name</code>
 <strong>Note</strong>：只针对 <code>servlet request</code> 生效</p>
-<div class="highlight"><pre class="highlight java"><code><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="n">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="n">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">ServletException</span><span class="o">,</span> <span class="n">IOException</span> <span class="o">{</span>
+<div class="highlight"><pre class="highlight java"><code><span class="kd">protected</span> <span class="kt">void</span> <span class="nf">doGet</span><span class="o">(</span><span class="nc">HttpServletRequest</span> <span class="n">request</span><span class="o">,</span> <span class="nc">HttpServletResponse</span> <span class="n">response</span><span class="o">)</span> <span class="kd">throws</span> <span class="nc">ServletException</span><span class="o">,</span> <span class="nc">IOException</span> <span class="o">{</span>
  <span class="o">...</span>
- <span class="n">String</span> <span class="n">requestUri</span> <span class="o">=</span> <span class="n">httpServletRequest</span><span class="o">.</span><span class="na">getRequestURI</span><span class="o">();</span> 
+ <span class="nc">String</span> <span class="n">requestUri</span> <span class="o">=</span> <span class="n">httpServletRequest</span><span class="o">.</span><span class="na">getRequestURI</span><span class="o">();</span> 
  <span class="k">if</span> <span class="o">(</span><span class="n">requestUri</span><span class="o">.</span><span class="na">startsWith</span><span class="o">(</span><span class="s">"/my-special-request/"</span><span class="o">)){</span>
      <span class="n">request</span><span class="o">.</span><span class="na">setAttribute</span><span class="o">(</span><span class="s">"com.blueware.monitor.APPLICATION_NAME"</span><span class="o">,</span> <span class="s">"MySpecialWebApp"</span><span class="o">);</span>
  <span class="o">}</span> <span class="o">...</span>
@@ -480,11 +480,11 @@
 
 <p>如果访问了多个 <code>servlet</code>，最早执行结束的 <code>servlet</code> 的配置生效</p>
 <div class="highlight"><pre class="highlight java"><code><span class="o">&lt;</span><span class="n">servlet</span><span class="o">&gt;</span>
- <span class="o">&lt;</span><span class="n">servlet</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">SqlServlet</span><span class="o">&lt;/</span><span class="n">servlet</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+ <span class="o">&lt;</span><span class="n">servlet</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="nc">SqlServlet</span><span class="o">&lt;/</span><span class="n">servlet</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
  <span class="o">&lt;</span><span class="n">servlet</span><span class="o">-</span><span class="kd">class</span><span class="err">&gt;</span><span class="nc">test</span><span class="o">.</span><span class="na">SqlServlet</span><span class="o">&lt;/</span><span class="n">servlet</span><span class="o">-</span><span class="kd">class</span><span class="err">&gt;</span>
  <span class="err">&lt;</span><span class="nc">init</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">com</span><span class="o">.</span><span class="na">blueware</span><span class="o">.</span><span class="na">monitor</span><span class="o">.</span><span class="na">APPLICATION_NAME</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span><span class="n">MyServletApp</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span><span class="nc">MyServletApp</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span>
  <span class="o">&lt;/</span><span class="n">init</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span>
 <span class="o">&lt;/</span><span class="n">servlet</span><span class="o">&gt;</span>
 </code></pre></div>
@@ -492,22 +492,22 @@
 
 <p>最早执行结束的 <code>filter</code> 的配置生效</p>
 <div class="highlight"><pre class="highlight java"><code><span class="o">&lt;</span><span class="n">filter</span><span class="o">&gt;</span> 
- <span class="o">&lt;</span><span class="n">filter</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">SqlFilter</span><span class="o">&lt;/</span><span class="n">filter</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> 
+ <span class="o">&lt;</span><span class="n">filter</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="nc">SqlFilter</span><span class="o">&lt;/</span><span class="n">filter</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> 
  <span class="o">&lt;</span><span class="n">filter</span><span class="o">-</span><span class="kd">class</span><span class="err">&gt;</span><span class="nc">test</span><span class="o">.</span><span class="na">SqlFilter</span><span class="o">&lt;/</span><span class="n">filter</span><span class="o">-</span><span class="kd">class</span><span class="err">&gt;</span> 
  <span class="err">&lt;</span><span class="nc">init</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span> 
     <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">com</span><span class="o">.</span><span class="na">blueware</span><span class="o">.</span><span class="na">monitor</span><span class="o">.</span><span class="na">APPLICATION_NAME</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span> 
-    <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span><span class="n">MyFilterApp</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span> 
+    <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span><span class="nc">MyFilterApp</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span> 
  <span class="o">&lt;/</span><span class="n">init</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span> 
 <span class="o">&lt;/</span><span class="n">filter</span><span class="o">&gt;</span>
 </code></pre></div>
 <h3>4. Web context</h3>
 <div class="highlight"><pre class="highlight java"><code><span class="o">&lt;</span><span class="n">context</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span>
  <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">com</span><span class="o">.</span><span class="na">blueware</span><span class="o">.</span><span class="na">monitor</span><span class="o">.</span><span class="na">APPLICATION_NAME</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
- <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span><span class="n">MyWebApp</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span> 
+ <span class="o">&lt;</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span><span class="nc">MyWebApp</span><span class="o">&lt;/</span><span class="n">param</span><span class="o">-</span><span class="n">value</span><span class="o">&gt;</span> 
 <span class="o">&lt;/</span><span class="n">context</span><span class="o">-</span><span class="n">param</span><span class="o">&gt;</span>
 </code></pre></div>
 <h3>5. Display name</h3>
-<div class="highlight"><pre class="highlight java"><code><span class="o">&lt;</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="n">MyWebApp</span><span class="o">&lt;/</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
+<div class="highlight"><pre class="highlight java"><code><span class="o">&lt;</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span><span class="nc">MyWebApp</span><span class="o">&lt;/</span><span class="n">display</span><span class="o">-</span><span class="n">name</span><span class="o">&gt;</span>
 </code></pre></div>
 <h3>6. Context path</h3>
 
