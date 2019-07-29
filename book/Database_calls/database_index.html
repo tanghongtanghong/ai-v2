@@ -68,7 +68,6 @@
 .highlight .cp {
   color: #b2fd6d;
   font-weight: bold;
-  font-style: italic;
 }
 .highlight .err {
   color: #fefeec;
@@ -531,20 +530,25 @@
           <div class="body-box">
             <h1>数据库列表</h1>
 
-<p>数据库列表汇总了该应用在监控过程中产生的所有关系型和非关系型数据库的相关信息，包括数据库存储名、所属Tier、类型、平均响应时间、调用次数、每分钟调用次数信息。
+<p>数据库列表汇总了该应用在监控过程中产生的所有关系型和非关系型数据库的相关信息，包括数据库存储名、所属Tier、类型、平均响应时间、调用次数、每分钟调用次数信息。 </p>
+
+<p>数据库列表的数据按应用维度进行过滤，举例来说，比如mysql:10.128.5.165:8090数据库服务器上的mysql数据库被zull节点、webapp节点同时调用，那么会计算这sql操作语句的响应时间和吞吐量（总响应时间由探针上传）<br>
+吞吐量=sum（sql语句调用次数）/选定时间窗口的时间<br>
+平均响应时间=总响应时间/sum(sql语句调用次数)<br>
 <img src="/images/db_01.png" alt="Db 01" /></p>
 
 <p>该页面为数据库页面，共由SQL语句栏，Top5语句响应时间图，响应时间－操作类型图，吞吐量－操作类型图，慢SQL追踪列表这4个部分组成。</p>
 
-<p><img src="/images/db_02.png" alt="Db 02" />
-点击单条 SQL 语句,展示当前 SQL 语句的详细信息,分别为响应时间和吞吐量图、调用者时间占比图和调用事务列表、慢 SQL 追踪列表。
+<p><img src="/images/db_02.png" alt="Db 02" /><br>
+点击单条 SQL 语句,展示当前 SQL 语句的详细信息,分别为响应时间和吞吐量图、调用者时间占比图和调用事务列表、慢 SQL 追踪列表。<br>
 <img src="/images/db_03.png" alt="Db 03" /></p>
 
 <p><strong>1.响应时间和吞吐量图：</strong></p>
 
 <ul>
 <li>展示当前 SQL 语句的响应时间和吞吐量随时间的变化情况。 时间占比。</li>
-<li>用折线图展示响应时间,用柱状图展示吞吐量。</li>
+<li>用折线图展示响应时间,用柱状图展示吞吐量。<br>
+对于关系型数据库（mysql、oracle、postgres、mssql、DB2、informix），响应时间&amp;吞吐量堆叠图中显示insert、update、select、delete操作；对于memcached，显示get、set、add、delete操作；对于mongodb，显示insert、update、remove、find操作；对于redis，显示top5数据库操作类型。</li>
 </ul>
 
 <p><strong>2.调用者时间占比图、调用事务列表:</strong></p>

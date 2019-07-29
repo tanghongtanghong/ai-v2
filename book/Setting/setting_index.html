@@ -68,7 +68,6 @@
 .highlight .cp {
   color: #b2fd6d;
   font-weight: bold;
-  font-style: italic;
 }
 .highlight .err {
   color: #fefeec;
@@ -537,28 +536,28 @@
 
 <h2>1. 自定义参数</h2>
 
-<p>自定义参数页面用于定义web事务trace中上传的参数数据，OneAPM AI按照集群进行分类，在每个集群下面，用户可自定义名称、定义不同类型上传规则，下面以java探针为例，它支持http和method类型。 
+<p>自定义参数页面用于定义web事务trace中上传的参数数据，OneAPM AI按照集群进行分类，在每个集群下面，用户可自定义名称、定义不同类型上传规则，下面以java探针为例，它支持http和method类型。<br>
 <img src="/images/set_11.png" alt="Set 11" />  </p>
 
 <p><strong>HTTP类型</strong><br>
-当用户选择类型为http时，用户可设置http请求参数，包括URL、session id、默认用户特征参数、参数提取规则、适用的web事务。
+当用户选择类型为http时，用户可设置http请求参数，包括URL、session id、默认用户特征参数、参数提取规则、适用的web事务。<br>
 <img src="/images/set_12.png" alt="Set 12" />    </p>
 
 <p>用户可自定义参数提取规则，AI支持的提取范围包括cookie、request header、request parameter、session，key则根据用户自己业务代码进行定义。<br>
 <img src="/images/set_13.png" alt="Set 13" />   </p>
 
-<p>在设定好参数提取规则后，可选择适用的web事务，对该web事务进行trace追踪。
+<p>在设定好参数提取规则后，可选择适用的web事务，对该web事务进行trace追踪。<br>
 <img src="/images/set_14.png" alt="Set 14" />   </p>
 
 <p><strong>Method类型</strong><br>
-用户可自定义方法签名，参数过滤条件、指定收集的参数、适用的web事务等。
+用户可自定义方法签名，参数过滤条件、指定收集的参数、适用的web事务等。<br>
 <img src="/images/set_15.png" alt="Set 15" />   </p>
 
 <h2>2. 自定义事务</h2>
 
 <p>自定义事务页面用于灵活设置web事务的数据拆分和聚合规则。选择对应的集群，点击添加，即可进入到自定义事务配置页面，页面由设置名称、业务匹配范围、请求梳理拆分业务共三部分组成，其中优先级是不必须要填写的，当一个集群配置多个自定义事务时，一个URL符合多个配置的自定义事务，系统将按照优先级进行查找与显示。<br>
 OneAPM AI的自定义事务设置视探针而有所不同，以Java探针为例，它支持Servlet、POJO类型事务提取。<br>
-<strong>Servlet类型</strong>
+<strong>Servlet类型</strong><br>
 <img src="/images/set_0301.png" alt="Set 0301" /><br>
 业务匹配范围是对监控的事务进行描述，由请求方法、URL、HTTP 参数、Header 参数、请求主机地址、请求主机端口 6 部分组成，用户可根据自身业务情况进行自定义。
 当在业务匹配范围选择了URL后，在右侧可使用请求数据拆分业务。<br>
@@ -592,18 +591,18 @@ aaa/bbb/ccc/eee
 
 <h2>3. 自定义远程服务</h2>
 
-<p>用户可在此版块灵活设置远程服务的数据拆分和聚合规则。 选择要配的集群后点击添加，进入到自定义远程服务。使用请求数据拆分业务的使用方法可参见自定义事务模块方法。
+<p>用户可在此版块灵活设置远程服务的数据拆分和聚合规则。 选择要配的集群后点击添加，进入到自定义远程服务。使用请求数据拆分业务的使用方法可参见自定义事务模块方法。<br>
 <img src="/images/set_0401.png" alt="Set 0401" /></p>
 
 <h2>4.应用设置</h2>
 
-<p>应用设置板块主要用于设置探针上传数据的相关阈值和参数，One APM AI以整个应用的框架向用户进行呈现，用户可对应用下的每个集群进行设置。
+<p>应用设置板块主要用于设置探针上传数据的相关阈值和参数，One APM AI以整个应用的框架向用户进行呈现，用户可对应用下的每个集群进行设置。<br>
 <img src="/images/set_05.png" alt="Set 05" /></p>
 
-<p>在应用设置页面,OneAPM AI分为基本信息、慢事务、浏览器监控、Web 事务、HTTP 请求参数、错误信息、数据库、过滤指定事务这 8 个部分。</p>
+<p>在应用设置页面,OneAPM AI分为基本信息、慢事务、浏览器监控、Web 事务、HTTP 请求参数、错误信息、数据库、日志错误采集、过滤指定事务这 9个部分。</p>
 
 <p><strong>基本信息</strong><br>
-用于修改当前应用的展示名称。
+用于修改当前应用的展示名称。<br>
 <img src="/images/set_051.png" alt="Set 051" /></p>
 
 <p><strong>慢事务</strong></p>
@@ -611,13 +610,13 @@ aaa/bbb/ccc/eee
 <ul>
 <li>修改慢事务追踪的阈值。当事务的响应时间超过阈值,则开始记录“慢事务追踪”(默认为 4 倍 Apdex T)</li>
 <li>修改 Agent 最多能够传回的慢事务的个数(默认为 20 个,最小为 1)</li>
-<li>修改性能指数 Apdex T。(默认为 0.5 秒)
+<li>修改性能指数 Apdex T。(默认为 0.5 秒)<br>
 <img src="/images/set_052.png" alt="Set 052" /></li>
 </ul>
 
 <p><strong>浏览器监控</strong></p>
 
-<p>通过勾选或者取消勾选,可以启用或者停用浏览器监控。
+<p>通过勾选或者取消勾选,可以启用或者停用浏览器监控。<br>
 <img src="/images/set_053.png" alt="Set 053" /></p>
 
 <p><strong>Web 事务</strong></p>
@@ -625,7 +624,7 @@ aaa/bbb/ccc/eee
 <ul>
 <li>勾选“自动命名 Web 事务”,则会根据应用框架和组件来命名 Web 事务;若不勾选,则使用 
 Web 事务的 URI 来命名 Web 事务。</li>
-<li>在过滤静态资源栏,可以用逗号分隔,填写多个赋值内容。则会自动过滤以上格式的静态文件,避免生成过多的事务。
+<li>在过滤静态资源栏,可以用逗号分隔,填写多个赋值内容。则会自动过滤以上格式的静态文件,避免生成过多的事务。<br>
 <img src="/images/set_054.png" alt="Set 054" /></li>
 </ul>
 
@@ -634,7 +633,7 @@ Web 事务的 URI 来命名 Web 事务。</li>
 <ul>
 <li>勾选“采集 HTTP 请求参数”,则会捕捉 HTTP 参数,并将它展示在慢追踪和错误信息中。</li>
 <li>忽略参数:在忽略参数行,填写需要忽略的参数,并使用逗号分隔。则会有选择的放弃收集这些 HTTP 参数。
-若用户既需要看到某些重要的 HTTP 参数,但同时也要保护敏感信息。则可以使用该部分功能实现。
+若用户既需要看到某些重要的 HTTP 参数,但同时也要保护敏感信息。则可以使用该部分功能实现。<br>
 <img src="/images/set_055.png" alt="Set 055" /></li>
 </ul>
 
@@ -642,7 +641,7 @@ Web 事务的 URI 来命名 Web 事务。</li>
 
 <ul>
 <li>勾选“采集错误信息”,则将采集该应用所有的错误和异常信息。</li>
-<li>在过滤类名栏,可以用逗号分隔,填写多个赋值内容。则会过滤掉这些特定的类名,不作为错误信息报告。
+<li>在过滤类名栏,可以用逗号分隔,填写多个赋值内容。则会过滤掉这些特定的类名,不作为错误信息报告。<br>
 <img src="/images/set_056.png" alt="Set 056" /></li>
 </ul>
 
@@ -653,19 +652,23 @@ Web 事务的 URI 来命名 Web 事务。</li>
 <li>追踪模式:通过下拉列表,修改 SQL 的追踪模式 ——“关闭”表示不记录 SQL;“原始 SQL” 表示按原模式纪录 SQL;“混淆 SQL 表示不纪录数字和字符串。<br><br></li>
 <li>勾选“执行计划追踪”,则会捕捉执行计划。(目前只支持 MySQL 和 PostgreSQL 的 Select 语句)<br><br></li>
 <li>慢 SQL 追踪阈值:该选项只有在“启用慢 SQL 追踪”时才生效。当 SQL 的执行时间大于该阈值的时候,将其记录为慢 SQL;如果开启“执行计划追踪”,同时也会收集该 SQL 的执行计划。(默认值为 0.5 秒)<br><br></li>
-<li>Stacktrace 阈值:作用于 Web 事务的 Trace 功能和慢 SQL 追踪功能,当某组件的响应时间超过该阈值,则收集并展示 Stacktrace。(默认值为 0.5 秒)
+<li>Stacktrace 阈值:作用于 Web 事务的 Trace 功能和慢 SQL 追踪功能,当某组件的响应时间超过该阈值,则收集并展示 Stacktrace。(默认值为 0.5 秒)<br>
 <img src="/images/set_057.png" alt="Set 057" /></li>
 </ul>
 
+<p><strong>日志错误采集</strong><br>
+可以配置Java探针从日志中采集错误信息，目前支持常见的日志类型有java.util.log, log4j, logback。可以根据具体应用中使用哪种日志类勾选日志采集类型。除了从常见的日志类中采集日志信息外，还可以从自定义参数中配置类和方法，提取异常和错误，具体参见自定义参数说明。<br>
+<img src="/images/set_0057.png" alt="Set 0057" />  </p>
+
 <p><strong>过滤指定事务</strong></p>
 
-<p><img src="/images/set_058.png" alt="Set 058" />
-对指定的过滤事务进行修改
+<p><img src="/images/set_058.png" alt="Set 058" /><br>
+对指定的过滤事务进行修改<br>
 <img src="/images/set_059.png" alt="Set 059" /></p>
 
 <h2>5.自定义调用栈</h2>
 
-<p>在调用栈模块，用户可以将调用栈加入黑名单或白名单，其中黑名单主要是用于过滤掉一些不重要的方法和类，降低调用栈的可读性和系统开销。白名单主要是用于在过滤掉的类中显示一些特殊方法。
+<p>在调用栈模块，用户可以将调用栈加入黑名单或白名单，其中黑名单主要是用于过滤掉一些不重要的方法和类，降低调用栈的可读性和系统开销。白名单主要是用于在过滤掉的类中显示一些特殊方法。<br>
 <img src="/images/set_22.png" alt="Set 22" /></p>
 
             <!--<hr style="margin-top: 50px;" />
